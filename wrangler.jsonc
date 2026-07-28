@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "han-zhang-portfolio",
+  "name": "han-zhang-portfolio-website",
   "compatibility_date": "2026-07-27",
   "compatibility_flags": ["nodejs_compat"],
   "main": "./worker/index.ts",
