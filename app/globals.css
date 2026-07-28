@@ -269,21 +269,12 @@ ul {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(42px, 6vw, 92px) 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(40px, 4vw, 64px) 24px;
 }
 
 .project-card {
-  grid-column: span 6;
   min-width: 0;
-}
-
-.project-card[data-size="wide"] {
-  grid-column: span 8;
-}
-
-.project-card[data-size="wide"] + .project-card:not([data-size="wide"]) {
-  grid-column: span 4;
 }
 
 .project-card__visual {
@@ -325,6 +316,7 @@ ul {
 
 .project-card__body {
   display: flex;
+  min-height: 116px;
   align-items: start;
   justify-content: space-between;
   gap: 24px;
@@ -624,18 +616,6 @@ ul {
   font-family: var(--mono);
   font-size: 0.65rem;
   text-transform: uppercase;
-}
-
-.project-grid--all .project-card {
-  grid-column: span 6;
-}
-
-.project-grid--all .project-card:nth-child(5n + 1) {
-  grid-column: span 8;
-}
-
-.project-grid--all .project-card:nth-child(5n + 2) {
-  grid-column: span 4;
 }
 
 .about-page {
@@ -1039,10 +1019,6 @@ ul {
   border-top: 1px solid var(--ink);
 }
 
-.project-grid--related .project-card {
-  grid-column: span 4;
-}
-
 .not-found {
   display: flex;
   min-height: calc(100vh - 69px);
@@ -1142,13 +1118,8 @@ html[data-ready="true"] [data-reveal][data-visible="true"] {
     grid-column: 2;
   }
 
-  .project-card,
-  .project-card[data-size="wide"],
-  .project-card[data-size="wide"] + .project-card:not([data-size="wide"]),
-  .project-grid--all .project-card,
-  .project-grid--all .project-card:nth-child(5n + 1),
-  .project-grid--all .project-card:nth-child(5n + 2) {
-    grid-column: span 6;
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .home-about__grid {
@@ -1217,9 +1188,6 @@ html[data-ready="true"] [data-reveal][data-visible="true"] {
     grid-row: auto;
   }
 
-  .project-grid--related .project-card {
-    grid-column: span 6;
-  }
 }
 
 @media (max-width: 640px) {
@@ -1281,18 +1249,12 @@ html[data-ready="true"] [data-reveal][data-visible="true"] {
     grid-template-columns: 1fr;
   }
 
-  .project-card,
-  .project-card[data-size="wide"],
-  .project-card[data-size="wide"] + .project-card:not([data-size="wide"]),
-  .project-grid--all .project-card,
-  .project-grid--all .project-card:nth-child(5n + 1),
-  .project-grid--all .project-card:nth-child(5n + 2),
-  .project-grid--related .project-card {
-    grid-column: 1;
-  }
-
   .project-card__body h2 {
     font-size: 1.45rem;
+  }
+
+  .project-card__body {
+    min-height: 0;
   }
 
   .section-cta {
