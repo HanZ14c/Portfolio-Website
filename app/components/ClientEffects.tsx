@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function ClientEffects() {
+  const pathname = usePathname();
+
   useEffect(() => {
     document.documentElement.dataset.ready = "true";
 
@@ -28,7 +31,7 @@ export function ClientEffects() {
     document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return null;
 }
