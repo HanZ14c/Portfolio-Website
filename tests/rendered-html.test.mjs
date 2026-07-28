@@ -32,4 +32,6 @@ test("server-renders the project index", async () => {
   assert.match(html, /Complete project index/);
   assert.match(html, /Vertical City Housing/);
   assert.match(html, /Team Workflow Scheduler/);
+  assert.match(html, /Sort projects/);
+  assert.match(html, /Time — newest first/);
 });
