@@ -59,6 +59,7 @@ The visual system uses warm paper tones, black typography, restrained red accent
 - Plain CSS for the complete visual system and responsive layout
 - Small, framework-free browser JavaScript for reveal effects
 - Static WebP project media prepared from the original portfolio material
+- Cloudflare Workers for production hosting
 
 The project data lives in `lib/projects.ts`; adding a record there creates an entry that can use the shared project-detail structure.
 
@@ -81,6 +82,24 @@ pnpm test
 ```
 
 `pnpm test` builds the site and checks that the home page and project index render as finished portfolio pages.
+
+## Deployment
+
+The private GitHub repository is the source of truth. Cloudflare Workers can build and publish the site automatically whenever `main` changes.
+
+In Cloudflare, choose **Workers & Pages → Import a repository**, authorize only this repository, and use:
+
+- Production branch: `main`
+- Build command: `pnpm build`
+- Deploy command: `pnpm exec wrangler deploy`
+
+For an authenticated local deployment, run:
+
+```bash
+pnpm deploy
+```
+
+The Cloudflare Worker and asset bindings are defined in `wrangler.jsonc`.
 
 ## Current status
 
