@@ -99,7 +99,11 @@ export function ProjectIndex() {
       {filter === "All" ? (
         <div className="project-groups" aria-label={`Projects grouped by ${sortMode}`}>
           {groups.map((group, index) => (
-            <section className="project-group" key={group.label}>
+            <section
+              className="project-group"
+              data-group={sortMode === "category" ? group.label : undefined}
+              key={group.label}
+            >
               <header className="project-group__heading">
                 <div>
                   <span>{String(index + 1).padStart(2, "0")}</span>
