@@ -1,15 +1,11 @@
 :root {
-  --paper: #f2eee4;
-  --paper-deep: #e4dfd4;
-  --ink: #15202a;
-  --ink-soft: #2d3a43;
-  --muted: #69716f;
-  --spatial-wash: #ced9d1;
-  --spatial-wash-deep: #afc0b6;
-  --signal: #f05a3e;
-  --line: rgba(21, 32, 42, 0.24);
-  --soft-line: rgba(21, 32, 42, 0.12);
-  --red: var(--signal);
+  --paper: #f1eee6;
+  --paper-deep: #e6e1d6;
+  --ink: #151515;
+  --muted: #6d6a63;
+  --line: rgba(21, 21, 21, 0.22);
+  --soft-line: rgba(21, 21, 21, 0.11);
+  --red: #ed3f2b;
   --page: min(1720px, calc(100vw - 64px));
   --sans: "Helvetica Neue", "Noto Sans SC", Arial, sans-serif;
   --serif: Georgia, "Noto Serif SC", "Times New Roman", serif;
@@ -36,8 +32,8 @@ body {
 }
 
 ::selection {
-  background: var(--signal);
-  color: white;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 a {
@@ -140,7 +136,7 @@ ul {
   bottom: -5px;
   left: 0;
   height: 1px;
-  background: var(--signal);
+  background: currentColor;
   content: "";
   transform: scaleX(0);
   transform-origin: right;
@@ -160,39 +156,10 @@ ul {
 }
 
 .home-hero {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  isolation: isolate;
   min-height: calc(100svh - 69px);
   padding: clamp(44px, 7vw, 112px) 0 36px;
-}
-
-.home-hero::before {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  width: 42%;
-  height: 100%;
-  background:
-    linear-gradient(90deg, rgba(21, 32, 42, 0.12) 1px, transparent 1px),
-    linear-gradient(rgba(21, 32, 42, 0.1) 1px, transparent 1px),
-    var(--spatial-wash);
-  background-size: clamp(58px, 6vw, 104px) clamp(58px, 6vw, 104px);
-  content: "";
-}
-
-.home-hero::after {
-  position: absolute;
-  z-index: -1;
-  right: 7%;
-  bottom: 10%;
-  width: clamp(86px, 10vw, 170px);
-  aspect-ratio: 1;
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  content: "";
 }
 
 .home-hero__meta {
@@ -219,32 +186,12 @@ ul {
 
 .home-hero h1 span {
   display: block;
-}
-
-.home-hero__code {
-  width: fit-content;
-  padding: 0.02em 0.12em 0.11em 0.06em;
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.home-hero h1 .home-hero__space {
   margin-left: 8.4vw;
-  color: var(--ink-soft);
+  color: var(--red);
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.065em;
-}
-
-.home-hero h1 .home-hero__space::after {
-  display: inline-block;
-  width: 0.16em;
-  height: 0.16em;
-  margin-left: 0.1em;
-  background: var(--signal);
-  content: "";
-  transform: translateY(-0.08em);
 }
 
 .home-hero__footer {
@@ -285,23 +232,6 @@ ul {
   font-size: 0.66rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-.discipline-strip span:nth-child(1) {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.discipline-strip span:nth-child(2) {
-  background: var(--spatial-wash-deep);
-}
-
-.discipline-strip span:nth-child(3) {
-  background: var(--paper-deep);
-}
-
-.discipline-strip span:nth-child(4) {
-  background: var(--spatial-wash);
 }
 
 .discipline-strip span:last-child {
@@ -351,7 +281,7 @@ ul {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: var(--spatial-wash);
+  background: var(--project-accent, var(--paper-deep));
 }
 
 .project-card__visual img {
@@ -425,7 +355,6 @@ ul {
 }
 
 .project-card a:hover .project-card__arrow {
-  color: var(--signal);
   transform: translate(3px, -3px);
 }
 
@@ -434,10 +363,10 @@ ul {
   width: 100%;
   height: 100%;
   background:
-    linear-gradient(90deg, transparent 0 9.8%, rgba(242, 238, 228, 0.16) 10% 10.2%, transparent 10.4%),
-    linear-gradient(rgba(242, 238, 228, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 238, 228, 0.1) 1px, transparent 1px),
-    var(--ink);
+    linear-gradient(90deg, transparent 0 9.8%, rgba(21, 21, 21, 0.1) 10% 10.2%, transparent 10.4%),
+    linear-gradient(rgba(21, 21, 21, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 21, 0.08) 1px, transparent 1px),
+    var(--project-accent);
   background-size: auto, 32px 32px, 32px 32px, auto;
 }
 
@@ -445,7 +374,7 @@ ul {
   position: absolute;
   right: 5%;
   bottom: -0.18em;
-  color: var(--spatial-wash);
+  color: rgba(21, 21, 21, 0.78);
   font-family: var(--mono);
   font-size: clamp(6rem, 14vw, 13rem);
   font-weight: 700;
@@ -457,7 +386,7 @@ ul {
 .project-cover__code i {
   position: absolute;
   height: 9px;
-  background: var(--signal);
+  background: var(--ink);
 }
 
 .code-cover i:nth-of-type(1) { top: 18%; left: 8%; width: 38%; }
@@ -494,16 +423,6 @@ ul {
 .home-about {
   padding-block: clamp(96px, 12vw, 190px);
   border-top: 1px solid var(--ink);
-}
-
-.home-about::before {
-  display: block;
-  width: clamp(54px, 7vw, 118px);
-  height: 8px;
-  margin-top: -1px;
-  margin-bottom: 30px;
-  background: var(--spatial-wash-deep);
-  content: "";
 }
 
 .home-about__grid {
@@ -649,9 +568,9 @@ ul {
 
 .project-filters button:hover,
 .project-filters button[aria-pressed="true"] {
-  border-color: var(--signal);
-  background: var(--signal);
-  color: white;
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .project-filters button span {
@@ -690,7 +609,7 @@ ul {
 
 .project-sort select:hover,
 .project-sort select:focus-visible {
-  border-color: var(--signal);
+  border-color: var(--ink);
   outline: none;
 }
 
@@ -748,36 +667,6 @@ ul {
   font-family: var(--mono);
   font-size: 0.65rem;
   text-transform: uppercase;
-}
-
-.project-group[data-group="Software"] .project-group__heading,
-.project-group[data-group="Academic Architecture"] .project-group__heading,
-.project-group[data-group="Architecture Practice"] .project-group__heading,
-.project-group[data-group="Visual Studies"] .project-group__heading {
-  margin-inline: -18px;
-  padding: 18px;
-}
-
-.project-group[data-group="Software"] .project-group__heading {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.project-group[data-group="Software"] .project-group__heading > div,
-.project-group[data-group="Software"] .project-group__heading > p {
-  color: var(--spatial-wash);
-}
-
-.project-group[data-group="Academic Architecture"] .project-group__heading {
-  background: var(--spatial-wash-deep);
-}
-
-.project-group[data-group="Architecture Practice"] .project-group__heading {
-  background: var(--spatial-wash);
-}
-
-.project-group[data-group="Visual Studies"] .project-group__heading {
-  background: var(--paper-deep);
 }
 
 .about-page {
@@ -887,23 +776,6 @@ ul {
   border-right: 1px solid var(--line);
 }
 
-.skills-grid article:first-child {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.skills-grid article:first-child p {
-  color: var(--spatial-wash);
-}
-
-.skills-grid article:nth-child(2) {
-  background: var(--paper-deep);
-}
-
-.skills-grid article:nth-child(3) {
-  background: var(--spatial-wash);
-}
-
 .skills-grid article:last-child {
   border: 0;
 }
@@ -967,9 +839,7 @@ ul {
 .project-subtitle {
   max-width: 1050px;
   margin-top: 30px;
-  border-left: 5px solid var(--signal);
-  padding-left: 22px;
-  color: var(--ink-soft);
+  color: var(--project-accent);
   font-family: var(--serif);
   font-size: clamp(1.7rem, 3.8vw, 4.5rem);
   letter-spacing: -0.04em;
@@ -981,9 +851,8 @@ ul {
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-top: clamp(64px, 8vw, 120px);
-  padding: 20px;
-  background: var(--ink);
-  color: var(--paper);
+  border-top: 1px solid var(--ink);
+  padding-top: 18px;
 }
 
 .project-hero__meta span,
@@ -997,10 +866,6 @@ ul {
   text-transform: uppercase;
 }
 
-.project-hero__meta span {
-  color: var(--spatial-wash);
-}
-
 .project-hero__meta p {
   max-width: 300px;
   font-size: 0.82rem;
@@ -1010,7 +875,7 @@ ul {
   width: 100%;
   max-height: 94vh;
   overflow: hidden;
-  background: var(--spatial-wash);
+  background: var(--project-accent);
 }
 
 .project-cover > img {
@@ -1037,8 +902,8 @@ ul {
   min-height: 76vh;
   overflow: hidden;
   background:
-    repeating-linear-gradient(90deg, transparent 0 8.25%, rgba(242, 238, 228, 0.14) 8.33% 8.4%),
-    var(--ink);
+    repeating-linear-gradient(90deg, transparent 0 8.25%, rgba(21, 21, 21, 0.12) 8.33% 8.4%),
+    var(--project-accent);
 }
 
 .project-cover__code span {
@@ -1046,7 +911,7 @@ ul {
   bottom: -0.16em;
   left: 2vw;
   max-width: 90vw;
-  color: var(--spatial-wash);
+  color: rgba(21, 21, 21, 0.85);
   font-family: var(--mono);
   font-size: clamp(6rem, 15vw, 17rem);
   font-weight: 700;
@@ -1106,12 +971,11 @@ ul {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border-block: 1px solid var(--ink);
-  background: var(--spatial-wash);
 }
 
 .project-facts > div {
   min-height: 150px;
-  padding: 18px 20px 30px;
+  padding: 18px 20px 30px 0;
   border-right: 1px solid var(--line);
 }
 
@@ -1139,10 +1003,6 @@ ul {
 
 .project-section:first-child {
   border-top: 1px solid var(--line);
-}
-
-.project-section > .section-label {
-  color: var(--signal);
 }
 
 .project-section > div {

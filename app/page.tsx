@@ -17,8 +17,8 @@ export default function Home() {
             <p>Computer science student<br />Former architectural designer</p>
           </div>
           <h1 data-reveal>
-            <span className="home-hero__code">I design systems</span>
-            <span className="home-hero__space">across code and space.</span>
+            I design systems
+            <span>across code and space.</span>
           </h1>
           <div className="home-hero__footer" data-reveal>
             <p>
