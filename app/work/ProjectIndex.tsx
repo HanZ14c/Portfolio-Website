@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { categories, projects, type ProjectCategory } from "@/lib/projects";
+import { categories, projects, type Project, type ProjectCategory } from "@/lib/projects";
 import { ProjectCard } from "@/app/components/ProjectCard";
 
 type Filter = "All" | ProjectCategory;
@@ -10,9 +10,15 @@ type SortMode = "category" | "alphabetical" | "time";
 const categoryOrder = categories.slice(1) as ProjectCategory[];
 const originalOrder = new Map(projects.map((project, index) => [project.slug, index]));
 
-function getProjectYear(period: string) {
-  const years = period.match(/\b(?:19|20)\d{2}\b/g)?.map(Number) ?? [];
+function getProjectYear(time: string) {
+  const years = time.match(/\b(?:19|20)\d{2}\b/g)?.map(Number) ?? [];
   return years.length > 0 ? Math.max(...years) : Number.NEGATIVE_INFINITY;
+}
+
+function getGroupLabel(project: Project, sortMode: SortMode) {
+  if (sortMode === "category") return project.category;
+  if (sortMode === "alphabetical") return project.title.trim().charAt(0).toUpperCase();
+  return project.time;
 }
 
 export function ProjectIndex() {
@@ -25,8 +31,8 @@ export function ProjectIndex() {
     }
 
     if (sortMode === "time") {
-      const firstYear = getProjectYear(first.period);
-      const secondYear = getProjectYear(second.period);
+      const firstYear = getProjectYear(first.time);
+      const secondYear = getProjectYear(second.time);
       if (firstYear !== secondYear) return secondYear - firstYear;
     }
 
@@ -38,6 +44,18 @@ export function ProjectIndex() {
 
     return (originalOrder.get(first.slug) ?? 0) - (originalOrder.get(second.slug) ?? 0);
   });
+  const groups = visible.reduce<Array<{ label: string; projects: Project[] }>>((result, project) => {
+    const label = getGroupLabel(project, sortMode);
+    const currentGroup = result.at(-1);
+
+    if (currentGroup?.label === label) {
+      currentGroup.projects.push(project);
+    } else {
+      result.push({ label, projects: [project] });
+    }
+
+    return result;
+  }, []);
 
   return (
     <>
@@ -78,11 +96,33 @@ export function ProjectIndex() {
       <p className="filter-summary" aria-live="polite">
         Showing {visible.length} {visible.length === 1 ? "project" : "projects"} · Sorted by {sortMode}
       </p>
-      <div className="project-grid project-grid--all">
-        {visible.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
-      </div>
+      {filter === "All" ? (
+        <div className="project-groups" aria-label={`Projects grouped by ${sortMode}`}>
+          {groups.map((group, index) => (
+            <section className="project-group" key={group.label}>
+              <header className="project-group__heading">
+                <div>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <p>{sortMode}</p>
+                </div>
+                <h2>{group.label}</h2>
+                <p>{group.projects.length} {group.projects.length === 1 ? "project" : "projects"}</p>
+              </header>
+              <div className="project-grid project-grid--all">
+                {group.projects.map((project) => (
+                  <ProjectCard key={project.slug} project={project} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div className="project-grid project-grid--all">
+          {visible.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

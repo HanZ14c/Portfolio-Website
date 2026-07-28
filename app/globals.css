@@ -302,16 +302,26 @@ ul {
   transform: scale(1.025);
 }
 
-.project-card__index {
+.project-card__index,
+.project-card__time {
   position: absolute;
   top: 14px;
-  left: 14px;
   padding: 7px 9px;
   background: var(--paper);
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.project-card__index {
+  left: 14px;
+}
+
+.project-card__time {
+  right: 14px;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .project-card__body {
@@ -612,6 +622,47 @@ ul {
 
 .filter-summary {
   margin-bottom: 50px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.project-groups {
+  display: grid;
+  gap: clamp(72px, 8vw, 130px);
+}
+
+.project-group {
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+}
+
+.project-group__heading {
+  display: grid;
+  grid-template-columns: 2fr 8fr 2fr;
+  gap: 24px;
+  align-items: baseline;
+  margin-bottom: 28px;
+}
+
+.project-group__heading > div {
+  display: flex;
+  gap: 14px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.project-group__heading h2 {
+  font-size: clamp(1.6rem, 2.8vw, 3rem);
+  font-weight: 520;
+  letter-spacing: -0.04em;
+}
+
+.project-group__heading > p {
+  justify-self: end;
   color: var(--muted);
   font-family: var(--mono);
   font-size: 0.65rem;
@@ -1311,6 +1362,20 @@ html[data-ready="true"] [data-reveal][data-visible="true"] {
 
   .project-sort__field {
     max-width: 250px;
+  }
+
+  .project-group__heading {
+    grid-template-columns: 1fr auto;
+  }
+
+  .project-group__heading h2 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .project-group__heading > p {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .about-hero,

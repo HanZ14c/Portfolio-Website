@@ -23,6 +23,7 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
           )}
           <span className="project-card__index">{project.category}</span>
+          <span className="project-card__time">{project.time}</span>
         </div>
         <div className="project-card__body">
           <div>
