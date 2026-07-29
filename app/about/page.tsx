@@ -106,9 +106,15 @@ export default function AboutPage() {
         </section>
 
         <section className="about-links" data-reveal>
-          <p className="section-label">Continue</p>
+          <p className="section-label">Continue + connect</p>
           <Link href="/work">View all work <span>↗</span></Link>
           <a href="mailto:hanz14c@gmail.com">Start a conversation <span>↗</span></a>
+          <a href="https://www.linkedin.com/in/hanz14c/" target="_blank" rel="noreferrer">
+            LinkedIn <span>↗</span>
+          </a>
+          <a href="https://github.com/HanZ14c" target="_blank" rel="noreferrer">
+            GitHub <span>↗</span>
+          </a>
         </section>
       </main>
       <SiteFooter />

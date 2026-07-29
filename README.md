@@ -39,7 +39,9 @@ The site is intentionally organized like a small publication: a concise home pag
 
 ### Visual studies
 
-- **Architectural Hand Sketches** — three observational building studies
+- **Bungalow** — Lumion 9 direct-render study of weather and seasonal atmosphere
+- **Rumah** — residential visualization rendered in Lumion 8 and refined in Adobe Photoshop
+- **Architectural Hand Sketches** — selected architectural hand drawings
 
 ## Background represented
 

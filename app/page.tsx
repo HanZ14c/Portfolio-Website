@@ -6,8 +6,22 @@ import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { projects } from "@/lib/projects";
 
+const featuredProjectSlugs = [
+  "emotion-time",
+  "bc-travel-guide",
+  "team-workflow-scheduler",
+  "qianhai-shimao-centre",
+  "car-dealership-manager",
+  "grid-pursuit-cheese",
+  "bungalow",
+  "architectural-hand-sketches",
+  "family-tree-database",
+] as const;
+
 export default function Home() {
-  const featured = projects.filter((project) => project.featured);
+  const featured = featuredProjectSlugs
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter((project) => project !== undefined);
 
   return (
     <>
@@ -72,6 +86,20 @@ export default function Home() {
                 work.
               </p>
               <Link className="text-link" href="/about">Read the full profile <span>↗</span></Link>
+              <nav className="profile-links" aria-label="Profile links">
+                <a href="mailto:hanz14c@gmail.com">
+                  <img src="/media/social/email.png" alt="" aria-hidden="true" />
+                  Email <span className="link-arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/hanz14c/" target="_blank" rel="noreferrer">
+                  <img src="/media/social/linkedin.png" alt="" aria-hidden="true" />
+                  LinkedIn <span className="link-arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="https://github.com/HanZ14c" target="_blank" rel="noreferrer">
+                  <img src="/media/social/github.png" alt="" aria-hidden="true" />
+                  GitHub <span className="link-arrow" aria-hidden="true">↗</span>
+                </a>
+              </nav>
             </div>
           </div>
 

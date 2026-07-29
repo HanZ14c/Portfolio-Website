@@ -44,11 +44,15 @@ export type Project = {
   cover?: string;
   coverAlt?: string;
   containCover?: boolean;
+  visualOnly?: boolean;
   featured?: boolean;
   cardSize?: "wide" | "standard";
   facts: ProjectFact[];
   sections: ProjectSection[];
   gallery?: ProjectImage[];
+  galleryLayout?: "process-triptych";
+  galleryLabel?: string;
+  galleryTitle?: string;
   links?: ProjectLink[];
 };
 
@@ -56,7 +60,7 @@ export const projects: Project[] = [
   {
     slug: "vertical-city-housing",
     title: "Vertical City Housing",
-    subtitle: "垂直城市 — 西安保利曲江春天里小区设计",
+    subtitle: "Vertical City — Xi’an Poly Qujiang Chuntianli Residential Community Design",
     category: "Academic Architecture",
     time: "2018",
     period: "2018",
@@ -245,10 +249,10 @@ export const projects: Project[] = [
   {
     slug: "emotion-time",
     title: "Emotion Time",
-    subtitle: "情感的形意场语言生成",
+    subtitle: "Generating Spatial Language from an Emotional Form–Meaning Field",
     category: "Academic Architecture",
-    time: "2020",
-    period: "Academic project / Later revision",
+    time: "2021",
+    period: "2021",
     location: "Xi'an, China",
     role: "Individual design and independent revision",
     status: "Academic / Unbuilt",
@@ -476,8 +480,8 @@ export const projects: Project[] = [
     title: "CM Qianhai Shimao Centre",
     subtitle: "Civic pavilions within a mixed-use development",
     category: "Architecture Practice",
-    time: "2018–2020",
-    period: "2018–2020",
+    time: "2019",
+    period: "2019",
     location: "Shenzhen, China",
     role: "Architectural assistant — basement technical drawings and consultant coordination",
     status: "Completed / Professional team project",
@@ -629,8 +633,8 @@ export const projects: Project[] = [
     title: "Shenzhen Junior High School",
     subtitle: "A compact vertical campus",
     category: "Architecture Practice",
-    time: "2018–2020",
-    period: "2018–2020",
+    time: "2020",
+    period: "2020",
     location: "Shenzhen, China",
     role: "Architectural assistant — programming and early form exploration",
     status: "Completed / Professional team project",
@@ -687,9 +691,8 @@ export const projects: Project[] = [
       "A small game used to make state, timing and collision rules visible through immediate browser interaction.",
     accent: "#cf5a35",
     codeAccent: "#d8d4e1",
-    cover: "/media/grid-pursuit-cheese/gameplay.png",
-    coverAlt: "Gameplay board from Grid Pursuit Cheese",
-    containCover: true,
+    cover: "/media/grid-pursuit-cheese/gameplay-interface.png",
+    coverAlt: "Complete Grid Pursuit Cheese game interface with board, controls, scoring and status panels",
     featured: true,
     facts: [
       { label: "Stack", value: "HTML / CSS / JavaScript" },
@@ -771,8 +774,8 @@ export const projects: Project[] = [
     title: "Jiangmen Heshan Ocean World",
     subtitle: "Hotel, water park, retail and leisure district",
     category: "Architecture Practice",
-    time: "2018–2020",
-    period: "2018–2020",
+    time: "2017",
+    period: "2017",
     location: "Jiangmen, China",
     role: "Architectural assistant — form and facade studies",
     status: "Professional team project",
@@ -818,8 +821,8 @@ export const projects: Project[] = [
     title: "Guangzhou Najin Business Area",
     subtitle: "A connected office and commercial campus",
     category: "Architecture Practice",
-    time: "2018–2020",
-    period: "2018–2020",
+    time: "2020",
+    period: "2020",
     location: "Guangzhou, China",
     role: "Architectural assistant — programming and form development",
     status: "Professional team project",
@@ -912,8 +915,8 @@ export const projects: Project[] = [
     title: "Chongqing Tianan Cyber Park T3",
     subtitle: "Feasibility and early design communication",
     category: "Architecture Practice",
-    time: "2018–2020",
-    period: "2018–2020",
+    time: "2019",
+    period: "2019",
     location: "Chongqing, China",
     role: "Architectural assistant — site study, feasibility and diagrams",
     status: "Professional team project",
@@ -960,8 +963,8 @@ export const projects: Project[] = [
     title: "Dongguan Songshanhu Office Tower",
     subtitle: "Technical documentation and precedent research",
     category: "Architecture Practice",
-    time: "2018–2020",
-    period: "2018–2020",
+    time: "2017",
+    period: "2017",
     location: "Dongguan, China",
     role: "Architectural assistant — basement drawings and precedent studies",
     status: "Professional team project",
@@ -1094,42 +1097,155 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "architectural-hand-sketches",
-    title: "Architectural Hand Sketches",
-    subtitle: "Three studies of structure, mass and landscape",
+    slug: "bungalow",
+    title: "Bungalow",
+    subtitle: "Lumion 9 weather studies",
     category: "Visual Studies",
-    time: "2019",
-    period: "Selected studies",
-    role: "Drawing",
-    status: "Ongoing visual archive",
+    time: "2020",
+    period: "2020 / Personal study",
+    role: "Visualization and environment study",
+    status: "Completed",
     excerpt:
-      "A small series of hand-drawn architectural studies exploring contour, structure, material weight and landscape setting.",
+      "A Lumion 9 direct-render study testing how weather, light and seasonal atmosphere alter the same architectural scene.",
     statement:
-      "Drawing is used here as a way to slow down observation and understand how a building holds together visually.",
-    accent: "#898780",
-    cover: "/media/architecture-practice/architectural-sketches.webp",
-    coverAlt: "Three architectural hand sketches",
-    cardSize: "wide",
+      "The same hillside residence is used to compare Lumion 9 weather settings through changes in sky, precipitation, light, vegetation and ground conditions.",
+    accent: "#8fa8bb",
+    cover: "/media/bungalow/clear-weather.jpg",
+    coverAlt: "Lumion 9 visualization of a modern hillside residence in clear weather",
     facts: [
-      { label: "Medium", value: "Hand drawing" },
-      { label: "Works", value: "Three studies" },
-      { label: "Focus", value: "Structure / Mass / Landscape" },
-      { label: "Archive", value: "More work to be added" },
+      { label: "Tool", value: "Lumion 9" },
+      { label: "Study", value: "Weather + seasonal atmosphere" },
+      { label: "Output", value: "Direct renders" },
     ],
     sections: [
       {
-        label: "01 / Observation",
-        title: "Understanding through line",
+        label: "01 / Baseline",
+        title: "Keeping the architecture constant",
         body: [
-          "The studies simplify complex buildings into dominant contours, structural rhythms and tonal relationships. Each drawing looks for the few lines that make the subject recognizable.",
+          "A consistent model and camera position isolate the effect of the environmental settings, allowing weather and atmosphere to become the primary variables.",
         ],
       },
       {
-        label: "02 / Practice",
-        title: "A visual discipline beyond presentation",
+        label: "02 / Weather",
+        title: "Comparing atmosphere directly in Lumion 9",
         body: [
-          "Hand drawing complements digital modelling and rendering by making proportion, hierarchy and composition immediate. The series will expand as paintings and additional sketch material are prepared for the site.",
+          "Rain, snow, haze, sky conditions and seasonal landscape changes are tested as direct Lumion outputs without a separate compositing stage.",
         ],
+      },
+    ],
+    galleryLabel: "Weather studies",
+    galleryTitle: "One scene across changing atmospheric conditions.",
+    gallery: [
+      {
+        src: "/media/bungalow/rain-weather.jpg",
+        alt: "Lumion 9 direct render of the hillside residence in rain",
+        caption: "Lumion 9 / Rain",
+      },
+      {
+        src: "/media/bungalow/cold-snow-weather.jpg",
+        alt: "Lumion 9 direct render of the hillside residence in cold blue snowfall",
+        caption: "Lumion 9 / Cold snowfall",
+      },
+      {
+        src: "/media/bungalow/winter-weather.jpg",
+        alt: "Lumion 9 direct render of the hillside residence in a snow-covered winter landscape",
+        caption: "Lumion 9 / Winter snow",
+      },
+    ],
+  },
+  {
+    slug: "rumah",
+    title: "Rumah",
+    subtitle: "Architectural visualization study",
+    category: "Visual Studies",
+    time: "2019",
+    period: "2019 / Personal study",
+    role: "Visualization and post-production",
+    status: "Completed",
+    excerpt:
+      "A residential exterior visualization rendered in Lumion 8 and refined through Photoshop post-production.",
+    statement:
+      "The study separates the Lumion output passes from the final composited image to show a concise architectural visualization workflow.",
+    accent: "#7f9ab1",
+    cover: "/media/rumah/rumah-final.jpg",
+    coverAlt: "Final visualization of a contemporary house on a residential street",
+    facts: [
+      { label: "Tools", value: "Lumion 8 + Adobe Photoshop" },
+      { label: "Subject", value: "Residential exterior" },
+      { label: "Workflow", value: "Render passes → Post-production" },
+    ],
+    sections: [
+      {
+        label: "01 / Render",
+        title: "Separating the visualization into useful passes",
+        body: [
+          "Lumion 8 produced the base render together with a sky alpha mask and material ID pass for controlled post-production.",
+        ],
+      },
+      {
+        label: "02 / Finish",
+        title: "Refining atmosphere and image balance",
+        body: [
+          "Photoshop was used to adjust the sky, tonal balance, texture and overall atmosphere while retaining the original architectural composition.",
+        ],
+      },
+    ],
+    galleryLayout: "process-triptych",
+    galleryLabel: "Visualization workflow",
+    galleryTitle: "Lumion output to Photoshop finish.",
+    gallery: [
+      {
+        src: "/media/rumah/lumion-base.jpg",
+        alt: "Base residential exterior render exported from Lumion 8",
+        caption: "Lumion 8 / Base render",
+      },
+      {
+        src: "/media/rumah/lumion-sky-alpha.jpg",
+        alt: "Black and white sky alpha pass exported from Lumion 8",
+        caption: "Lumion 8 / Sky Alpha",
+      },
+      {
+        src: "/media/rumah/lumion-material-id.jpg",
+        alt: "Colour-coded material ID pass exported from Lumion 8",
+        caption: "Lumion 8 / Material ID",
+      },
+      {
+        src: "/media/rumah/rumah-final.jpg",
+        alt: "Photoshop-processed final visualization of the contemporary house",
+        caption: "Photoshop / Final image",
+      },
+    ],
+  },
+  {
+    slug: "architectural-hand-sketches",
+    title: "Architectural Hand Sketches",
+    subtitle: "Selected hand drawings",
+    category: "Visual Studies",
+    time: "2019",
+    period: "2019 / Personal work",
+    role: "Hand drawing",
+    status: "Selected works",
+    excerpt: "A selection of architectural hand drawings.",
+    statement: "Selected architectural hand drawings.",
+    accent: "#898780",
+    cover: "/media/architectural-hand-sketches/sketch-1.jpg",
+    coverAlt: "Ink sketch of a house set within a rocky landscape",
+    visualOnly: true,
+    cardSize: "wide",
+    facts: [],
+    sections: [],
+    gallery: [
+      {
+        src: "/media/architectural-hand-sketches/sketch-1.jpg",
+        alt: "Ink sketch of a house set within a rocky landscape",
+      },
+      {
+        src: "/media/architectural-hand-sketches/sketch-2.jpg",
+        alt: "Ink sketch of an angular contemporary building complex",
+      },
+      {
+        src: "/media/architectural-hand-sketches/sketch-3.jpg",
+        alt: "Ink sketch of a curving twin-tower building beside water",
       },
     ],
   },

@@ -23,11 +23,30 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(html, /I design systems/);
   assert.match(html, /across code and space/);
   assert.match(html, /Selected work/);
+  assert.match(html, /class="profile-links"/);
+  assert.match(html, /media\/social\/email\.png/);
+  assert.match(html, /media\/social\/linkedin\.png/);
+  assert.match(html, /media\/social\/github\.png/);
   assert.match(html, /Langara College/);
   assert.match(html, /media\/institutions\/ubc\.jpeg/);
   assert.match(html, /media\/institutions\/langara\.jpeg/);
   assert.match(html, /media\/institutions\/huayi\.jpeg/);
   assert.match(html, /media\/institutions\/xaut\.jpeg/);
+  const featuredTitles = [
+    "Emotion Time",
+    "BC Travel Guide",
+    "Team Workflow Scheduler",
+    "CM Qianhai Shimao Centre",
+    "Car Dealership Manager",
+    "Grid Pursuit: Cheese",
+    "Bungalow",
+    "Architectural Hand Sketches",
+    "Family Tree Database",
+  ];
+  const featuredPositions = featuredTitles.map((title) => html.indexOf(title));
+  assert.ok(featuredPositions.every((position) => position >= 0));
+  assert.deepEqual(featuredPositions, [...featuredPositions].sort((first, second) => first - second));
+  assert.match(html, /2021/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
 });
 
@@ -39,6 +58,7 @@ test("server-renders the institutional background on the about page", async () =
   assert.match(html, /Langara College/);
   assert.match(html, /Hong Kong Huayi Design Consultant/);
   assert.match(html, /Xi(?:&#x27;|')an University of Technology/);
+  assert.match(html, /Continue \+ connect/);
   assert.match(html, /media\/institutions\/(?:ubc|langara|huayi|xaut)\.jpeg/);
 });
 
@@ -106,6 +126,46 @@ test("server-renders the Grid Pursuit Cheese technical case study", async () => 
   const html = await response.text();
   assert.match(html, /Five-action queue/);
   assert.match(html, /HTML5 Canvas API/);
-  assert.match(html, /gameplay\.png/);
+  assert.match(html, /gameplay-interface\.png/);
   assert.match(html, /Grid-Pursuit-Cheese/);
+});
+
+test("server-renders the architectural sketches as a visual-only gallery", async () => {
+  const response = await render("/work/architectural-hand-sketches");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Architectural Hand Sketches/);
+  assert.match(html, /sketch-1\.jpg/);
+  assert.match(html, /sketch-2\.jpg/);
+  assert.match(html, /sketch-3\.jpg/);
+  assert.doesNotMatch(html, /<section class="project-cover/);
+  assert.doesNotMatch(html, /Three studies|Project premise|Drawings, systems and outcomes/);
+});
+
+test("server-renders the Rumah visualization workflow", async () => {
+  const response = await render("/work/rumah");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Rumah/);
+  assert.match(html, /Lumion 8 \+ Adobe Photoshop/);
+  assert.match(html, /project-gallery__triptych/);
+  assert.match(html, /lumion-base\.jpg/);
+  assert.match(html, /lumion-sky-alpha\.jpg/);
+  assert.match(html, /lumion-material-id\.jpg/);
+  assert.match(html, /rumah-final\.jpg/);
+  assert.match(html, /Photoshop \/ Final image/);
+});
+
+test("server-renders the Bungalow Lumion weather study", async () => {
+  const response = await render("/work/bungalow");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Bungalow/);
+  assert.match(html, /Lumion 9/);
+  assert.match(html, /Weather \+ seasonal atmosphere/);
+  assert.match(html, /clear-weather\.jpg/);
+  assert.match(html, /rain-weather\.jpg/);
+  assert.match(html, /cold-snow-weather\.jpg/);
+  assert.match(html, /winter-weather\.jpg/);
+  assert.match(html, /One scene across changing atmospheric conditions/);
 });

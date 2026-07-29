@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <p>{project.category}</p>
           </div>
           <h1 data-reveal>{project.title}</h1>
-          <p className="project-subtitle" data-reveal>{project.subtitle}</p>
+          {!project.visualOnly && <p className="project-subtitle" data-reveal>{project.subtitle}</p>}
           <div className="project-hero__meta" data-reveal>
             <div><span>Period</span><p>{project.period}</p></div>
             {project.location && <div><span>Location</span><p>{project.location}</p></div>}
@@ -61,68 +61,91 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </header>
 
-        <section className={`project-cover ${project.containCover ? "is-contained" : ""}`} data-reveal>
-          {project.cover ? (
-            <img src={project.cover} alt={project.coverAlt ?? ""} />
-          ) : (
-            <div className="project-cover__code" aria-hidden="true">
-              <span>{project.title}</span>
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
-          )}
-        </section>
+        {!project.visualOnly && (
+          <section className={`project-cover ${project.containCover ? "is-contained" : ""}`} data-reveal>
+            {project.cover ? (
+              <img src={project.cover} alt={project.coverAlt ?? ""} />
+            ) : (
+              <div className="project-cover__code" aria-hidden="true">
+                <span>{project.title}</span>
+                <i />
+                <i />
+                <i />
+                <i />
+              </div>
+            )}
+          </section>
+        )}
 
-        <section className="project-intro page-shell" data-reveal>
-          <p className="section-label">Project premise</p>
-          <h2>{project.statement}</h2>
-          <p>{project.excerpt}</p>
-          {project.links && (
-            <div className="project-links">
-              {project.links.map((link) => (
-                <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
-                  {link.label} <span>↗</span>
-                </a>
+        {!project.visualOnly && (
+          <>
+            <section className="project-intro page-shell" data-reveal>
+              <p className="section-label">Project premise</p>
+              <h2>{project.statement}</h2>
+              <p>{project.excerpt}</p>
+              {project.links && (
+                <div className="project-links">
+                  {project.links.map((link) => (
+                    <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                      {link.label} <span>↗</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section className="project-facts page-shell" aria-label="Project facts">
+              {project.facts.map((fact) => (
+                <div key={fact.label} data-reveal>
+                  <span>{fact.label}</span>
+                  <p>{fact.value}</p>
+                </div>
+              ))}
+            </section>
+
+            <div className="project-sections page-shell" hidden={!projectSectionsEnabled}>
+              {project.sections.map((section) => (
+                <section key={section.label} className="project-section" data-reveal>
+                  <p className="section-label">{section.label}</p>
+                  <div>
+                    <h2>{section.title}</h2>
+                    {section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    {section.points && (
+                      <ul>
+                        {section.points.map((point) => <li key={point}>{point}</li>)}
+                      </ul>
+                    )}
+                  </div>
+                </section>
               ))}
             </div>
-          )}
-        </section>
-
-        <section className="project-facts page-shell" aria-label="Project facts">
-          {project.facts.map((fact) => (
-            <div key={fact.label} data-reveal>
-              <span>{fact.label}</span>
-              <p>{fact.value}</p>
-            </div>
-          ))}
-        </section>
-
-        <div className="project-sections page-shell" hidden={!projectSectionsEnabled}>
-          {project.sections.map((section) => (
-            <section key={section.label} className="project-section" data-reveal>
-              <p className="section-label">{section.label}</p>
-              <div>
-                <h2>{section.title}</h2>
-                {section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                {section.points && (
-                  <ul>
-                    {section.points.map((point) => <li key={point}>{point}</li>)}
-                  </ul>
-                )}
-              </div>
-            </section>
-          ))}
-        </div>
+          </>
+        )}
 
         {project.gallery && (
-          <section className="project-gallery page-shell">
-            <div className="section-heading" data-reveal>
-              <p className="section-label">Selected project material</p>
-              <h2>Drawings, systems and outcomes.</h2>
-            </div>
-            {project.gallery.map((image) => (
+          <section className={`project-gallery page-shell${project.visualOnly ? " project-gallery--visual-only" : ""}`}>
+            {!project.visualOnly && <div className="section-heading" data-reveal>
+              <p className="section-label">{project.galleryLabel ?? "Selected project material"}</p>
+              <h2>{project.galleryTitle ?? "Drawings, systems and outcomes."}</h2>
+            </div>}
+            {project.galleryLayout === "process-triptych" ? (
+              <>
+                <div className="project-gallery__triptych">
+                  {project.gallery.slice(0, 3).map((image) => (
+                    <figure key={image.src} data-reveal>
+                      <img src={image.src} alt={image.alt} loading="lazy" />
+                      {image.caption && <figcaption>{image.caption}</figcaption>}
+                    </figure>
+                  ))}
+                </div>
+                {project.gallery.slice(3).map((image) => (
+                  <figure key={image.src} data-reveal>
+                    <img src={image.src} alt={image.alt} loading="lazy" />
+                    {image.caption && <figcaption>{image.caption}</figcaption>}
+                  </figure>
+                ))}
+              </>
+            ) : project.gallery.map((image) => (
               <figure key={image.src} data-reveal>
                 <img src={image.src} alt={image.alt} loading="lazy" />
                 {image.caption && <figcaption>{image.caption}</figcaption>}
@@ -131,7 +154,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </section>
         )}
 
-        {related.length > 0 && (
+        {!project.visualOnly && related.length > 0 && (
           <section className="related-work page-shell">
             <div className="section-heading" data-reveal>
               <p className="section-label">Continue exploring</p>
