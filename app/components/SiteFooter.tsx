@@ -10,10 +10,10 @@ export function SiteFooter() {
       <div className="footer-links">
         <a href="mailto:hanz14c@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/hanz14c/" target="_blank" rel="noreferrer">
-          LinkedIn ↗
+          LinkedIn <span className="link-arrow" aria-hidden="true">↗</span>
         </a>
         <a href="https://github.com/HanZ14c" target="_blank" rel="noreferrer">
-          GitHub ↗
+          GitHub <span className="link-arrow" aria-hidden="true">↗</span>
         </a>
         <Link href="/about">About</Link>
       </div>

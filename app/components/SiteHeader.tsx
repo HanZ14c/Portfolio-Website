@@ -11,7 +11,7 @@ export function SiteHeader() {
           <Link href="/work">Work</Link>
           <Link href="/about">About</Link>
           <a href="https://github.com/HanZ14c" target="_blank" rel="noreferrer">
-            GitHub ↗
+            GitHub <span className="link-arrow" aria-hidden="true">↗</span>
           </a>
         </nav>
         <details className="mobile-nav">
@@ -20,7 +20,7 @@ export function SiteHeader() {
             <Link href="/work">Work</Link>
             <Link href="/about">About</Link>
             <a href="https://github.com/HanZ14c" target="_blank" rel="noreferrer">
-              GitHub ↗
+              GitHub <span className="link-arrow" aria-hidden="true">↗</span>
             </a>
           </nav>
         </details>

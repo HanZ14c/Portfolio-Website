@@ -13,7 +13,7 @@ The site is intentionally organized like a small publication: a concise home pag
 
 ## Included projects
 
-### Software
+### Computer Science
 
 - **Team Workflow Scheduler** — Java/JavaFX collaboration system with TCP networking, JSON persistence and JUnit testing
 - **Car Dealership Manager** — Java/Swing inventory application with UML-led design, JSON storage and tests

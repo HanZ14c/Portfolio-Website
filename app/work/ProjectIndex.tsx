@@ -9,16 +9,29 @@ type SortMode = "category" | "alphabetical" | "time";
 
 const categoryOrder = categories.slice(1) as ProjectCategory[];
 const originalOrder = new Map(projects.map((project, index) => [project.slug, index]));
+const sortLabels: Record<SortMode, string> = {
+  category: "category",
+  alphabetical: "alphabetical order",
+  time: "end time",
+};
 
-function getProjectYear(time: string) {
+function getProjectEndYear(time: string) {
+  if (/\b(?:present|ongoing|current|now)\b/i.test(time)) return Number.POSITIVE_INFINITY;
   const years = time.match(/\b(?:19|20)\d{2}\b/g)?.map(Number) ?? [];
   return years.length > 0 ? Math.max(...years) : Number.NEGATIVE_INFINITY;
+}
+
+function getEndTimeLabel(time: string) {
+  const endYear = getProjectEndYear(time);
+  if (endYear === Number.POSITIVE_INFINITY) return "Ongoing";
+  if (endYear === Number.NEGATIVE_INFINITY) return "XXXX";
+  return String(endYear);
 }
 
 function getGroupLabel(project: Project, sortMode: SortMode) {
   if (sortMode === "category") return project.category;
   if (sortMode === "alphabetical") return project.title.trim().charAt(0).toUpperCase();
-  return project.time;
+  return getEndTimeLabel(project.time);
 }
 
 export function ProjectIndex() {
@@ -31,8 +44,8 @@ export function ProjectIndex() {
     }
 
     if (sortMode === "time") {
-      const firstYear = getProjectYear(first.time);
-      const secondYear = getProjectYear(second.time);
+      const firstYear = getProjectEndYear(first.time);
+      const secondYear = getProjectEndYear(second.time);
       if (firstYear !== secondYear) return secondYear - firstYear;
     }
 
@@ -87,23 +100,23 @@ export function ProjectIndex() {
             >
               <option value="category">Category</option>
               <option value="alphabetical">Alphabetical A–Z</option>
-              <option value="time">Time — newest first</option>
+              <option value="time">End time — newest first</option>
             </select>
             <span className="project-sort__arrow" aria-hidden="true">↓</span>
           </span>
         </label>
       </div>
       <p className="filter-summary" aria-live="polite">
-        Showing {visible.length} {visible.length === 1 ? "project" : "projects"} · Sorted by {sortMode}
+        Showing {visible.length} {visible.length === 1 ? "project" : "projects"} · Sorted by {sortLabels[sortMode]}
       </p>
       {filter === "All" ? (
-        <div className="project-groups" aria-label={`Projects grouped by ${sortMode}`}>
+        <div className="project-groups" aria-label={`Projects grouped by ${sortLabels[sortMode]}`}>
           {groups.map((group, index) => (
             <section className="project-group" key={group.label}>
               <header className="project-group__heading">
                 <div>
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <p>{sortMode}</p>
+                  <p>{sortLabels[sortMode]}</p>
                 </div>
                 <h2>{group.label}</h2>
                 <p>{group.projects.length} {group.projects.length === 1 ? "project" : "projects"}</p>

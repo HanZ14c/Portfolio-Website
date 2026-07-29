@@ -19,10 +19,27 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  assert.match(html, /Han Zhang — Computer Science, Architecture and Visual Work/);
   assert.match(html, /I design systems/);
   assert.match(html, /across code and space/);
   assert.match(html, /Selected work/);
+  assert.match(html, /Langara College/);
+  assert.match(html, /media\/institutions\/ubc\.jpeg/);
+  assert.match(html, /media\/institutions\/langara\.jpeg/);
+  assert.match(html, /media\/institutions\/huayi\.jpeg/);
+  assert.match(html, /media\/institutions\/xaut\.jpeg/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
+});
+
+test("server-renders the institutional background on the about page", async () => {
+  const response = await render("/about");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /University of British Columbia/);
+  assert.match(html, /Langara College/);
+  assert.match(html, /Hong Kong Huayi Design Consultant/);
+  assert.match(html, /Xi(?:&#x27;|')an University of Technology/);
+  assert.match(html, /media\/institutions\/(?:ubc|langara|huayi|xaut)\.jpeg/);
 });
 
 test("server-renders the project index", async () => {
@@ -32,9 +49,63 @@ test("server-renders the project index", async () => {
   assert.match(html, /Complete project index/);
   assert.match(html, /Vertical City Housing/);
   assert.match(html, /Team Workflow Scheduler/);
+  assert.match(html, /Computer Science/);
   assert.match(html, /Sort projects/);
-  assert.match(html, /Time — newest first/);
+  assert.match(html, /End time — newest first/);
   assert.match(html, /Projects grouped by category/);
   assert.match(html, /2026/);
   assert.doesNotMatch(html, /XXXX/);
+});
+
+test("server-renders the Team Workflow Scheduler technical case study", async () => {
+  const response = await render("/work/team-workflow-scheduler");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Thread-per-connection socket handling/);
+  assert.match(html, /ConcurrentHashMap/);
+  assert.match(html, /JUnit 5/);
+  assert.match(html, /localhost:5050/);
+  assert.match(html, /Team-Workflow-Scheduler/);
+  assert.match(html, /class="project-sections page-shell" hidden/);
+});
+
+test("server-renders the Car Dealership Manager technical case study", async () => {
+  const response = await render("/work/car-dealership-manager");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Java 11\+/);
+  assert.match(html, /JUnit 5 \/ 39 tests/);
+  assert.match(html, /singleton EventLog/);
+  assert.match(html, /uml-design-diagram\.png/);
+  assert.match(html, /Car-Dealership-Manager/);
+});
+
+test("server-renders the Family Tree Database technical case study", async () => {
+  const response = await render("/work/family-tree-database");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /13 tables/);
+  assert.match(html, /Twenty SQL examples/);
+  assert.match(html, /MySQL \+ Microsoft SQL Server/);
+  assert.match(html, /eer-modeling-diagram\.png/);
+});
+
+test("server-renders the BC Travel Guide technical case study", async () => {
+  const response = await render("/work/bc-travel-guide");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Six destination stories/);
+  assert.match(html, /PHP \/ PDO \/ MySQL/);
+  assert.match(html, /photo-wall\.jpg/);
+  assert.match(html, /BC-Travel-Guide/);
+});
+
+test("server-renders the Grid Pursuit Cheese technical case study", async () => {
+  const response = await render("/work/grid-pursuit-cheese");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Five-action queue/);
+  assert.match(html, /HTML5 Canvas API/);
+  assert.match(html, /gameplay\.png/);
+  assert.match(html, /Grid-Pursuit-Cheese/);
 });

@@ -8,7 +8,10 @@ export function ProjectCard({ project }: { project: Project }) {
       className="project-card"
       data-size={project.cardSize ?? "standard"}
       data-reveal
-      style={{ "--project-accent": project.accent } as CSSProperties}
+      style={{
+        "--project-accent": project.accent,
+        "--code-card": project.codeAccent,
+      } as CSSProperties}
     >
       <Link href={`/work/${project.slug}`} aria-label={`View ${project.title}`}>
         <div className={`project-card__visual ${project.containCover ? "is-contained" : ""}`}>

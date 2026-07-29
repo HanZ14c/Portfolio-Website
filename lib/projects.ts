@@ -1,5 +1,5 @@
 export type ProjectCategory =
-  | "Software"
+  | "Computer Science"
   | "Academic Architecture"
   | "Architecture Practice"
   | "Visual Studies";
@@ -40,6 +40,7 @@ export type Project = {
   excerpt: string;
   statement: string;
   accent: string;
+  codeAccent?: string;
   cover?: string;
   coverAlt?: string;
   containCover?: boolean;
@@ -138,50 +139,99 @@ export const projects: Project[] = [
     slug: "team-workflow-scheduler",
     title: "Team Workflow Scheduler",
     subtitle: "A client-server task management system",
-    category: "Software",
+    category: "Computer Science",
     time: "2026",
-    period: "Selected software project",
-    role: "Application design and implementation",
+    period: "2026 / Software project",
+    role: "System architecture, protocol, UI and implementation",
     status: "Repository available",
     excerpt:
-      "A Java task manager connecting a JavaFX desktop client and a command-line client to a multi-client TCP server.",
+      "A Java client-server application for managing shared team tasks through a JavaFX desktop client or a command-line interface, with TCP networking and JSON persistence.",
     statement:
-      "A compact exercise in keeping several clients, a shared task lifecycle and persistent state consistent.",
+      "A compact exercise in keeping several clients, a shared task lifecycle and persistent state consistent through a deliberately small, legible protocol.",
     accent: "#ff5636",
+    codeAccent: "#c7d7e6",
     featured: true,
     cardSize: "standard",
     facts: [
       { label: "Language", value: "Java" },
-      { label: "Interface", value: "JavaFX + CLI" },
-      { label: "Network", value: "TCP sockets" },
-      { label: "Storage", value: "JSON" },
+      { label: "Client interfaces", value: "JavaFX + CLI" },
+      { label: "Architecture", value: "Client–server" },
+      { label: "Networking", value: "TCP sockets / Port 5050" },
+      { label: "Persistence", value: "JSON / data/tasks.json" },
+      { label: "Testing", value: "JUnit 5" },
     ],
     sections: [
       {
-        label: "01 / Problem",
+        label: "01 / Overview",
         title: "One workflow, several clients",
         body: [
-          "The application manages tasks across a graphical desktop client and a command-line client. Both communicate with a shared server, so task state must remain predictable even when several users connect at the same time.",
+          "The application manages shared team tasks across a JavaFX desktop client and a command-line client for testing raw protocol commands. Both communicate with the same TCP server, so task state must remain predictable even when several users connect at the same time.",
+          "Clients send one-line text commands; the server parses each request, updates the shared task list and saves the result to a JSON file. The desktop table refreshes after every operation so the interface stays synchronized with server state.",
         ],
       },
       {
-        label: "02 / System",
-        title: "A small distributed application",
+        label: "02 / Capabilities",
+        title: "The complete task lifecycle",
         body: [
-          "The server accepts concurrent TCP connections, interprets client commands and applies changes through one task lifecycle. JSON persistence restores the workspace between sessions, while automatic status updates keep overdue tasks current.",
+          "Tasks carry a title, assignee, status, priority and ISO-formatted due time. The application supports the full create, read, update and delete workflow while automatically moving unfinished tasks into an overdue state when their deadline passes.",
         ],
         points: [
-          "Multi-client socket handling",
-          "Shared task lifecycle",
+          "Add tasks with title, assignee, status, priority and due time",
+          "Update every task field",
+          "Delete tasks by task ID",
+          "List all persisted tasks",
+          "READY · IN_PROGRESS · DONE · OVERDUE · CANCELED",
           "Automatic overdue-state updates",
-          "JavaFX and command-line interfaces",
         ],
       },
       {
-        label: "03 / Quality",
+        label: "03 / Architecture",
+        title: "A small distributed application",
+        body: [
+          "The server listens on port 5050 and creates a dedicated ClientHandler thread for each accepted socket connection. Every handler parses one command and delegates it to a shared SchedulerService, which owns the task lifecycle independently of either interface.",
+          "A ConcurrentHashMap provides the shared task collection, with synchronized task mutations and serialized saves protecting critical updates. JSON persistence restores the workspace between sessions, while the service recalculates overdue states whenever tasks are listed or changed.",
+        ],
+        points: [
+          "Thread-per-connection socket handling",
+          "Shared SchedulerService domain layer",
+          "ConcurrentHashMap task storage",
+          "Synchronized task updates and JSON writes",
+        ],
+      },
+      {
+        label: "04 / Protocol",
+        title: "A readable one-line command format",
+        body: [
+          "The custom protocol uses a command followed by key-value fields. Its parser accepts quoted values and escaped characters, allowing task titles and assignee names to contain spaces without making the wire format difficult to inspect or test.",
+        ],
+        points: [
+          "ADD title=\"Test 1\" assignee=\"Lee\" status=READY priority=1 dueAt=2026-01-01T17:00:00Z",
+          "LIST",
+          "UPDATE taskId=1 title=\"Review\" status=IN_PROGRESS priority=2",
+          "DELETE taskId=1",
+        ],
+      },
+      {
+        label: "05 / Interfaces",
+        title: "A desktop workflow and a direct protocol client",
+        body: [
+          "The JavaFX client separates add, update and delete actions into dedicated tabs and presents server data in a task table. Network requests run away from the UI thread, then use Platform.runLater to update the interface safely after the server responds.",
+          "A command-line client provides a second path into the same server. It keeps the protocol visible during development and makes client-server behaviour easier to inspect without the graphical interface.",
+        ],
+      },
+      {
+        label: "06 / Quality",
         title: "Behaviour made testable",
         body: [
-          "The project separates domain behaviour from presentation and transport concerns. JUnit tests cover the task model and application behaviour, making changes safer as the feature set grows.",
+          "The project separates domain behaviour from presentation and transport concerns. JUnit 5 tests exercise protocol parsing and formatting as well as adding, listing, updating, deleting, persisting and automatically marking tasks overdue.",
+          "Tests use temporary JSON files, keeping service behaviour isolated from the application’s saved task data and making changes safer as the feature set grows.",
+        ],
+      },
+      {
+        label: "07 / Run locally",
+        title: "Two clients, one server",
+        body: [
+          "Start SchedulerServer.java first, then run either SchedulerFxClient.java for the desktop interface or SchedulerClient.java for command-line access. Both clients connect to the server on localhost:5050.",
         ],
       },
     ],
@@ -339,44 +389,81 @@ export const projects: Project[] = [
     slug: "bc-travel-guide",
     title: "BC Travel Guide",
     subtitle: "Responsive destination storytelling",
-    category: "Software",
+    category: "Computer Science",
     time: "2023",
-    period: "Selected web project",
-    role: "Web design and implementation",
+    period: "2023 / Web project",
+    role: "Content structure, responsive interface and full-stack implementation",
     status: "Live demo available",
     excerpt:
       "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
     statement:
       "A content-led web project focused on organizing destinations into a clear, responsive browsing experience.",
     accent: "#427d65",
+    codeAccent: "#d3dde5",
+    cover: "/media/bc-travel-guide/photo-wall.jpg",
+    coverAlt: "British Columbia travel photography wall used by the website",
     featured: true,
     facts: [
-      { label: "Front end", value: "HTML / CSS / JavaScript" },
-      { label: "Back end", value: "PHP / MySQL" },
-      { label: "Format", value: "Responsive multi-page site" },
-      { label: "Status", value: "Published demo" },
+      { label: "Front end", value: "HTML5 / CSS3 / JavaScript" },
+      { label: "Back end", value: "PHP / PDO / MySQL" },
+      { label: "Content", value: "Six destination stories" },
+      { label: "Integrations", value: "YouTube + Google Maps" },
+      { label: "Local stack", value: "XAMPP" },
+      { label: "Deployment", value: "GitHub Pages frontend" },
     ],
     sections: [
       {
-        label: "01 / Content",
+        label: "01 / Content architecture",
         title: "Destinations as stories",
         body: [
           "The site organizes British Columbia destinations through images, written introductions and video. Navigation and page hierarchy keep a growing set of places understandable on both desktop and mobile screens.",
+          "Six story cards introduce Vancouver, Vancouver Island, Whistler, the Sea-to-Sky Highway, Stanley Park and Capilano Suspension Bridge. Featured videos, a travel photo wall, contact information and an embedded map broaden the site beyond a simple destination list.",
         ],
       },
       {
-        label: "02 / Experience",
+        label: "02 / Responsive interface",
         title: "A responsive reading flow",
         body: [
           "HTML and CSS establish the editorial structure, while JavaScript supports interactive behaviour. The layout adapts from large image-led pages to compact mobile reading without hiding essential content.",
+          "Anchor navigation moves between Stories, Explore More, Videos and Contact Us. A prominent sign-up action scrolls smoothly to the subscription form, and media cards preserve a consistent hierarchy as the viewport narrows.",
         ],
       },
       {
-        label: "03 / Extension",
+        label: "03 / Story system",
+        title: "One template, six data-driven pages",
+        body: [
+          "Destination links open one shared story template with a story key in the URL. Vanilla JavaScript reads the query parameter, selects the matching record and renders its title, image, introduction, travel tip, quick facts and related-story links.",
+          "Keeping the destination content in a structured JavaScript object avoids duplicating six nearly identical HTML pages and makes the story collection easier to extend.",
+        ],
+      },
+      {
+        label: "04 / Subscription backend",
         title: "Optional subscription workflow",
         body: [
           "A PHP and MySQL path extends the static experience with a local subscription workflow, connecting interface design with basic server-side data handling.",
+          "The XAMPP setup script creates a subscriptions table containing visitor name, email, favourite article and submission time. A PHP form handler inserts records through a prepared PDO statement, while a separate page retrieves subscribers in reverse chronological order and escapes displayed values.",
         ],
+      },
+      {
+        label: "05 / Hosting boundary",
+        title: "A static demo with a local server extension",
+        body: [
+          "GitHub Pages publishes the responsive frontend, including destination stories and media. Because static hosting cannot execute PHP or connect to MySQL, JavaScript detects unsupported form contexts and directs the user to run the project through XAMPP before submitting.",
+        ],
+      },
+      {
+        label: "06 / Run locally",
+        title: "Frontend anywhere, subscriptions through XAMPP",
+        body: [
+          "The published link demonstrates the full frontend. To use subscriptions, place the project in the XAMPP web root, configure the database connection, run php/setup.php once, then open the site at localhost so PHP and MySQL can process and display subscriber records.",
+        ],
+      },
+    ],
+    gallery: [
+      {
+        src: "/media/bc-travel-guide/coastal-background.jpg",
+        alt: "Rocky British Columbia coastline used as the BC Travel Guide background",
+        caption: "Image-led visual language used across the travel guide.",
       },
     ],
     links: [
@@ -436,43 +523,101 @@ export const projects: Project[] = [
     slug: "car-dealership-manager",
     title: "Car Dealership Manager",
     subtitle: "Modular desktop inventory and sales application",
-    category: "Software",
+    category: "Computer Science",
     time: "2025",
-    period: "Selected software project",
-    role: "Application design and implementation",
+    period: "2025 / Software project",
+    role: "Domain modelling, persistence, desktop UI and testing",
     status: "Repository available",
     excerpt:
-      "A Java Swing application for inventory, customers, brokers and sales, supported by persistence, tests and UML documentation.",
+      "A Java desktop application for managing dealership inventory, customers, brokers and sales through Swing or a console interface, supported by JSON persistence and automated tests.",
     statement:
       "A desktop application organized around clear domain boundaries rather than a collection of disconnected forms.",
     accent: "#f3b64b",
+    codeAccent: "#c9d8d1",
+    featured: true,
     facts: [
-      { label: "Language", value: "Java" },
-      { label: "Interface", value: "Swing" },
-      { label: "Storage", value: "JSON" },
-      { label: "Quality", value: "JUnit / Checkstyle / UML" },
+      { label: "Language", value: "Java 11+" },
+      { label: "Interfaces", value: "Java Swing + Console" },
+      { label: "Structure", value: "Model / UI / Persistence" },
+      { label: "Persistence", value: "org.json / dealership.json" },
+      { label: "Testing", value: "JUnit 5 / 39 tests" },
+      { label: "Quality", value: "Checkstyle + UML" },
     ],
     sections: [
       {
-        label: "01 / Domain",
+        label: "01 / Overview",
         title: "A dealership as connected records",
         body: [
           "Vehicles, customers, brokers and sales each have their own behaviour, but the application must connect them without duplicating business rules across screens.",
+          "The application gives dealership staff one workspace for adding cars, maintaining inventory status, viewing customer and broker directories, and recording sales that connect all four record types.",
         ],
       },
       {
-        label: "02 / Interface",
+        label: "02 / Workflow",
+        title: "From incoming inventory to completed sale",
+        body: [
+          "A sale is more than an isolated record: it links a car, buyer, broker and final price, marks the selected vehicle as sold, assigns the customer to the broker and records each change in the event log.",
+        ],
+        points: [
+          "Add vehicles with model, year, colour, packages and price",
+          "Track six inventory states from creation to sold",
+          "Browse inventory, sales, brokers and customers",
+          "Record a sale across car, customer and broker IDs",
+          "Save or restore the complete dealership workspace",
+        ],
+      },
+      {
+        label: "03 / Architecture",
+        title: "Domain boundaries before screens",
+        body: [
+          "The codebase separates model, UI and persistence packages. Dealership acts as the aggregate for cars, brokers, customers and sales; each record type owns its own state while cross-record business rules remain centralized in the dealership model.",
+          "The Swing and console entry points operate on the same domain objects, while the Writable contract, JsonReader and JsonWriter keep file serialization outside the interface layer. This organization keeps the model usable independently of either presentation path.",
+        ],
+      },
+      {
+        label: "04 / Interface",
         title: "A modular tab-based workspace",
         body: [
           "The Swing interface groups daily operations into focused tabs. Event logging and JSON persistence provide continuity, while the domain model remains usable independently of the interface.",
+          "Home handles load and save actions; Inventory presents cars and status editing; Sale links the records needed for a transaction; Directory exposes brokers and customers. A separate console application provides the same core workflow without the graphical layer.",
         ],
       },
       {
-        label: "03 / Documentation",
+        label: "05 / Persistence + events",
+        title: "State that survives the session",
+        body: [
+          "The full dealership aggregate is serialized with org.json to data/dealership.json. The reader reconstructs cars, brokers, customers and sales, while restored car IDs advance the next identifier to reduce collisions after loading.",
+          "A singleton EventLog records meaningful model changes such as adding cars, updating status, assigning customers and completing sales. The GUI prints the accumulated log when its window closes, providing a chronological account of the session.",
+        ],
+      },
+      {
+        label: "06 / Documentation + quality",
         title: "Design that can be inspected",
         body: [
           "JUnit tests, Checkstyle and a documented UML model make the architecture visible and support disciplined iteration.",
+          "Thirty-nine JUnit 5 tests cover the domain model, singleton event log and JSON reader/writer against both general and empty fixtures. The UML diagram records class responsibilities across the tabs, aggregate model, persistence layer and event system.",
         ],
+        points: [
+          "Replace integer car states with a CarStatus enum",
+          "Introduce a shared ID generator",
+          "Extract common broker and customer fields into Person",
+          "Move broker-customer links from IDs to managed object associations",
+        ],
+      },
+      {
+        label: "07 / Run locally",
+        title: "A Java 11 desktop application",
+        body: [
+          "Compile the project with JDK 11 or newer and the libraries in lib. Run ui.DealershipUI for the Swing application or ui.Main for the console version; Windows users replace the colon in the classpath with a semicolon.",
+        ],
+      },
+    ],
+    gallery: [
+      {
+        src: "/media/car-dealership-manager/uml-design-diagram.png",
+        alt: "UML class diagram for Car Dealership Manager",
+        caption:
+          "UML design diagram showing the tabbed Swing interface, dealership aggregate, domain records, persistence layer and event log.",
       },
     ],
     links: [
@@ -496,6 +641,7 @@ export const projects: Project[] = [
     accent: "#ba7a62",
     cover: "/media/architecture-practice/shenzhen-junior-school.webp",
     coverAlt: "Completed Shenzhen Junior High School campus",
+    featured: true,
     facts: [
       { label: "Type", value: "Education" },
       { label: "Contribution", value: "Programming" },
@@ -530,42 +676,88 @@ export const projects: Project[] = [
     slug: "grid-pursuit-cheese",
     title: "Grid Pursuit: Cheese",
     subtitle: "A browser-based pursuit game",
-    category: "Software",
+    category: "Computer Science",
     time: "2023",
-    period: "Selected web project",
-    role: "Game logic and interface implementation",
+    period: "2023 / Browser game",
+    role: "Game state, Canvas rendering and interface implementation",
     status: "Playable demo available",
     excerpt:
       "A 10×10 Canvas game with queued player actions, randomized enemies, traps, walls, scoring and collision detection.",
     statement:
       "A small game used to make state, timing and collision rules visible through immediate browser interaction.",
     accent: "#cf5a35",
+    codeAccent: "#d8d4e1",
+    cover: "/media/grid-pursuit-cheese/gameplay.png",
+    coverAlt: "Gameplay board from Grid Pursuit Cheese",
+    containCover: true,
+    featured: true,
     facts: [
-      { label: "Runtime", value: "Browser" },
-      { label: "Rendering", value: "HTML5 Canvas" },
-      { label: "Logic", value: "JavaScript" },
+      { label: "Stack", value: "HTML / CSS / JavaScript" },
+      { label: "Rendering", value: "HTML5 Canvas API" },
       { label: "Board", value: "10 × 10 grid" },
+      { label: "Turn model", value: "Five-action queue / 250ms steps" },
+      { label: "Testing tools", value: "Wall mode + God Mode" },
+      { label: "Deployment", value: "GitHub Pages" },
     ],
     sections: [
       {
-        label: "01 / Rules",
+        label: "01 / Gameplay",
         title: "A readable grid, unpredictable pressure",
         body: [
           "The player navigates a compact board while enemies move with randomized behaviour. Walls, traps and scoring create tactical choices without obscuring the basic rules.",
+          "Mikey begins in the upper-left cell and tries to collect cheese without meeting a kitty. Each cheese increases the score and introduces another kitty; if an enemy reaches the cheese first, the score falls and the target moves.",
         ],
       },
       {
-        label: "02 / Logic",
+        label: "02 / Turn sequence",
         title: "State changes in a controlled order",
         body: [
           "Queued player actions, enemy movement and collision detection are resolved as explicit stages. Separating these stages prevents one input from producing inconsistent board states.",
+          "The player must queue exactly five arrow or trap actions before execution begins. A timer resolves one command every 250 milliseconds; after each action every kitty chooses a random direction, checks the destination and moves only when the cell is valid.",
+        ],
+        points: [
+          "Queue five keyboard commands",
+          "Resolve one player action",
+          "Move every kitty",
+          "Evaluate cheese, trap, wall and kitty collisions",
+          "Redraw the complete board state",
         ],
       },
       {
-        label: "03 / Interface",
+        label: "03 / State + collision",
+        title: "Coordinates as the shared game model",
+        body: [
+          "Mikey, cheese, traps, walls and kitties are all represented by grid-aligned coordinates. Kitty and wall collections use coordinate arrays, allowing the same position checks to support random placement, movement blocking and collision outcomes.",
+          "Placement routines reject occupied cells and regenerate invalid random positions. Collision rules distinguish direct player-enemy contact, enemies reaching cheese, traps catching one kitty and walls returning an attempted move to its previous cell.",
+        ],
+      },
+      {
+        label: "04 / Mechanics",
+        title: "Difficulty grows with the score",
+        body: [
+          "Collecting cheese adds 100 points and introduces a new kitty. A trapped kitty is replaced and awards 250 points, while a kitty reaching the cheese removes 50 points. Optional walls add ten blocked cells and force both player and enemy movement to respect the same spatial constraints.",
+        ],
+      },
+      {
+        label: "05 / Rendering",
         title: "Canvas as a compact renderer",
         body: [
           "The Canvas API draws the board and its changing entities efficiently, while surrounding HTML and CSS provide instructions and responsive framing.",
+          "Drawing responsibilities are separated into dedicated helpers for the grid, walls, trap, mouse, cheese, kitties and game-over state. Each frame clears the surface and rebuilds the current state from coordinates rather than manipulating many positioned DOM elements.",
+        ],
+      },
+      {
+        label: "06 / Controls + testing",
+        title: "Game controls that also expose edge cases",
+        body: [
+          "Arrow keys queue movement and M places a trap. Move Mikey executes a full sequence, Reset regenerates the board, Wall mode adds obstacles, and God Mode prevents capture so movement, scoring and collision behaviour can be inspected for longer sessions.",
+        ],
+      },
+      {
+        label: "07 / Run + deployment",
+        title: "A dependency-free browser project",
+        body: [
+          "The game runs directly from index.html with its stylesheet and two JavaScript files: game.js for state and rules, and draw.js for Canvas rendering. The same static structure is published as a playable GitHub Pages demo.",
         ],
       },
     ],
@@ -815,43 +1007,86 @@ export const projects: Project[] = [
     slug: "family-tree-database",
     title: "Family Tree Database",
     subtitle: "A relational model for people, events and history",
-    category: "Software",
+    category: "Computer Science",
     time: "2024",
-    period: "Selected database project",
-    role: "Data modelling and SQL implementation",
+    period: "2024 / Database project",
+    role: "Requirements, EER modelling, normalization and SQL implementation",
     status: "Repository available",
     excerpt:
       "A normalized relational model for family relationships, education, employment, addresses, marriages and life events.",
     statement:
       "The project turns an intuitive but complicated human network into explicit, queryable relationships.",
     accent: "#665b8e",
+    codeAccent: "#c5d0dc",
     facts: [
-      { label: "Model", value: "EER / Relational" },
-      { label: "Databases", value: "MySQL / SQL Server" },
-      { label: "Focus", value: "Normalization" },
-      { label: "Domain", value: "People and life events" },
+      { label: "Model", value: "EER + Relational schema" },
+      { label: "Platforms", value: "MySQL + Microsoft SQL Server" },
+      { label: "Schema", value: "13 tables" },
+      { label: "Query set", value: "20 example operations" },
+      { label: "Focus", value: "Cardinality + Normalization" },
+      { label: "Deliverables", value: "Create / Insert / Query / Drop" },
     ],
     sections: [
       {
-        label: "01 / Domain",
+        label: "01 / Requirements",
         title: "More than a parent-child tree",
         body: [
           "A useful family-history model must represent people, marriages, addresses, education, employment, achievements and events without flattening them into one oversized table.",
+          "The requirements also account for biological and non-biological parenthood, divorce and remarriage, children across different marriages, multiple names, incomplete work histories and attendance at other family members’ life events.",
         ],
       },
       {
-        label: "02 / Model",
+        label: "02 / EER model",
         title: "Relationships made explicit",
         body: [
           "An enhanced entity-relationship model identifies stable entities and resolves many-to-many relationships through associative structures. Normalization reduces duplication and protects data integrity.",
+          "Person sits at the centre of the model, connected recursively through father, mother and spouse relationships and historically through homes, organizations and achievements. Cardinality and participation rules distinguish required biographical data from optional education, work, marriage and event histories.",
         ],
       },
       {
-        label: "03 / Implementation",
+        label: "03 / Relational mapping",
+        title: "Thirteen tables with distinct responsibilities",
+        body: [
+          "Regular entities become Person, Home, Organization and Achievement tables. Associative history tables resolve many-to-many residence, education, employment and achievement relationships, while recursive parent and spouse tables preserve relationships between people.",
+          "Middle names and used names are mapped into separate tables as multivalued attributes. Composite primary keys, unique constraints and foreign-key cascades make duplication and orphaned history records less likely.",
+        ],
+        points: [
+          "Person · Home · Organization · Achievement",
+          "HomeHistory · EducationHistory · WorkHistory · AchievementHistory",
+          "FatherOf · MotherOf · SpouseHistory",
+          "Person_MiddleName · Person_UsedName",
+        ],
+      },
+      {
+        label: "04 / Normalization",
+        title: "A schema designed against repeated facts",
+        body: [
+          "The companion normalization study documents how the initial family records are decomposed into stable entities and relationship tables. Separating people, places, organizations and time-bounded histories reduces update anomalies while keeping biographical facts queryable.",
+        ],
+      },
+      {
+        label: "05 / SQL implementation",
         title: "One model, two SQL environments",
         body: [
           "The schema is implemented for MySQL and Microsoft SQL Server, demonstrating how a conceptual model is translated across related database systems.",
+          "Parallel scripts account for dialect differences such as AUTO_INCREMENT versus IDENTITY(1,1), and TIMESTAMPDIFF versus DATEDIFF. Each platform includes database creation, sample insertion, query and teardown scripts.",
         ],
+      },
+      {
+        label: "06 / Query set",
+        title: "Family history as answerable questions",
+        body: [
+          "Twenty SQL examples test the usefulness of the model through joins, views, updates, deletes, aggregation and unions. They retrieve names and aliases, adults, siblings, parents, adopted children, marriage history, residences, education and work relationships.",
+          "The query set moves beyond simple record lookup to questions such as who currently works or studies, who has lived in British Columbia, how many work histories each person has and whether someone later worked for an organization where they studied.",
+        ],
+      },
+    ],
+    gallery: [
+      {
+        src: "/media/family-tree-database/eer-modeling-diagram.png",
+        alt: "Enhanced entity relationship diagram for the Family Tree Database",
+        caption:
+          "EER model connecting people with recursive family relationships, residence, education, employment and achievement histories.",
       },
     ],
     links: [
@@ -902,7 +1137,7 @@ export const projects: Project[] = [
 
 export const categories: Array<"All" | ProjectCategory> = [
   "All",
-  "Software",
+  "Computer Science",
   "Academic Architecture",
   "Architecture Practice",
   "Visual Studies",

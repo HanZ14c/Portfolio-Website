@@ -11,6 +11,8 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+const projectSectionsEnabled = false;
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -39,7 +41,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <SiteHeader />
       <main
         className="project-page"
-        style={{ "--project-accent": project.accent } as CSSProperties}
+        style={{
+          "--project-accent": project.accent,
+          "--code-card": project.codeAccent,
+        } as CSSProperties}
       >
         <header className="project-hero page-shell">
           <div className="project-hero__top" data-reveal>
@@ -94,7 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </section>
 
-        <div className="project-sections page-shell">
+        <div className="project-sections page-shell" hidden={!projectSectionsEnabled}>
           {project.sections.map((section) => (
             <section key={section.label} className="project-section" data-reveal>
               <p className="section-label">{section.label}</p>

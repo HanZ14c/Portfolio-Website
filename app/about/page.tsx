@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InstitutionName } from "../components/InstitutionName";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 
@@ -13,21 +14,25 @@ const timeline = [
     period: "2025 — Expected 2028",
     title: "Bachelor of Computer Science",
     place: "University of British Columbia",
+    logo: "/media/institutions/ubc.jpeg",
   },
   {
     period: "2023 — 2025",
     title: "Computer Studies",
     place: "Langara College",
+    logo: "/media/institutions/langara.jpeg",
   },
   {
     period: "2017 — 2020",
     title: "Architectural practice",
     place: "Hong Kong Huayi Design Consultant (Shenzhen)",
+    logo: "/media/institutions/huayi.jpeg",
   },
   {
     period: "2013 — 2018",
     title: "Bachelor of Engineering in Architecture",
     place: "Xi'an University of Technology",
+    logo: "/media/institutions/xaut.jpeg",
   },
 ];
 
@@ -40,8 +45,10 @@ export default function AboutPage() {
           <p className="section-label" data-reveal>About / Han Zhang</p>
           <h1 data-reveal>A builder of digital and spatial systems.</h1>
           <p className="about-hero__lead" data-reveal>
-            I am a computer science student at UBC and a former architectural designer. My work moves
-            between application logic, databases, interfaces, buildings, public space and visual narrative.
+            I am a computer science student at{" "}
+            <InstitutionName logo="/media/institutions/ubc.jpeg" compact>UBC</InstitutionName>{" "}
+            and a former architectural designer. My work moves between application logic, databases,
+            interfaces, buildings, public space and visual narrative.
           </p>
         </header>
 
@@ -71,7 +78,7 @@ export default function AboutPage() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <p>{item.period}</p>
                 <h3>{item.title}</h3>
-                <p>{item.place}</p>
+                <p><InstitutionName logo={item.logo}>{item.place}</InstitutionName></p>
               </article>
             ))}
           </div>

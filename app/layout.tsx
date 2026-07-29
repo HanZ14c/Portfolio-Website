@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { ClientEffects } from "./components/ClientEffects";
 import "./globals.css";
 
-const siteTitle = "Han Zhang — Software, Architecture and Visual Work";
+const siteTitle = "Han Zhang — Computer Science, Architecture and Visual Work";
 const siteDescription =
   "The interdisciplinary portfolio of Han Zhang: software systems, architectural practice, academic design and visual studies.";
 
