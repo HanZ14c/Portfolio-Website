@@ -1,60 +1,6 @@
-export type ProjectCategory =
-  | "Computer Science"
-  | "Academic Architecture"
-  | "Architecture Practice"
-  | "Visual Studies";
+import type { Project, ProjectCategory } from "@/lib/projects/types";
 
-export type ProjectFact = {
-  label: string;
-  value: string;
-};
-
-export type ProjectSection = {
-  label: string;
-  title: string;
-  body: string[];
-  points?: string[];
-};
-
-export type ProjectImage = {
-  src: string;
-  alt: string;
-  caption?: string;
-};
-
-export type ProjectLink = {
-  label: string;
-  href: string;
-};
-
-export type Project = {
-  slug: string;
-  title: string;
-  subtitle: string;
-  category: ProjectCategory;
-  time: string;
-  period: string;
-  location?: string;
-  role: string;
-  status: string;
-  excerpt: string;
-  statement: string;
-  accent: string;
-  codeAccent?: string;
-  cover?: string;
-  coverAlt?: string;
-  containCover?: boolean;
-  visualOnly?: boolean;
-  featured?: boolean;
-  cardSize?: "wide" | "standard";
-  facts: ProjectFact[];
-  sections: ProjectSection[];
-  gallery?: ProjectImage[];
-  galleryLayout?: "process-triptych";
-  galleryLabel?: string;
-  galleryTitle?: string;
-  links?: ProjectLink[];
-};
+export type { Project, ProjectCategory } from "@/lib/projects/types";
 
 export const projects: Project[] = [
   {
@@ -148,6 +94,7 @@ export const projects: Project[] = [
     period: "2026 / Software project",
     role: "System architecture, protocol, UI and implementation",
     status: "Repository available",
+    showSections: true,
     excerpt:
       "A Java client-server application for managing shared team tasks through a JavaFX desktop client or a command-line interface, with TCP networking and JSON persistence.",
     statement:
@@ -256,6 +203,7 @@ export const projects: Project[] = [
     location: "Xi'an, China",
     role: "Individual design and independent revision",
     status: "Academic / Unbuilt",
+    showSections: true,
     excerpt:
       "A library and cultural space that translates emotion, perception, events and movement into a field of spatial encounters.",
     statement:
@@ -398,6 +346,7 @@ export const projects: Project[] = [
     period: "2023 / Web project",
     role: "Content structure, responsive interface and full-stack implementation",
     status: "Live demo available",
+    showSections: true,
     excerpt:
       "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
     statement:
@@ -485,6 +434,7 @@ export const projects: Project[] = [
     location: "Shenzhen, China",
     role: "Architectural assistant — basement technical drawings and consultant coordination",
     status: "Completed / Professional team project",
+    showSections: true,
     excerpt:
       "Three public pavilions respond to distinct functions and positions within a larger urban development.",
     statement:
@@ -532,6 +482,7 @@ export const projects: Project[] = [
     period: "2025 / Software project",
     role: "Domain modelling, persistence, desktop UI and testing",
     status: "Repository available",
+    showSections: true,
     excerpt:
       "A Java desktop application for managing dealership inventory, customers, brokers and sales through Swing or a console interface, supported by JSON persistence and automated tests.",
     statement:
@@ -1015,6 +966,7 @@ export const projects: Project[] = [
     period: "2024 / Database project",
     role: "Requirements, EER modelling, normalization and SQL implementation",
     status: "Repository available",
+    showSections: true,
     excerpt:
       "A normalized relational model for family relationships, education, employment, addresses, marriages and life events.",
     statement:
@@ -1270,4 +1222,20 @@ export function getRelatedProjects(project: Project, limit = 3) {
         candidate.slug !== project.slug && candidate.category === project.category,
     )
     .slice(0, limit);
+}
+
+export function getProjectNeighbors(project: Project) {
+  const orderedProjects = categories
+    .filter((category): category is ProjectCategory => category !== "All")
+    .flatMap((category) => projects.filter((candidate) => candidate.category === category));
+  const currentIndex = orderedProjects.findIndex((candidate) => candidate.slug === project.slug);
+
+  return {
+    previous: currentIndex > 0 ? orderedProjects[currentIndex - 1] : undefined,
+    next: currentIndex >= 0 && currentIndex < orderedProjects.length - 1
+      ? orderedProjects[currentIndex + 1]
+      : undefined,
+    position: currentIndex + 1,
+    total: orderedProjects.length,
+  };
 }

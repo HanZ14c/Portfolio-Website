@@ -10,6 +10,7 @@ The site is intentionally organized like a small publication: a concise home pag
 - `/work` — complete, filterable project index
 - `/work/[slug]` — an individual case-study page for every project
 - `/about` — background, education, experience and working approach
+- `/Han-Zhang-Resume.pdf` — current résumé for viewing or download
 
 ## Included projects
 
@@ -52,7 +53,7 @@ The site is intentionally organized like a small publication: a concise home pag
 
 ## Design direction
 
-The visual system uses warm paper tones, black typography, restrained red accents, oversized titles and asymmetrical image layouts. Architectural drawings remain the visual centre of their case studies, while software projects use typographic covers instead of invented interface screenshots. Motion is deliberately light and respects `prefers-reduced-motion`.
+The visual system uses a white ground, soft charcoal typography, restrained blue navigation states and short orange accents. Architectural drawings remain the visual centre of their case studies, while computer-science projects use either real interface material or typographic covers. Motion is deliberately light and respects `prefers-reduced-motion`.
 
 ## Technology
 
@@ -63,7 +64,7 @@ The visual system uses warm paper tones, black typography, restrained red accent
 - Static WebP project media prepared from the original portfolio material
 - Cloudflare Workers for production hosting
 
-The project data lives in `lib/projects.ts`; adding a record there creates an entry that can use the shared project-detail structure.
+Project records live in `lib/projects.ts`, with shared types, project-index helpers, featured-project configuration and site metadata split into focused modules under `lib/`.
 
 ## Local development
 
@@ -81,9 +82,37 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 pnpm build
 pnpm test
+pnpm test:browser
 ```
 
-`pnpm test` builds the site and checks that the home page and project index render as finished portfolio pages.
+`pnpm test` builds and checks server-rendered routes. `pnpm test:browser` verifies filtering, sorting, navigation, selective case-study content and responsive overflow in desktop and mobile Chromium.
+
+## Cloudflare Web Analytics
+
+The production layout includes Cloudflare's privacy-first Web Analytics beacon only when a site token is configured. Local development never loads the beacon.
+
+1. Add the site in **Cloudflare Dashboard → Analytics & Logs → Web Analytics**.
+2. Copy its site token.
+3. Add `NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN` as a production build variable in Cloudflare.
+
+For a local production-build check, copy `.env.example` to `.env.local` and add the token. The token is public by design, but it should still be managed as deployment configuration rather than hard-coded into the component.
+
+## Portfolio Guide
+
+The bottom-right Portfolio Guide answers questions from the published project records, profile and résumé information. Its default local mode is deterministic: it does not call an external model, transmit chat content or require an API key.
+
+To enable generated answers on Cloudflare later, add a Workers AI binding and an explicit production flag to `wrangler.jsonc`:
+
+```jsonc
+"ai": {
+  "binding": "AI"
+},
+"vars": {
+  "PORTFOLIO_CHAT_AI_ENABLED": "true"
+}
+```
+
+With both values present, the Worker uses the same curated portfolio context for Workers AI and falls back to deterministic answers if inference is unavailable. The endpoint limits message length, recent history and request frequency, does not cache responses, and never renders model output as HTML.
 
 ## Deployment
 
@@ -105,7 +134,7 @@ The Cloudflare Worker and asset bindings are defined in `wrangler.jsonc`.
 
 ## Current status
 
-The first publication-style version is implemented with responsive layouts and 16 independent project pages. Future additions can extend the same system with more architecture projects, painting, rendering and personal artwork as source material becomes available.
+The publication-style portfolio currently includes responsive layouts, 18 independent project pages, selective long-form case studies, project discovery metadata, a résumé and desktop/mobile browser regression tests.
 
 ## Contact
 

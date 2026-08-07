@@ -1,0 +1,20 @@
+:root {
+  --paper: #ffffff;
+  --paper-deep: #e9edf1;
+  --ink: #1d2329;
+  --muted: #687078;
+  --line: rgba(29, 35, 41, 0.22);
+  --soft-line: rgba(29, 35, 41, 0.11);
+  --grid-line: rgba(49, 95, 148, 0.055);
+  --grid-unit: min(116.6667px, calc((100vw - 64px) / 12));
+  --shadow-low: 0 10px 30px rgba(29, 35, 41, 0.065);
+  --shadow-mid: 0 22px 60px rgba(29, 35, 41, 0.1);
+  --section-start-gap: 36px;
+  --red: #315f94;
+  --orange: #d86a3a;
+  --code-card: #c7d7e6;
+  --page: min(1400px, calc(100vw - 64px));
+  --sans: "Helvetica Neue", "Noto Sans SC", Arial, sans-serif;
+  --serif: Georgia, "Noto Serif SC", "Times New Roman", serif;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}

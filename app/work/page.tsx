@@ -6,13 +6,14 @@ import { SiteHeader } from "../components/SiteHeader";
 export const metadata: Metadata = {
   title: "Work",
   description: "Software, architecture and visual work by Han Zhang.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {
   return (
     <>
       <SiteHeader />
-      <main className="page-shell index-page">
+      <main id="main-content" className="page-shell index-page">
         <header className="index-hero" data-reveal>
           <p className="section-label">Complete project index</p>
           <h1>Work</h1>

@@ -11,6 +11,8 @@
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "deploy": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext deploy",
     "test": "pnpm run build && node --test tests/rendered-html.test.mjs",
+    "test:browser": "playwright test",
+    "test:all": "pnpm run test && pnpm run test:browser",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "react-dom": "19.2.6"
   },
   "devDependencies": {
+    "@playwright/test": "1.51.1",
     "@cloudflare/vite-plugin": "1.37.1",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",

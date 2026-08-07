@@ -7,6 +7,7 @@ import { SiteHeader } from "../components/SiteHeader";
 export const metadata: Metadata = {
   title: "About",
   description: "Background, experience and working approach of Han Zhang.",
+  alternates: { canonical: "/about" },
 };
 
 const timeline = [
@@ -40,7 +41,7 @@ export default function AboutPage() {
   return (
     <>
       <SiteHeader />
-      <main className="page-shell about-page">
+      <main id="main-content" className="page-shell about-page">
         <header className="about-hero">
           <p className="section-label" data-reveal>About / Han Zhang</p>
           <h1 data-reveal>A builder of digital and spatial systems.</h1>
@@ -108,6 +109,7 @@ export default function AboutPage() {
         <section className="about-links" data-reveal>
           <p className="section-label">Continue + connect</p>
           <Link href="/work">View all work <span>↗</span></Link>
+          <a href="/Han-Zhang-Resume.pdf" download>Download résumé <span>↓</span></a>
           <a href="mailto:hanz14c@gmail.com">Start a conversation <span>↗</span></a>
           <a href="https://www.linkedin.com/in/hanz14c/" target="_blank" rel="noreferrer">
             LinkedIn <span>↗</span>

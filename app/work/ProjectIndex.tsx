@@ -1,74 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { categories, projects, type Project, type ProjectCategory } from "@/lib/projects";
+import { categories, projects, type ProjectCategory } from "@/lib/projects";
+import {
+  groupProjects,
+  sortLabels,
+  sortProjects,
+  type ProjectSortMode,
+} from "@/lib/project-index";
 import { ProjectCard } from "@/app/components/ProjectCard";
 
 type Filter = "All" | ProjectCategory;
-type SortMode = "category" | "alphabetical" | "time";
 
 const categoryOrder = categories.slice(1) as ProjectCategory[];
 const originalOrder = new Map(projects.map((project, index) => [project.slug, index]));
-const sortLabels: Record<SortMode, string> = {
-  category: "category",
-  alphabetical: "alphabetical order",
-  time: "end time",
-};
-
-function getProjectEndYear(time: string) {
-  if (/\b(?:present|ongoing|current|now)\b/i.test(time)) return Number.POSITIVE_INFINITY;
-  const years = time.match(/\b(?:19|20)\d{2}\b/g)?.map(Number) ?? [];
-  return years.length > 0 ? Math.max(...years) : Number.NEGATIVE_INFINITY;
-}
-
-function getEndTimeLabel(time: string) {
-  const endYear = getProjectEndYear(time);
-  if (endYear === Number.POSITIVE_INFINITY) return "Ongoing";
-  if (endYear === Number.NEGATIVE_INFINITY) return "XXXX";
-  return String(endYear);
-}
-
-function getGroupLabel(project: Project, sortMode: SortMode) {
-  if (sortMode === "category") return project.category;
-  if (sortMode === "alphabetical") return project.title.trim().charAt(0).toUpperCase();
-  return getEndTimeLabel(project.time);
-}
 
 export function ProjectIndex() {
   const [filter, setFilter] = useState<Filter>("All");
-  const [sortMode, setSortMode] = useState<SortMode>("category");
+  const [sortMode, setSortMode] = useState<ProjectSortMode>("category");
   const filtered = filter === "All" ? projects : projects.filter((project) => project.category === filter);
-  const visible = [...filtered].sort((first, second) => {
-    if (sortMode === "alphabetical") {
-      return first.title.localeCompare(second.title, "en", { sensitivity: "base" });
-    }
-
-    if (sortMode === "time") {
-      const firstYear = getProjectEndYear(first.time);
-      const secondYear = getProjectEndYear(second.time);
-      if (firstYear !== secondYear) return secondYear - firstYear;
-    }
-
-    if (sortMode === "category") {
-      const categoryDifference =
-        categoryOrder.indexOf(first.category) - categoryOrder.indexOf(second.category);
-      if (categoryDifference !== 0) return categoryDifference;
-    }
-
-    return (originalOrder.get(first.slug) ?? 0) - (originalOrder.get(second.slug) ?? 0);
-  });
-  const groups = visible.reduce<Array<{ label: string; projects: Project[] }>>((result, project) => {
-    const label = getGroupLabel(project, sortMode);
-    const currentGroup = result.at(-1);
-
-    if (currentGroup?.label === label) {
-      currentGroup.projects.push(project);
-    } else {
-      result.push({ label, projects: [project] });
-    }
-
-    return result;
-  }, []);
+  const visible = sortProjects(filtered, sortMode, categoryOrder, originalOrder);
+  const groups = groupProjects(visible, sortMode);
 
   return (
     <>
@@ -95,7 +47,7 @@ export function ProjectIndex() {
           <span className="project-sort__field">
             <select
               value={sortMode}
-              onChange={(event) => setSortMode(event.target.value as SortMode)}
+              onChange={(event) => setSortMode(event.target.value as ProjectSortMode)}
               aria-label="Sort projects"
             >
               <option value="category">Category</option>

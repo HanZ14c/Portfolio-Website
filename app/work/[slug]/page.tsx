@@ -5,13 +5,12 @@ import type { CSSProperties } from "react";
 import { ProjectCard } from "@/app/components/ProjectCard";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
-import { getProject, getRelatedProjects, projects } from "@/lib/projects";
+import { getProject, getProjectNeighbors, getRelatedProjects, projects } from "@/lib/projects";
+import { absoluteUrl, serializeJsonLd, siteConfig } from "@/lib/site";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
-
-const projectSectionsEnabled = false;
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -26,6 +25,20 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   return {
     title: project.title,
     description: project.excerpt,
+    alternates: { canonical: `/work/${project.slug}` },
+    openGraph: {
+      type: "article",
+      url: `/work/${project.slug}`,
+      title: project.title,
+      description: project.excerpt,
+      images: [project.cover ?? "/og.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.excerpt,
+      images: [project.cover ?? "/og.png"],
+    },
   };
 }
 
@@ -35,17 +48,39 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   const related = getRelatedProjects(project);
+  const neighbors = getProjectNeighbors(project);
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.excerpt,
+    url: absoluteUrl(`/work/${project.slug}`),
+    image: absoluteUrl(project.cover ?? "/og.png"),
+    dateCreated: project.time,
+    genre: project.category,
+    creator: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    sameAs: project.links?.map((link) => link.href),
+  };
 
   return (
     <>
       <SiteHeader />
       <main
+        id="main-content"
         className="project-page"
         style={{
           "--project-accent": project.accent,
           "--code-card": project.codeAccent,
         } as CSSProperties}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(projectJsonLd) }}
+        />
         <header className="project-hero page-shell">
           <div className="project-hero__top" data-reveal>
             <Link href="/work" className="back-link">← All work</Link>
@@ -103,22 +138,24 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               ))}
             </section>
 
-            <div className="project-sections page-shell" hidden={!projectSectionsEnabled}>
-              {project.sections.map((section) => (
-                <section key={section.label} className="project-section" data-reveal>
-                  <p className="section-label">{section.label}</p>
-                  <div>
-                    <h2>{section.title}</h2>
-                    {section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                    {section.points && (
-                      <ul>
-                        {section.points.map((point) => <li key={point}>{point}</li>)}
-                      </ul>
-                    )}
-                  </div>
-                </section>
-              ))}
-            </div>
+            {project.showSections && project.sections.length > 0 && (
+              <div className="project-sections page-shell">
+                {project.sections.map((section) => (
+                  <section key={section.label} className="project-section" data-reveal>
+                    <p className="section-label">{section.label}</p>
+                    <div>
+                      <h2>{section.title}</h2>
+                      {section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                      {section.points && (
+                        <ul>
+                          {section.points.map((point) => <li key={point}>{point}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            )}
           </>
         )}
 
@@ -165,6 +202,26 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </section>
         )}
+
+        <nav className="project-pagination page-shell" aria-label="Browse adjacent projects">
+          {neighbors.previous && (
+            <Link className="project-pagination__link is-previous" href={`/work/${neighbors.previous.slug}`}>
+              <span className="project-pagination__direction">← Previous project</span>
+              <strong>{neighbors.previous.title}</strong>
+              <small>{neighbors.previous.category} · {neighbors.previous.time}</small>
+            </Link>
+          )}
+          <p className="project-pagination__position">
+            {String(neighbors.position).padStart(2, "0")} / {String(neighbors.total).padStart(2, "0")}
+          </p>
+          {neighbors.next && (
+            <Link className="project-pagination__link is-next" href={`/work/${neighbors.next.slug}`}>
+              <span className="project-pagination__direction">Next project →</span>
+              <strong>{neighbors.next.title}</strong>
+              <small>{neighbors.next.category} · {neighbors.next.time}</small>
+            </Link>
+          )}
+        </nav>
       </main>
       <SiteFooter />
     </>

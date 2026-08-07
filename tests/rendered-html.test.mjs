@@ -13,6 +13,18 @@ async function render(path = "/") {
   );
 }
 
+async function requestWorker(path, init = {}) {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${Math.random()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  return worker.fetch(
+    new Request(`http://localhost${path}`, init),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+}
+
 test("server-renders the finished portfolio home page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -24,10 +36,13 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(html, /across code and space/);
   assert.match(html, /Selected work/);
   assert.match(html, /class="profile-links"/);
+  assert.match(html, /Han-Zhang-Resume\.pdf/);
+  assert.match(html, /aria-current="page"[^>]*>HZ/);
   assert.match(html, /media\/social\/email\.png/);
   assert.match(html, /media\/social\/linkedin\.png/);
   assert.match(html, /media\/social\/github\.png/);
   assert.match(html, /Langara College/);
+  assert.match(html, /Ask about my work/);
   assert.match(html, /media\/institutions\/ubc\.jpeg/);
   assert.match(html, /media\/institutions\/langara\.jpeg/);
   assert.match(html, /media\/institutions\/huayi\.jpeg/);
@@ -48,6 +63,31 @@ test("server-renders the finished portfolio home page", async () => {
   assert.deepEqual(featuredPositions, [...featuredPositions].sort((first, second) => first - second));
   assert.match(html, /2021/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
+});
+
+test("answers portfolio-guide questions from published project data", async () => {
+  const response = await requestWorker("/api/portfolio-chat", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ messages: [{ role: "user", content: "Show me Java projects" }] }),
+  });
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("cache-control") ?? "", /no-store/);
+  const result = await response.json();
+  assert.equal(result.mode, "guide");
+  assert.match(result.answer, /Java-related projects/);
+  assert.ok(result.links.some((link) => link.href === "/work/team-workflow-scheduler"));
+});
+
+test("rejects malformed portfolio-guide requests", async () => {
+  const response = await requestWorker("/api/portfolio-chat", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ messages: [{ role: "user", content: "" }] }),
+  });
+
+  assert.equal(response.status, 400);
 });
 
 test("server-renders the institutional background on the about page", async () => {
@@ -73,6 +113,7 @@ test("server-renders the project index", async () => {
   assert.match(html, /Sort projects/);
   assert.match(html, /End time — newest first/);
   assert.match(html, /Projects grouped by category/);
+  assert.match(html, /href="\/work" aria-current="page"/);
   assert.match(html, /2026/);
   assert.doesNotMatch(html, /XXXX/);
 });
@@ -86,7 +127,59 @@ test("server-renders the Team Workflow Scheduler technical case study", async ()
   assert.match(html, /JUnit 5/);
   assert.match(html, /localhost:5050/);
   assert.match(html, /Team-Workflow-Scheduler/);
-  assert.match(html, /class="project-sections page-shell" hidden/);
+  assert.match(html, /class="project-sections page-shell"/);
+  assert.doesNotMatch(html, /class="project-sections page-shell" hidden/);
+  assert.match(html, /"@type":"CreativeWork"/);
+});
+
+test("selectively renders complete project narratives", async () => {
+  const completeResponse = await render("/work/qianhai-shimao-centre");
+  const completeHtml = await completeResponse.text();
+  assert.match(completeHtml, /class="project-sections page-shell"/);
+  assert.match(completeHtml, /Coordination below the public ground/);
+
+  const conciseResponse = await render("/work/grid-pursuit-cheese");
+  const conciseHtml = await conciseResponse.text();
+  assert.doesNotMatch(conciseHtml, /class="project-sections page-shell"/);
+  assert.doesNotMatch(conciseHtml, /A deterministic five-action turn/);
+});
+
+test("renders previous and next project navigation in the default index order", async () => {
+  const middleResponse = await render("/work/emotion-time");
+  const middleHtml = await middleResponse.text();
+  assert.match(middleHtml, /aria-label="Browse adjacent projects"/);
+  assert.match(middleHtml, /href="\/work\/vertical-city-housing"[^>]*>[^]*Previous project/);
+  assert.match(middleHtml, /href="\/work\/mirriedge-opera-house"[^>]*>[^]*Next project/);
+  assert.match(middleHtml, /07(?:<!-- -->)? \/ (?:<!-- -->)?18/);
+
+  const firstResponse = await render("/work/team-workflow-scheduler");
+  const firstHtml = await firstResponse.text();
+  assert.doesNotMatch(firstHtml, /Previous project/);
+  assert.match(firstHtml, /href="\/work\/bc-travel-guide"[^>]*>[^]*Next project/);
+
+  const lastResponse = await render("/work/architectural-hand-sketches");
+  const lastHtml = await lastResponse.text();
+  assert.match(lastHtml, /href="\/work\/rumah"[^>]*>[^]*Previous project/);
+  assert.doesNotMatch(lastHtml, /Next project/);
+});
+
+test("publishes crawl and discovery metadata", async () => {
+  const sitemapResponse = await render("/sitemap.xml");
+  assert.equal(sitemapResponse.status, 200);
+  const sitemap = await sitemapResponse.text();
+  assert.match(sitemap, /portfolio\.hanz14c\.workers\.dev\/work\/emotion-time/);
+
+  const robotsResponse = await render("/robots.txt");
+  assert.equal(robotsResponse.status, 200);
+  const robots = await robotsResponse.text();
+  assert.match(robots, /Allow: \//);
+  assert.match(robots, /Sitemap: https:\/\/portfolio\.hanz14c\.workers\.dev\/sitemap\.xml/);
+});
+
+test("keeps analytics disabled when no production site token is configured", async () => {
+  const response = await render();
+  const html = await response.text();
+  assert.doesNotMatch(html, /static\.cloudflareinsights\.com\/beacon\.min\.js/);
 });
 
 test("server-renders the Car Dealership Manager technical case study", async () => {

@@ -4,29 +4,16 @@ import { InstitutionName } from "./components/InstitutionName";
 import { ProjectCard } from "./components/ProjectCard";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
+import { getFeaturedProjects } from "@/lib/featured-projects";
 import { projects } from "@/lib/projects";
 
-const featuredProjectSlugs = [
-  "emotion-time",
-  "bc-travel-guide",
-  "team-workflow-scheduler",
-  "qianhai-shimao-centre",
-  "car-dealership-manager",
-  "grid-pursuit-cheese",
-  "bungalow",
-  "architectural-hand-sketches",
-  "family-tree-database",
-] as const;
-
 export default function Home() {
-  const featured = featuredProjectSlugs
-    .map((slug) => projects.find((project) => project.slug === slug))
-    .filter((project) => project !== undefined);
+  const featured = getFeaturedProjects();
 
   return (
     <>
       <SiteHeader />
-      <main className="home-page">
+      <main id="main-content" className="home-page">
         <section className="home-hero page-shell">
           <div className="home-hero__meta" data-reveal>
             <p className="section-label">Han Zhang / Vancouver, BC</p>
@@ -46,7 +33,7 @@ export default function Home() {
         </section>
 
         <section className="discipline-strip" aria-label="Portfolio disciplines">
-          <span>01 Software</span>
+          <span>01 Computer Science</span>
           <span>02 Architecture Practice</span>
           <span>03 Academic Research</span>
           <span>04 Visual Studies</span>
@@ -56,9 +43,6 @@ export default function Home() {
           <div className="section-heading" data-reveal>
             <p className="section-label">Selected work / 01–09</p>
             <h2>Projects with a point of view.</h2>
-            <p>
-              Each project has its own page: context, process, system, outcome and an honest account of my role.
-            </p>
           </div>
           <div className="project-grid project-grid--featured">
             {featured.map((project) => (
