@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1734" height="907" viewBox="0 0 1734 907" role="img" aria-labelledby="title description">
+  <title id="title">Han Zhang — Code and Space</title>
+  <desc id="description">Portfolio thumbnail for Han Zhang featuring computer science, architecture and visual work.</desc>
+  <rect width="1734" height="907" fill="#ffffff"/>
+
+  <g fill="none" stroke="#315f94" stroke-opacity="0.12" stroke-width="1">
+    <path d="M68 58h1598v772H68z"/>
+    <path d="M202 58v772M336 58v772M470 58v772M604 58v772M738 58v772M872 58v772M1006 58v772M1140 58v772M1274 58v772M1408 58v772M1542 58v772"/>
+    <path d="M68 187h1598M68 316h1598M68 445h1598M68 574h1598M68 703h1598"/>
+  </g>
+
+  <g fill="none" stroke="#1d2329" stroke-width="1.5">
+    <path d="M68 40v36M50 58h36M1666 40v36M1648 58h36M68 812v36M50 830h36M1666 812v36M1648 830h36"/>
+    <circle cx="868" cy="58" r="12"/>
+    <path d="M868 34v48M844 58h48"/>
+  </g>
+
+  <text x="1608" y="130" text-anchor="end" fill="#687078" font-family="SFMono-Regular, Consolas, monospace" font-size="20" letter-spacing="2">ZHANG-HAN.COM</text>
+
+  <text x="126" y="494" fill="#1d2329" font-family="Helvetica Neue, Arial, sans-serif" font-size="236" font-weight="700" letter-spacing="-10">HAN ZHANG</text>
+  <text x="126" y="650" fill="#315f94" font-family="Georgia, Times New Roman, serif" font-size="102" font-style="italic" letter-spacing="-2">CODE × SPACE</text>
+  <text x="130" y="735" fill="#1d2329" font-family="Helvetica Neue, Arial, sans-serif" font-size="30" font-weight="600" letter-spacing="4">COMPUTER SCIENCE / ARCHITECTURE / VISUAL WORK</text>
+
+  <g fill="none" stroke="#d86a3a" stroke-width="3">
+    <path d="M1110 703h244V538"/>
+    <circle cx="1354" cy="703" r="15" fill="#ffffff"/>
+    <path d="M1335 703h38M1354 684v38"/>
+  </g>
+  <rect x="1350" y="500" width="8" height="38" fill="#d86a3a"/>
+</svg>

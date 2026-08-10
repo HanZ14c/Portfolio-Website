@@ -47,6 +47,11 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(html, /media\/institutions\/langara\.jpeg/);
   assert.match(html, /media\/institutions\/huayi\.jpeg/);
   assert.match(html, /media\/institutions\/xaut\.jpeg/);
+  assert.match(html, /href="https:\/\/zhang-han\.com\/favicon-hz\.png"/);
+  assert.match(html, /href="https:\/\/zhang-han\.com\/favicon-hz-32\.png"/);
+  assert.match(html, /href="https:\/\/zhang-han\.com\/favicon-hz-16\.png"/);
+  assert.match(html, /rel="shortcut icon" href="https:\/\/zhang-han\.com\/favicon-hz\.ico"/);
+  assert.match(html, /rel="apple-touch-icon" href="https:\/\/zhang-han\.com\/apple-touch-icon-hz\.png"/);
   const featuredTitles = [
     "Emotion Time",
     "BC Travel Guide",

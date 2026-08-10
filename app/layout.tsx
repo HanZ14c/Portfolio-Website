@@ -8,8 +8,12 @@ import "./globals.css";
 import "./styles/accessibility.css";
 import "./styles/portfolio-guide.css";
 
+const metadataBase = new URL(
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : siteConfig.url,
+);
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase,
   title: {
     default: siteConfig.title,
     template: "%s — Han Zhang",
@@ -27,8 +31,13 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
+    icon: [
+      { url: "/favicon-hz.png", sizes: "1254x1254", type: "image/png" },
+      { url: "/favicon-hz-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-hz-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/favicon-hz.ico",
+    apple: [{ url: "/apple-touch-icon-hz.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     type: "website",
