@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Han Zhang — Computer Science, Architecture and Visual Work",
   description:
     "The interdisciplinary portfolio of Han Zhang: computer science, architectural practice, academic design and visual studies.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio.hanz14c.workers.dev",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://zhang-han.com",
   email: "hanz14c@gmail.com",
   github: "https://github.com/HanZ14c",
   linkedin: "https://www.linkedin.com/in/hanz14c/",

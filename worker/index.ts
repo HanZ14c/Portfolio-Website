@@ -35,6 +35,44 @@ interface ExecutionContext {
 
 const chatRateLimits = new Map<string, { count: number; resetAt: number }>();
 const chatModel = "@cf/meta/llama-3.1-8b-instruct-fast";
+const canonicalHostname = "zhang-han.com";
+const redirectHostnames = new Set([
+  "portfolio.hanz14c.workers.dev",
+  "www.zhang-han.com",
+]);
+
+const permanentCanonicalRedirect = (url: URL) => {
+  url.protocol = "https:";
+  url.hostname = canonicalHostname;
+  url.port = "";
+
+  return new Response(null, {
+    status: 308,
+    headers: {
+      "cache-control": "public, max-age=3600",
+      location: url.toString(),
+      "x-content-type-options": "nosniff",
+    },
+  });
+};
+
+const withSecurityHeaders = (response: Response, hostname: string) => {
+  const headers = new Headers(response.headers);
+  headers.set("permissions-policy", "camera=(), geolocation=(), microphone=()");
+  headers.set("referrer-policy", "strict-origin-when-cross-origin");
+  headers.set("x-content-type-options", "nosniff");
+  headers.set("x-frame-options", "SAMEORIGIN");
+
+  if (hostname === canonicalHostname) {
+    headers.set("strict-transport-security", "max-age=31536000; includeSubDomains");
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+};
 
 const jsonResponse = (body: unknown, status = 200) => Response.json(body, {
   status,
@@ -133,22 +171,29 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    if (redirectHostnames.has(url.hostname)) {
+      return permanentCanonicalRedirect(url);
+    }
+
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
-      return handleImageOptimization(request, {
+      const response = await handleImageOptimization(request, {
         fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
         transformImage: async (body, { width, format, quality }) => {
           const result = await env.IMAGES.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
           return result.response();
         },
       }, allowedWidths);
+      return withSecurityHeaders(response, url.hostname);
     }
 
     if (url.pathname === "/api/portfolio-chat") {
-      return handlePortfolioChat(request, env);
+      const response = await handlePortfolioChat(request, env);
+      return withSecurityHeaders(response, url.hostname);
     }
 
-    return handler.fetch(request, env, ctx);
+    const response = await handler.fetch(request, env, ctx);
+    return withSecurityHeaders(response, url.hostname);
   },
 };
 

@@ -167,13 +167,35 @@ test("publishes crawl and discovery metadata", async () => {
   const sitemapResponse = await render("/sitemap.xml");
   assert.equal(sitemapResponse.status, 200);
   const sitemap = await sitemapResponse.text();
-  assert.match(sitemap, /portfolio\.hanz14c\.workers\.dev\/work\/emotion-time/);
+  assert.match(sitemap, /zhang-han\.com\/work\/emotion-time/);
 
   const robotsResponse = await render("/robots.txt");
   assert.equal(robotsResponse.status, 200);
   const robots = await robotsResponse.text();
   assert.match(robots, /Allow: \//);
-  assert.match(robots, /Sitemap: https:\/\/portfolio\.hanz14c\.workers\.dev\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/zhang-han\.com\/sitemap\.xml/);
+});
+
+test("permanently redirects legacy and www hosts to the canonical domain", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-redirect`);
+  const { default: worker } = await import(workerUrl.href);
+  const env = { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } };
+  const ctx = { waitUntil() {}, passThroughOnException() {} };
+
+  for (const hostname of ["portfolio.hanz14c.workers.dev", "www.zhang-han.com"]) {
+    const response = await worker.fetch(
+      new Request(`https://${hostname}/work/emotion-time?from=legacy`),
+      env,
+      ctx,
+    );
+
+    assert.equal(response.status, 308);
+    assert.equal(
+      response.headers.get("location"),
+      "https://zhang-han.com/work/emotion-time?from=legacy",
+    );
+  }
 });
 
 test("keeps analytics disabled when no production site token is configured", async () => {

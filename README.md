@@ -118,6 +118,8 @@ With both values present, the Worker uses the same curated portfolio context for
 
 The private GitHub repository is the source of truth. Cloudflare Workers can build and publish the site automatically whenever `main` changes.
 
+Production is served from [zhang-han.com](https://zhang-han.com). The `www` hostname and the legacy `portfolio.hanz14c.workers.dev` address permanently redirect to the canonical domain while preserving paths and query parameters.
+
 In Cloudflare, choose **Workers & Pages → Import a repository**, authorize only this repository, and use:
 
 - Production branch: `main`
