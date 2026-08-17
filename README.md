@@ -25,7 +25,7 @@ The site is intentionally organized like a small publication: a concise home pag
 ### Academic architecture
 
 - **Vertical City Housing** — 2018 graduation project for the Xi'an Poly Qujiang Spring residential community, exploring shared circulation and three-dimensional neighbourhood life
-- **Emotion Time** — revised cultural-space proposal in Xi'an Beilin that translates emotion, event and movement into spatial sequences
+- **Feeling in Form** — revised cultural-space proposal in Xi'an Beilin that translates emotion, event and movement into spatial sequences
 - **MIRRIEDGE — The Gleam Within** — opera-house proposal structured around light, reflection, layered circulation and performance
 
 ### Architecture practice

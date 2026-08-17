@@ -6,7 +6,7 @@ test("home exposes navigation, featured work and an accessible main landmark", a
   await expect(page).toHaveTitle(/Han Zhang/);
   await expect(page.getByRole("main")).toHaveAttribute("id", "main-content");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("I design systems");
-  await expect(page.getByRole("link", { name: "View Emotion Time" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "View Feeling in Form" })).toBeVisible();
 
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
@@ -38,7 +38,7 @@ test("a finished case study shows its narrative while a concise project does not
 });
 
 test("project pages expose sequential previous and next navigation", async ({ page }) => {
-  await page.goto("/work/emotion-time");
+  await page.goto("/work/feeling-in-form");
 
   const navigation = page.getByRole("navigation", { name: "Browse adjacent projects" });
   await expect(navigation).toBeVisible();
@@ -57,7 +57,7 @@ test("header state and résumé actions follow the current page", async ({ page 
   expect(resumeResponse.ok()).toBe(true);
   expect(resumeResponse.headers()["content-type"]).toContain("application/pdf");
 
-  await page.goto("/work/emotion-time");
+  await page.goto("/work/feeling-in-form");
   await expect(page.locator(".desktop-nav a[href='/work']")).toHaveAttribute("aria-current", "page");
   await expect(page.locator(".desktop-nav a[href='/Han-Zhang-Resume.pdf']")).toHaveAttribute(
     "target",
@@ -92,13 +92,21 @@ test("portfolio guide answers a suggested question and links to relevant work", 
 test("mobile navigation opens and core pages do not overflow horizontally", async ({ page }) => {
   await page.goto("/");
 
+  if ((page.viewportSize()?.width ?? 0) <= 640) {
+    const guideLauncher = page.getByRole("button", { name: "Ask about Han's work" });
+    await expect(page.locator(".portfolio-guide__launcher-label")).toBeHidden();
+    const launcherBox = await guideLauncher.boundingBox();
+    expect(launcherBox?.width).toBeLessThanOrEqual(46);
+    expect(launcherBox?.height).toBeLessThanOrEqual(46);
+  }
+
   const menu = page.getByText("Menu", { exact: true });
   if (await menu.isVisible()) {
     await menu.click();
     await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeVisible();
   }
 
-  for (const path of ["/", "/work", "/about", "/work/emotion-time"]) {
+  for (const path of ["/", "/work", "/about", "/work/feeling-in-form"]) {
     await page.goto(path);
     const hasHorizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,

@@ -354,11 +354,19 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
   }
 
   .portfolio-guide__launcher {
-    min-height: 52px;
-    padding-right: 14px;
+    width: 46px;
+    min-height: 46px;
+    justify-content: center;
+    gap: 0;
+    padding: 3px;
   }
 
-  .portfolio-guide.is-open .portfolio-guide__launcher-label {
+  .portfolio-guide__launcher-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .portfolio-guide__launcher-label {
     display: none;
   }
 }

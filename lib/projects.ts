@@ -6,7 +6,7 @@ export const projects: Project[] = [
   {
     slug: "vertical-city-housing",
     title: "Vertical City Housing",
-    subtitle: "Vertical City — Xi’an Poly Qujiang Chuntianli Residential Community Design",
+    subtitle: "Housing research · massing · circulation · unit planning",
     category: "Academic Architecture",
     time: "2018",
     period: "2018",
@@ -88,7 +88,7 @@ export const projects: Project[] = [
   {
     slug: "team-workflow-scheduler",
     title: "Team Workflow Scheduler",
-    subtitle: "A client-server task management system",
+    subtitle: "Java · TCP sockets · concurrency · JavaFX",
     category: "Computer Science",
     time: "2026",
     period: "2026 / Software project",
@@ -194,9 +194,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "emotion-time",
-    title: "Emotion Time",
-    subtitle: "Generating Spatial Language from an Emotional Form–Meaning Field",
+    slug: "feeling-in-form",
+    title: "Feeling in Form",
+    subtitle: "Spatial research · form-language generation · architectural representation",
     category: "Academic Architecture",
     time: "2021",
     period: "2021",
@@ -210,7 +210,7 @@ export const projects: Project[] = [
       "Instead of beginning with rooms, the project begins with feelings and asks what kinds of events a space can invite.",
     accent: "#ed1f24",
     cover: "/media/emotion-time/revised-4.webp",
-    coverAlt: "Exploded axonometric drawing of Emotion Time",
+    coverAlt: "Exploded axonometric drawing of Feeling in Form",
     featured: true,
     cardSize: "wide",
     facts: [
@@ -246,7 +246,7 @@ export const projects: Project[] = [
     gallery: [
       {
         src: "/media/emotion-time/revised-2.webp",
-        alt: "Context research and massing generation for Emotion Time",
+        alt: "Context research and massing generation for Feeling in Form",
         caption: "Context, site and massing development in the revised proposal.",
       },
       {
@@ -256,7 +256,7 @@ export const projects: Project[] = [
       },
       {
         src: "/media/emotion-time/revised-5.webp",
-        alt: "Plan and interior views of Emotion Time",
+        alt: "Plan and interior views of Feeling in Form",
         caption: "Plan, material atmosphere and spatial fragments.",
       },
       {
@@ -274,7 +274,7 @@ export const projects: Project[] = [
   {
     slug: "mirriedge-opera-house",
     title: "MIRRIEDGE",
-    subtitle: "The Gleam Within — Opera House",
+    subtitle: "Auditorium planning · sightlines · circulation · façade studies",
     category: "Academic Architecture",
     time: "2017",
     period: "Academic project",
@@ -340,7 +340,7 @@ export const projects: Project[] = [
   {
     slug: "bc-travel-guide",
     title: "BC Travel Guide",
-    subtitle: "Responsive destination storytelling",
+    subtitle: "HTML / CSS / JavaScript · PHP / PDO · MySQL",
     category: "Computer Science",
     time: "2023",
     period: "2023 / Web project",
@@ -476,7 +476,7 @@ export const projects: Project[] = [
   {
     slug: "car-dealership-manager",
     title: "Car Dealership Manager",
-    subtitle: "Modular desktop inventory and sales application",
+    subtitle: "Java Swing · OOP domain modelling · JSON · JUnit 5",
     category: "Computer Science",
     time: "2025",
     period: "2025 / Software project",
@@ -630,7 +630,7 @@ export const projects: Project[] = [
   {
     slug: "grid-pursuit-cheese",
     title: "Grid Pursuit: Cheese",
-    subtitle: "A browser-based pursuit game",
+    subtitle: "JavaScript · Canvas API · game state · collision logic",
     category: "Computer Science",
     time: "2023",
     period: "2023 / Browser game",
@@ -960,7 +960,7 @@ export const projects: Project[] = [
   {
     slug: "family-tree-database",
     title: "Family Tree Database",
-    subtitle: "A relational model for people, events and history",
+    subtitle: "EER modelling · normalization · MySQL · SQL Server",
     category: "Computer Science",
     time: "2024",
     period: "2024 / Database project",
@@ -1051,7 +1051,7 @@ export const projects: Project[] = [
   {
     slug: "bungalow",
     title: "Bungalow",
-    subtitle: "Lumion 9 weather studies",
+    subtitle: "Lumion 9 · weather systems · real-time rendering",
     category: "Visual Studies",
     time: "2020",
     period: "2020 / Personal study",
@@ -1108,7 +1108,7 @@ export const projects: Project[] = [
   {
     slug: "rumah",
     title: "Rumah",
-    subtitle: "Architectural visualization study",
+    subtitle: "Lumion 8 · render passes · Photoshop post-production",
     category: "Visual Studies",
     time: "2019",
     period: "2019 / Personal study",
@@ -1171,7 +1171,7 @@ export const projects: Project[] = [
   {
     slug: "architectural-hand-sketches",
     title: "Architectural Hand Sketches",
-    subtitle: "Selected hand drawings",
+    subtitle: "Freehand perspective · architectural linework",
     category: "Visual Studies",
     time: "2019",
     period: "2019 / Personal work",

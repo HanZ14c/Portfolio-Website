@@ -1,7 +1,7 @@
 import { projects } from "@/lib/projects";
 
 export const featuredProjectSlugs = [
-  "emotion-time",
+  "feeling-in-form",
   "bc-travel-guide",
   "team-workflow-scheduler",
   "qianhai-shimao-centre",

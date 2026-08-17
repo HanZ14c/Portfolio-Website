@@ -53,7 +53,7 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(html, /rel="shortcut icon" href="https:\/\/zhang-han\.com\/favicon-hz\.ico"/);
   assert.match(html, /rel="apple-touch-icon" href="https:\/\/zhang-han\.com\/apple-touch-icon-hz\.png"/);
   const featuredTitles = [
-    "Emotion Time",
+    "Feeling in Form",
     "BC Travel Guide",
     "Team Workflow Scheduler",
     "CM Qianhai Shimao Centre",
@@ -150,7 +150,7 @@ test("selectively renders complete project narratives", async () => {
 });
 
 test("renders previous and next project navigation in the default index order", async () => {
-  const middleResponse = await render("/work/emotion-time");
+  const middleResponse = await render("/work/feeling-in-form");
   const middleHtml = await middleResponse.text();
   assert.match(middleHtml, /aria-label="Browse adjacent projects"/);
   assert.match(middleHtml, /href="\/work\/vertical-city-housing"[^>]*>[^]*Previous project/);
@@ -172,7 +172,7 @@ test("publishes crawl and discovery metadata", async () => {
   const sitemapResponse = await render("/sitemap.xml");
   assert.equal(sitemapResponse.status, 200);
   const sitemap = await sitemapResponse.text();
-  assert.match(sitemap, /zhang-han\.com\/work\/emotion-time/);
+  assert.match(sitemap, /zhang-han\.com\/work\/feeling-in-form/);
 
   const robotsResponse = await render("/robots.txt");
   assert.equal(robotsResponse.status, 200);
@@ -190,7 +190,7 @@ test("permanently redirects legacy and www hosts to the canonical domain", async
 
   for (const hostname of ["portfolio.hanz14c.workers.dev", "www.zhang-han.com"]) {
     const response = await worker.fetch(
-      new Request(`https://${hostname}/work/emotion-time?from=legacy`),
+      new Request(`https://${hostname}/work/feeling-in-form?from=legacy`),
       env,
       ctx,
     );
@@ -198,7 +198,7 @@ test("permanently redirects legacy and www hosts to the canonical domain", async
     assert.equal(response.status, 308);
     assert.equal(
       response.headers.get("location"),
-      "https://zhang-han.com/work/emotion-time?from=legacy",
+      "https://zhang-han.com/work/feeling-in-form?from=legacy",
     );
   }
 });
