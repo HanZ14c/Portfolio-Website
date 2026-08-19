@@ -123,17 +123,14 @@ test("server-renders the project index", async () => {
   assert.doesNotMatch(html, /XXXX/);
 });
 
-test("server-renders the Team Workflow Scheduler technical case study", async () => {
+test("server-renders the Team Workflow Scheduler summary without its narrative", async () => {
   const response = await render("/work/team-workflow-scheduler");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Thread-per-connection socket handling/);
-  assert.match(html, /ConcurrentHashMap/);
   assert.match(html, /JUnit 5/);
-  assert.match(html, /localhost:5050/);
   assert.match(html, /Team-Workflow-Scheduler/);
-  assert.match(html, /class="project-sections page-shell"/);
-  assert.doesNotMatch(html, /class="project-sections page-shell" hidden/);
+  assert.doesNotMatch(html, /class="project-sections page-shell"/);
+  assert.doesNotMatch(html, /Thread-per-connection socket handling/);
   assert.match(html, /"@type":"CreativeWork"/);
 });
 
@@ -143,10 +140,19 @@ test("selectively renders complete project narratives", async () => {
   assert.match(completeHtml, /class="project-sections page-shell"/);
   assert.match(completeHtml, /Coordination below the public ground/);
 
-  const conciseResponse = await render("/work/grid-pursuit-cheese");
-  const conciseHtml = await conciseResponse.text();
-  assert.doesNotMatch(conciseHtml, /class="project-sections page-shell"/);
-  assert.doesNotMatch(conciseHtml, /A deterministic five-action turn/);
+  const computerSciencePaths = [
+    "/work/team-workflow-scheduler",
+    "/work/bc-travel-guide",
+    "/work/car-dealership-manager",
+    "/work/grid-pursuit-cheese",
+    "/work/family-tree-database",
+  ];
+
+  for (const path of computerSciencePaths) {
+    const conciseResponse = await render(path);
+    const conciseHtml = await conciseResponse.text();
+    assert.doesNotMatch(conciseHtml, /class="project-sections page-shell"/);
+  }
 });
 
 test("renders previous and next project navigation in the default index order", async () => {
@@ -209,25 +215,27 @@ test("keeps analytics disabled when no production site token is configured", asy
   assert.doesNotMatch(html, /static\.cloudflareinsights\.com\/beacon\.min\.js/);
 });
 
-test("server-renders the Car Dealership Manager technical case study", async () => {
+test("server-renders the Car Dealership Manager summary and gallery", async () => {
   const response = await render("/work/car-dealership-manager");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Java 11\+/);
   assert.match(html, /JUnit 5 \/ 39 tests/);
-  assert.match(html, /singleton EventLog/);
   assert.match(html, /uml-design-diagram\.png/);
   assert.match(html, /Car-Dealership-Manager/);
+  assert.doesNotMatch(html, /singleton EventLog/);
+  assert.doesNotMatch(html, /class="project-sections page-shell"/);
 });
 
-test("server-renders the Family Tree Database technical case study", async () => {
+test("server-renders the Family Tree Database summary and gallery", async () => {
   const response = await render("/work/family-tree-database");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /13 tables/);
-  assert.match(html, /Twenty SQL examples/);
   assert.match(html, /MySQL \+ Microsoft SQL Server/);
   assert.match(html, /eer-modeling-diagram\.png/);
+  assert.doesNotMatch(html, /Twenty SQL examples/);
+  assert.doesNotMatch(html, /class="project-sections page-shell"/);
 });
 
 test("server-renders the BC Travel Guide technical case study", async () => {

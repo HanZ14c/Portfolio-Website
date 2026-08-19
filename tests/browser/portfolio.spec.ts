@@ -27,14 +27,13 @@ test("work filters and sorts projects without losing the current result summary"
   await expect(page.locator(".project-group__heading h2").first()).toHaveText("2026");
 });
 
-test("a finished case study shows its narrative while a concise project does not", async ({ page }) => {
+test("computer science narratives stay hidden while architecture narratives remain", async ({ page }) => {
   await page.goto("/work/team-workflow-scheduler");
-  await expect(page.locator(".project-sections")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "One workflow, several clients" })).toBeVisible();
-
-  await page.goto("/work/grid-pursuit-cheese");
   await expect(page.locator(".project-sections")).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Related work" })).toBeVisible();
+
+  await page.goto("/work/qianhai-shimao-centre");
+  await expect(page.locator(".project-sections")).toBeVisible();
 });
 
 test("project pages expose sequential previous and next navigation", async ({ page }) => {

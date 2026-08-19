@@ -94,7 +94,7 @@ export const projects: Project[] = [
     period: "2026 / Software project",
     role: "System architecture, protocol, UI and implementation",
     status: "Repository available",
-    showSections: true,
+    showSections: false,
     excerpt:
       "A Java client-server application for managing shared team tasks through a JavaFX desktop client or a command-line interface, with TCP networking and JSON persistence.",
     statement:
@@ -346,7 +346,7 @@ export const projects: Project[] = [
     period: "2023 / Web project",
     role: "Content structure, responsive interface and full-stack implementation",
     status: "Live demo available",
-    showSections: true,
+    showSections: false,
     excerpt:
       "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
     statement:
@@ -482,7 +482,7 @@ export const projects: Project[] = [
     period: "2025 / Software project",
     role: "Domain modelling, persistence, desktop UI and testing",
     status: "Repository available",
-    showSections: true,
+    showSections: false,
     excerpt:
       "A Java desktop application for managing dealership inventory, customers, brokers and sales through Swing or a console interface, supported by JSON persistence and automated tests.",
     statement:
@@ -636,6 +636,7 @@ export const projects: Project[] = [
     period: "2023 / Browser game",
     role: "Game state, Canvas rendering and interface implementation",
     status: "Playable demo available",
+    showSections: false,
     excerpt:
       "A 10×10 Canvas game with queued player actions, randomized enemies, traps, walls, scoring and collision detection.",
     statement:
@@ -966,7 +967,7 @@ export const projects: Project[] = [
     period: "2024 / Database project",
     role: "Requirements, EER modelling, normalization and SQL implementation",
     status: "Repository available",
-    showSections: true,
+    showSections: false,
     excerpt:
       "A normalized relational model for family relationships, education, employment, addresses, marriages and life events.",
     statement:
