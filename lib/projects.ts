@@ -347,6 +347,7 @@ export const projects: Project[] = [
     role: "Content structure, responsive interface and full-stack implementation",
     status: "Live demo available",
     showSections: false,
+    showGallery: false,
     excerpt:
       "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
     statement:

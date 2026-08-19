@@ -32,8 +32,8 @@ test("server-renders the finished portfolio home page", async () => {
 
   const html = await response.text();
   assert.match(html, /Han Zhang — Computer Science, Architecture and Visual Work/);
-  assert.match(html, /I design systems/);
-  assert.match(html, /across code and space/);
+  assert.match(html, /A portfolio of/);
+  assert.match(html, /code, space, and visual studies/);
   assert.match(html, /Selected work/);
   assert.match(html, /class="profile-links"/);
   assert.match(html, /Han-Zhang-Resume\.pdf/);
@@ -246,6 +246,8 @@ test("server-renders the BC Travel Guide technical case study", async () => {
   assert.match(html, /PHP \/ PDO \/ MySQL/);
   assert.match(html, /photo-wall\.jpg/);
   assert.match(html, /BC-Travel-Guide/);
+  assert.doesNotMatch(html, /class="project-gallery page-shell/);
+  assert.doesNotMatch(html, /coastal-background\.jpg/);
 });
 
 test("server-renders the Grid Pursuit Cheese technical case study", async () => {

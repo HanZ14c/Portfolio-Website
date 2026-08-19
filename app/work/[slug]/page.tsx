@@ -159,7 +159,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </>
         )}
 
-        {project.gallery && (
+        {project.gallery && project.showGallery !== false && (
           <section className={`project-gallery page-shell${project.visualOnly ? " project-gallery--visual-only" : ""}`}>
             {!project.visualOnly && <div className="section-heading" data-reveal>
               <p className="section-label">{project.galleryLabel ?? "Selected project material"}</p>

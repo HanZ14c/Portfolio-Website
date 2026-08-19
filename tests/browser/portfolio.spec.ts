@@ -5,7 +5,9 @@ test("home exposes navigation, featured work and an accessible main landmark", a
 
   await expect(page).toHaveTitle(/Han Zhang/);
   await expect(page.getByRole("main")).toHaveAttribute("id", "main-content");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("I design systems");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "A portfolio of code, space, and visual studies.",
+  );
   await expect(page.getByRole("link", { name: "View Feeling in Form" })).toBeVisible();
 
   await page.keyboard.press("Tab");

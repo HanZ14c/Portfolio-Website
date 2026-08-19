@@ -20,8 +20,8 @@ export default function Home() {
             <p>Computer science student<br />Former architectural designer</p>
           </div>
           <h1 data-reveal>
-            I design systems
-            <span>across code and space.</span>
+            A portfolio of{" "}
+            <span>code, space, and visual studies.</span>
           </h1>
           <div className="home-hero__footer" data-reveal>
             <p>

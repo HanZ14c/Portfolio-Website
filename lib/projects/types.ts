@@ -46,6 +46,7 @@ export type Project = {
   containCover?: boolean;
   visualOnly?: boolean;
   showSections?: boolean;
+  showGallery?: boolean;
   featured?: boolean;
   cardSize?: "wide" | "standard";
   facts: ProjectFact[];
