@@ -45,6 +45,7 @@ export type Project = {
   coverAlt?: string;
   containCover?: boolean;
   visualOnly?: boolean;
+  hidden?: boolean;
   showSections?: boolean;
   showGallery?: boolean;
   featured?: boolean;

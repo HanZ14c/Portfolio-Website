@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { categories, projects, type ProjectCategory } from "@/lib/projects";
+import { categories, publicProjects, type ProjectCategory } from "@/lib/projects";
 import {
   groupProjects,
   sortLabels,
@@ -13,12 +13,14 @@ import { ProjectCard } from "@/app/components/ProjectCard";
 type Filter = "All" | ProjectCategory;
 
 const categoryOrder = categories.slice(1) as ProjectCategory[];
-const originalOrder = new Map(projects.map((project, index) => [project.slug, index]));
+const originalOrder = new Map(publicProjects.map((project, index) => [project.slug, index]));
 
 export function ProjectIndex() {
   const [filter, setFilter] = useState<Filter>("All");
   const [sortMode, setSortMode] = useState<ProjectSortMode>("category");
-  const filtered = filter === "All" ? projects : projects.filter((project) => project.category === filter);
+  const filtered = filter === "All"
+    ? publicProjects
+    : publicProjects.filter((project) => project.category === filter);
   const visible = sortProjects(filtered, sortMode, categoryOrder, originalOrder);
   const groups = groupProjects(visible, sortMode);
 
@@ -36,8 +38,8 @@ export function ProjectIndex() {
               {category}
               <span>
                 {category === "All"
-                  ? projects.length
-                  : projects.filter((project) => project.category === category).length}
+                  ? publicProjects.length
+                  : publicProjects.filter((project) => project.category === category).length}
               </span>
             </button>
           ))}

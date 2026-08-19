@@ -17,6 +17,9 @@ test("home exposes navigation, featured work and an accessible main landmark", a
 test("work filters and sorts projects without losing the current result summary", async ({ page }) => {
   await page.goto("/work");
   await expect(page.locator("html")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator(".filter-summary")).toContainText("Showing 16 projects");
+  await expect(page.getByText("Chongqing Tianan Cyber Park T3")).toHaveCount(0);
+  await expect(page.getByText("Dongguan Songshanhu Office Tower")).toHaveCount(0);
 
   await page.getByRole("button", { name: /Visual Studies/ }).click();
   await expect(page.locator(".filter-summary")).toContainText("Showing 3 projects");
@@ -45,7 +48,7 @@ test("project pages expose sequential previous and next navigation", async ({ pa
   await expect(navigation).toBeVisible();
   await expect(navigation.locator("a.is-previous")).toHaveAttribute("href", "/work/vertical-city-housing");
   await expect(navigation.locator("a.is-next")).toHaveAttribute("href", "/work/mirriedge-opera-house");
-  await expect(navigation).toContainText("07 / 18");
+  await expect(navigation).toContainText("07 / 16");
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
@@ -67,6 +70,7 @@ test("header state and résumé actions follow the current page", async ({ page 
 
   await page.goto("/about");
   await expect(page.locator(".desktop-nav a[href='/about']")).toHaveAttribute("aria-current", "page");
+  await expect(page.getByText("Working approach")).toHaveCount(0);
   await expect(page.locator(".about-links a[href='/Han-Zhang-Resume.pdf']")).toHaveAttribute("download", "");
 });
 

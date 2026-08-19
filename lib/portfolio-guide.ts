@@ -1,4 +1,4 @@
-import { projects } from "@/lib/projects";
+import { publicProjects } from "@/lib/projects";
 
 export type GuideMessage = {
   role: "user" | "assistant";
@@ -23,7 +23,7 @@ const contactLinks: GuideLink[] = [
 
 const normalize = (value: string) => value.toLocaleLowerCase().replace(/[^a-z0-9\u3400-\u9fff]+/g, " ").trim();
 
-const projectSearchText = (project: (typeof projects)[number]) => normalize([
+const projectSearchText = (project: (typeof publicProjects)[number]) => normalize([
   project.title,
   project.subtitle,
   project.category,
@@ -34,12 +34,12 @@ const projectSearchText = (project: (typeof projects)[number]) => normalize([
   ...project.sections.flatMap((section) => [section.title, ...section.body, ...(section.points ?? [])]),
 ].join(" "));
 
-const projectLink = (project: (typeof projects)[number]): GuideLink => ({
+const projectLink = (project: (typeof publicProjects)[number]): GuideLink => ({
   label: project.title,
   href: `/work/${project.slug}`,
 });
 
-const summarizeProjects = (matchingProjects: typeof projects, introduction: string): GuideReply => {
+const summarizeProjects = (matchingProjects: typeof publicProjects, introduction: string): GuideReply => {
   const selection = matchingProjects.slice(0, 4);
 
   if (selection.length === 0) {
@@ -59,7 +59,7 @@ const summarizeProjects = (matchingProjects: typeof projects, introduction: stri
 export function createPortfolioGuideReply(question: string): GuideReply {
   const query = normalize(question);
 
-  const exactProject = projects.find((project) => {
+  const exactProject = publicProjects.find((project) => {
     const title = normalize(project.title);
     const slug = normalize(project.slug);
     return query.includes(title) || query.includes(slug);
@@ -99,47 +99,47 @@ export function createPortfolioGuideReply(question: string): GuideReply {
 
   if (/java|javafx|junit|tcp|socket/.test(query)) {
     return summarizeProjects(
-      projects.filter((project) => /java|javafx|junit|tcp|socket/.test(projectSearchText(project))),
+      publicProjects.filter((project) => /java|javafx|junit|tcp|socket/.test(projectSearchText(project))),
       "The strongest Java-related projects are",
     );
   }
 
   if (/database|sql|mysql|data model|relational|数据库|数据建模/.test(query)) {
     return summarizeProjects(
-      projects.filter((project) => /database|sql|mysql|relational|data model/.test(projectSearchText(project))),
+      publicProjects.filter((project) => /database|sql|mysql|relational|data model/.test(projectSearchText(project))),
       "For database and data-modelling work, start with",
     );
   }
 
   if (/team|collaborat|workflow|shared|团队|协作/.test(query)) {
     return summarizeProjects(
-      projects.filter((project) => /team|collaborat|workflow|shared|client server/.test(projectSearchText(project))),
+      publicProjects.filter((project) => /team|collaborat|workflow|shared|client server/.test(projectSearchText(project))),
       "Projects that foreground shared workflows or collaboration include",
     );
   }
 
   if (/visual|render|lumion|photoshop|drawing|sketch|art|视觉|渲染|手绘|绘画/.test(query)) {
     return summarizeProjects(
-      projects.filter((project) => project.category === "Visual Studies"),
+      publicProjects.filter((project) => project.category === "Visual Studies"),
       "The visual studies collection currently includes",
     );
   }
 
   if (/architecture|building|housing|urban|public space|建筑|空间|住宅|城市/.test(query)) {
     return summarizeProjects(
-      projects.filter((project) => project.category.includes("Architecture")),
+      publicProjects.filter((project) => project.category.includes("Architecture")),
       "A useful cross-section of Han's architecture work is",
     );
   }
 
   if (/software|computer science|developer|backend|frontend|code|program|cs project|计算机|软件|编程|开发/.test(query)) {
     return summarizeProjects(
-      projects.filter((project) => project.category === "Computer Science"),
+      publicProjects.filter((project) => project.category === "Computer Science"),
       "For a computer-science or software role, review",
     );
   }
 
-  const keywordMatches = projects.filter((project) => {
+  const keywordMatches = publicProjects.filter((project) => {
     const searchable = projectSearchText(project);
     return query.split(" ").filter((term) => term.length >= 3).some((term) => searchable.includes(term));
   });
@@ -158,7 +158,7 @@ export function createPortfolioGuideReply(question: string): GuideReply {
 }
 
 export function getPortfolioGuideContext(): string {
-  const projectContext = projects.map((project) => [
+  const projectContext = publicProjects.map((project) => [
     `Title: ${project.title}`,
     `URL: /work/${project.slug}`,
     `Category: ${project.category}`,

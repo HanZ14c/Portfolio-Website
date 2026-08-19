@@ -866,6 +866,7 @@ export const projects: Project[] = [
   {
     slug: "chongqing-tianan-cyber-park-t3",
     title: "Chongqing Tianan Cyber Park T3",
+    hidden: true,
     subtitle: "Feasibility and early design communication",
     category: "Architecture Practice",
     time: "2019",
@@ -914,6 +915,7 @@ export const projects: Project[] = [
   {
     slug: "dongguan-songshanhu-office-tower",
     title: "Dongguan Songshanhu Office Tower",
+    hidden: true,
     subtitle: "Technical documentation and precedent research",
     category: "Architecture Practice",
     time: "2017",
@@ -1213,12 +1215,14 @@ export const categories: Array<"All" | ProjectCategory> = [
   "Visual Studies",
 ];
 
+export const publicProjects = projects.filter((project) => !project.hidden);
+
 export function getProject(slug: string) {
-  return projects.find((project) => project.slug === slug);
+  return publicProjects.find((project) => project.slug === slug);
 }
 
 export function getRelatedProjects(project: Project, limit = 3) {
-  return projects
+  return publicProjects
     .filter(
       (candidate) =>
         candidate.slug !== project.slug && candidate.category === project.category,
@@ -1229,7 +1233,7 @@ export function getRelatedProjects(project: Project, limit = 3) {
 export function getProjectNeighbors(project: Project) {
   const orderedProjects = categories
     .filter((category): category is ProjectCategory => category !== "All")
-    .flatMap((category) => projects.filter((candidate) => candidate.category === category));
+    .flatMap((category) => publicProjects.filter((candidate) => candidate.category === category));
   const currentIndex = orderedProjects.findIndex((candidate) => candidate.slug === project.slug);
 
   return {

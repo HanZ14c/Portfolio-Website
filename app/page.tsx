@@ -5,7 +5,7 @@ import { ProjectCard } from "./components/ProjectCard";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { getFeaturedProjects } from "@/lib/featured-projects";
-import { projects } from "@/lib/projects";
+import { publicProjects } from "@/lib/projects";
 
 export default function Home() {
   const featured = getFeaturedProjects();
@@ -50,7 +50,7 @@ export default function Home() {
             ))}
           </div>
           <div className="section-cta" data-reveal>
-            <p>{projects.length} projects currently published</p>
+            <p>{publicProjects.length} projects currently published</p>
             <Link className="button-link" href="/work">View the full index <span>↗</span></Link>
           </div>
         </section>

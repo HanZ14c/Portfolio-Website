@@ -6,9 +6,11 @@ import { SiteHeader } from "../components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Background, experience and working approach of Han Zhang.",
+  description: "Background, experience and capabilities of Han Zhang.",
   alternates: { canonical: "/about" },
 };
+
+const showWorkingApproach = false;
 
 const timeline = [
   {
@@ -53,20 +55,22 @@ export default function AboutPage() {
           </p>
         </header>
 
-        <section className="about-statement" data-reveal>
-          <p className="section-label">Working approach</p>
-          <div>
-            <p>
-              Architecture trained me to move between a city-scale idea and a construction detail. Software
-              asks for the same kind of thinking: understand the whole system, define relationships, then make
-              each part reliable enough to support the experience.
-            </p>
-            <p>
-              I value legible structure, patient iteration and visual communication. I am especially interested
-              in work where technical decisions and human experience cannot be separated.
-            </p>
-          </div>
-        </section>
+        {showWorkingApproach && (
+          <section className="about-statement" data-reveal>
+            <p className="section-label">Working approach</p>
+            <div>
+              <p>
+                Architecture trained me to move between a city-scale idea and a construction detail. Software
+                asks for the same kind of thinking: understand the whole system, define relationships, then make
+                each part reliable enough to support the experience.
+              </p>
+              <p>
+                I value legible structure, patient iteration and visual communication. I am especially interested
+                in work where technical decisions and human experience cannot be separated.
+              </p>
+            </div>
+          </section>
+        )}
 
         <section className="timeline-section">
           <div className="section-heading" data-reveal>

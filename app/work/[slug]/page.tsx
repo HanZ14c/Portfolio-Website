@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 import { ProjectCard } from "@/app/components/ProjectCard";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
-import { getProject, getProjectNeighbors, getRelatedProjects, projects } from "@/lib/projects";
+import { getProject, getProjectNeighbors, getRelatedProjects, publicProjects } from "@/lib/projects";
 import { absoluteUrl, serializeJsonLd, siteConfig } from "@/lib/site";
 
 type ProjectPageProps = {
@@ -13,7 +13,7 @@ type ProjectPageProps = {
 };
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return publicProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {

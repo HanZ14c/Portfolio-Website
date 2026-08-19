@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/lib/projects";
+import { publicProjects } from "@/lib/projects";
 import { absoluteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : 0.8,
   }));
 
-  const projectRoutes = projects.map((project) => ({
+  const projectRoutes = publicProjects.map((project) => ({
     url: absoluteUrl(`/work/${project.slug}`),
     changeFrequency: "yearly" as const,
     priority: project.featured ? 0.8 : 0.7,

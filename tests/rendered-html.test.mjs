@@ -105,6 +105,8 @@ test("server-renders the institutional background on the about page", async () =
   assert.match(html, /Xi(?:&#x27;|')an University of Technology/);
   assert.match(html, /Continue \+ connect/);
   assert.match(html, /media\/institutions\/(?:ubc|langara|huayi|xaut)\.jpeg/);
+  assert.doesNotMatch(html, /Working approach/);
+  assert.doesNotMatch(html, /Architecture trained me to move between/);
 });
 
 test("server-renders the project index", async () => {
@@ -120,7 +122,20 @@ test("server-renders the project index", async () => {
   assert.match(html, /Projects grouped by category/);
   assert.match(html, /href="\/work" aria-current="page"/);
   assert.match(html, /2026/);
+  assert.match(html, /Showing (?:<!-- -->)?16(?:<!-- -->)? (?:<!-- -->)?projects/);
+  assert.doesNotMatch(html, /Chongqing Tianan Cyber Park T3/);
+  assert.doesNotMatch(html, /Dongguan Songshanhu Office Tower/);
   assert.doesNotMatch(html, /XXXX/);
+});
+
+test("returns not found for portfolio projects marked as hidden", async () => {
+  for (const path of [
+    "/work/chongqing-tianan-cyber-park-t3",
+    "/work/dongguan-songshanhu-office-tower",
+  ]) {
+    const response = await render(path);
+    assert.equal(response.status, 404);
+  }
 });
 
 test("server-renders the Team Workflow Scheduler summary without its narrative", async () => {
@@ -161,7 +176,7 @@ test("renders previous and next project navigation in the default index order", 
   assert.match(middleHtml, /aria-label="Browse adjacent projects"/);
   assert.match(middleHtml, /href="\/work\/vertical-city-housing"[^>]*>[^]*Previous project/);
   assert.match(middleHtml, /href="\/work\/mirriedge-opera-house"[^>]*>[^]*Next project/);
-  assert.match(middleHtml, /07(?:<!-- -->)? \/ (?:<!-- -->)?18/);
+  assert.match(middleHtml, /07(?:<!-- -->)? \/ (?:<!-- -->)?16/);
 
   const firstResponse = await render("/work/team-workflow-scheduler");
   const firstHtml = await firstResponse.text();
@@ -179,6 +194,8 @@ test("publishes crawl and discovery metadata", async () => {
   assert.equal(sitemapResponse.status, 200);
   const sitemap = await sitemapResponse.text();
   assert.match(sitemap, /zhang-han\.com\/work\/feeling-in-form/);
+  assert.doesNotMatch(sitemap, /chongqing-tianan-cyber-park-t3/);
+  assert.doesNotMatch(sitemap, /dongguan-songshanhu-office-tower/);
 
   const robotsResponse = await render("/robots.txt");
   assert.equal(robotsResponse.status, 200);
