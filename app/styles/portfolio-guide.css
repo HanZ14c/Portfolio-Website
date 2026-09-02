@@ -1,24 +1,20 @@
 .portfolio-guide {
-  position: fixed;
-  right: max(22px, env(safe-area-inset-right));
-  bottom: max(22px, env(safe-area-inset-bottom));
+  position: relative;
   z-index: 60;
-  display: grid;
-  justify-items: end;
-  gap: 12px;
+  display: block;
   font-family: var(--sans);
 }
 
 .portfolio-guide__launcher {
   display: flex;
-  min-height: 54px;
+  min-height: 40px;
   align-items: center;
-  gap: 11px;
+  gap: 8px;
   border: 1px solid color-mix(in srgb, var(--red) 72%, var(--ink));
   border-radius: 999px;
-  padding: 6px 18px 6px 6px;
-  background: color-mix(in srgb, var(--red) 94%, transparent);
-  box-shadow: 0 14px 34px rgba(29, 35, 41, 0.2);
+  padding: 4px 12px 4px 4px;
+  background: var(--red);
+  box-shadow: 0 8px 20px rgba(29, 35, 41, 0.14);
   color: white;
   cursor: pointer;
   -webkit-backdrop-filter: blur(7px);
@@ -41,21 +37,21 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 .portfolio-guide__launcher-mark {
   position: relative;
   display: grid;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   place-items: center;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
   font-family: var(--mono);
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .portfolio-guide:not(.is-open) .portfolio-guide__launcher-mark::after {
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border: 2px solid var(--red);
   border-radius: 50%;
   background: var(--orange);
@@ -64,12 +60,16 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 
 .portfolio-guide__launcher-label {
   font-family: var(--mono);
-  font-size: 0.68rem;
+  font-size: 0.6rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .portfolio-guide__panel {
+  position: fixed;
+  z-index: 80;
+  top: 80px;
+  right: max(22px, env(safe-area-inset-right));
   display: grid;
   width: min(390px, calc(100vw - 44px));
   height: min(570px, calc(100svh - 112px));
@@ -141,8 +141,8 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 
 .portfolio-guide__header-actions button {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   place-items: center;
   border: 1px solid transparent;
   border-radius: 50%;
@@ -226,6 +226,7 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 }
 
 .portfolio-guide__suggestions button {
+  min-height: 44px;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 12px;
@@ -280,7 +281,7 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 
 .portfolio-guide__form {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 38px;
+  grid-template-columns: minmax(0, 1fr) 44px;
   gap: 8px;
   border-top: 1px solid var(--soft-line);
   padding: 12px 12px 8px;
@@ -288,7 +289,7 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 }
 
 .portfolio-guide__form textarea {
-  min-height: 40px;
+  min-height: 44px;
   max-height: 88px;
   resize: none;
   border: 1px solid var(--line);
@@ -308,8 +309,8 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 
 .portfolio-guide__form button {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   align-self: end;
   border: 0;
@@ -342,28 +343,29 @@ html:not([data-ready="true"]) .portfolio-guide__launcher {
 
 @media (max-width: 640px) {
   .portfolio-guide {
-    right: 12px;
-    bottom: max(12px, env(safe-area-inset-bottom));
-    left: 12px;
+    position: relative;
   }
 
   .portfolio-guide__panel {
-    width: 100%;
+    top: 70px;
+    right: 12px;
+    left: 12px;
+    width: auto;
     height: min(620px, calc(100svh - 84px));
     border-radius: 16px;
   }
 
   .portfolio-guide__launcher {
-    width: 46px;
-    min-height: 46px;
+    width: 40px;
+    min-height: 40px;
     justify-content: center;
     gap: 0;
     padding: 3px;
   }
 
   .portfolio-guide__launcher-mark {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
 
   .portfolio-guide__launcher-label {

@@ -59,9 +59,7 @@ test("server-renders the finished portfolio home page", async () => {
     "CM Qianhai Shimao Centre",
     "Car Dealership Manager",
     "Grid Pursuit: Cheese",
-    "Bungalow",
     "Architectural Hand Sketches",
-    "Family Tree Database",
   ];
   const featuredPositions = featuredTitles.map((title) => html.indexOf(title));
   assert.ok(featuredPositions.every((position) => position >= 0));

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { CloudflareAnalytics } from "./components/CloudflareAnalytics";
 import { ClientEffects } from "./components/ClientEffects";
-import { PortfolioGuide } from "./components/PortfolioGuide";
 import { serializeJsonLd, siteConfig } from "@/lib/site";
 import "./styles/tokens.css";
 import "./globals.css";
@@ -80,7 +79,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <ClientEffects />
         {children}
-        <PortfolioGuide />
         <CloudflareAnalytics />
       </body>
     </html>

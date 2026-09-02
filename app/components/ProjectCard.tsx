@@ -2,7 +2,13 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { Project } from "@/lib/projects";
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  showSummary = false,
+}: {
+  project: Project;
+  showSummary?: boolean;
+}) {
   return (
     <article
       className="project-card"
@@ -31,7 +37,8 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="project-card__body">
           <div>
             <h2>{project.title}</h2>
-            <p>{project.subtitle}</p>
+            <p className="project-card__subtitle">{project.subtitle}</p>
+            {showSummary && <p className="project-card__summary">{project.excerpt}</p>}
           </div>
           <span className="project-card__arrow" aria-hidden="true">↗</span>
         </div>

@@ -36,6 +36,7 @@ export function PortfolioGuide() {
   const inputId = useId();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const messageEndRef = useRef<HTMLDivElement>(null);
   const nextMessageId = useRef(1);
 
@@ -43,15 +44,34 @@ export function PortfolioGuide() {
     if (!isOpen) return;
     inputRef.current?.focus();
 
-    const closeOnEscape = (event: KeyboardEvent) => {
+    const handleDialogKeys = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
         launcherRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusable = panelRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable || focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
+    window.addEventListener("keydown", handleDialogKeys);
+    return () => window.removeEventListener("keydown", handleDialogKeys);
   }, [isOpen]);
 
   useEffect(() => {
@@ -114,14 +134,21 @@ export function PortfolioGuide() {
     window.requestAnimationFrame(() => inputRef.current?.focus());
   };
 
+  const closeGuide = () => {
+    setIsOpen(false);
+    window.requestAnimationFrame(() => launcherRef.current?.focus());
+  };
+
   return (
     <aside className={`portfolio-guide${isOpen ? " is-open" : ""}`}>
       {isOpen && (
         <section
           className="portfolio-guide__panel"
           role="dialog"
+          aria-modal="true"
           aria-label="Portfolio guide"
           aria-describedby={`${inputId}-description`}
+          ref={panelRef}
         >
           <header className="portfolio-guide__header">
             <div>
@@ -131,7 +158,7 @@ export function PortfolioGuide() {
             </div>
             <div className="portfolio-guide__header-actions">
               <button type="button" onClick={resetConversation} aria-label="Reset conversation">↺</button>
-              <button type="button" onClick={() => setIsOpen(false)} aria-label="Close portfolio guide">×</button>
+              <button type="button" onClick={closeGuide} aria-label="Close portfolio guide">×</button>
             </div>
           </header>
 

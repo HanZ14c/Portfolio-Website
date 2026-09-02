@@ -41,12 +41,12 @@ export default function Home() {
 
         <section className="selected-work page-shell">
           <div className="section-heading" data-reveal>
-            <p className="section-label">Selected work / 01–09</p>
+            <p className="section-label">Selected work / 01–{String(featured.length).padStart(2, "0")}</p>
             <h2>Projects with a point of view.</h2>
           </div>
           <div className="project-grid project-grid--featured">
             {featured.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <ProjectCard key={project.slug} project={project} showSummary />
             ))}
           </div>
           <div className="section-cta" data-reveal>

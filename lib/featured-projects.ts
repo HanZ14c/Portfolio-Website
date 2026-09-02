@@ -7,9 +7,7 @@ export const featuredProjectSlugs = [
   "qianhai-shimao-centre",
   "car-dealership-manager",
   "grid-pursuit-cheese",
-  "bungalow",
   "architectural-hand-sketches",
-  "family-tree-database",
 ] as const;
 
 export function getFeaturedProjects() {

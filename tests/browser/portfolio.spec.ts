@@ -80,6 +80,7 @@ test("portfolio guide answers a suggested question and links to relevant work", 
 
   const guide = page.getByRole("dialog", { name: "Portfolio guide" });
   await expect(guide).toBeVisible();
+  await expect(guide).toHaveAttribute("aria-modal", "true");
   await guide.getByRole("button", { name: "Show projects involving Java or databases" }).click();
   await expect(guide.getByText(/Java-related projects/i)).toBeVisible();
   await expect(guide.getByRole("link", { name: /Team Workflow Scheduler/ })).toBeVisible();
