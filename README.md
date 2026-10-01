@@ -4,6 +4,39 @@ An editorial portfolio for Han Zhang, bringing software engineering, architectur
 
 The site is intentionally organized like a small publication: a concise home page introduces the overall practice, the project index provides a filterable overview, and every selected project has its own permanent detail page.
 
+## 本地启动 / Quick start
+
+在 `Portfolio-Website` 项目目录打开终端。需要 Node.js `>=22.13.0` 和 pnpm；首次运行先安装依赖：
+
+```bash
+pnpm install
+```
+
+**只启动作品集网站：**
+
+```bash
+pnpm dev
+```
+
+打开 [http://localhost:3000](http://localhost:3000) 预览网站。
+
+**同时启动项目编辑器和网站预览：**
+
+```bash
+pnpm editor
+```
+
+- 网站预览：[http://localhost:3000](http://localhost:3000)
+- 项目编辑器：[http://127.0.0.1:4310](http://127.0.0.1:4310)
+
+如果网站已经通过 `pnpm dev` 启动，在另一个终端运行以下命令，仅启动编辑器：
+
+```bash
+pnpm editor --no-preview
+```
+
+在启动服务的终端按 **Ctrl+C** 停止。编辑器保存的是本地内容，发布后才会更新线上网站。详细编辑说明见 [Local project editor](#local-project-editor)。
+
 ## Portfolio structure
 
 - `/` — introduction and selected work
@@ -64,18 +97,21 @@ The visual system uses a white ground, soft charcoal typography, restrained blue
 - Static WebP project media prepared from the original portfolio material
 - Cloudflare Workers for production hosting
 
-Project records live in `lib/projects.ts`, with shared types, project-index helpers, featured-project configuration and site metadata split into focused modules under `lib/`.
+Project records live in `lib/projects/data.json`. `lib/projects.ts` provides typed access and shared queries, with project-index helpers, featured-project configuration and site metadata split into focused modules under `lib/`.
 
-## Local development
+## Local project editor
 
-Requires Node.js `>=22.13.0` and pnpm.
+Start with `pnpm editor` as described in the quick start above, then open [http://127.0.0.1:4310](http://127.0.0.1:4310).
 
-```bash
-pnpm install
-pnpm dev
-```
+The Chinese-language editor lists all projects, including hidden ones. Edit titles, summaries, sections, paragraph text, bullet points, standalone highlights, facts, links, cover images, galleries and display settings. Sections, facts, links and gallery images can be added, removed and reordered. Project slugs stay fixed to preserve existing URLs; homepage featured order remains in `lib/featured-projects.ts`.
 
-Open [http://localhost:3000](http://localhost:3000).
+Choose **保存项目** to write changes to `lib/projects/data.json`, then **预览已保存页面** to inspect the existing website template. Unsaved changes trigger a reminder when leaving or switching projects. Conflicting changes from another editor or program are rejected rather than overwritten; copy any draft text you need before choosing **重新载入**.
+
+Uploads accept JPEG, PNG, WebP and GIF files up to 10 MB each and receive unique filenames under `public/media/editor/<slug>/`. Removing or replacing an image removes its reference, retaining the original file. An uploaded image is written immediately; save the project to use it. Unused uploads can be cleaned up separately after checking references. SVG, video and PDF uploads are not part of this editor.
+
+Hidden projects return 404 on the preview site and are omitted from homepage selections. Enable visibility and save to preview one. The **显示正文章节** switch controls long-form content; **纯图片展示** hides narrative, highlights and facts. Standalone highlights appear when populated on non-visual-only projects.
+
+The editor is a separate Node process bound only to `127.0.0.1`, with host/origin checks and a per-session request token. Its UI and write endpoints are outside `app/` and `public/` and are not included in production. Saving changes never deploys the site; review and publish through the normal workflow.
 
 ## Verification
 
@@ -83,6 +119,7 @@ Open [http://localhost:3000](http://localhost:3000).
 pnpm build
 pnpm test
 pnpm test:browser
+pnpm test:editor
 ```
 
 `pnpm test` builds and checks server-rendered routes. `pnpm test:browser` verifies filtering, sorting, navigation, selective case-study content and responsive overflow in desktop and mobile Chromium.
@@ -136,7 +173,7 @@ The Cloudflare Worker and asset bindings are defined in `wrangler.jsonc`.
 
 ## Current status
 
-The publication-style portfolio currently includes responsive layouts, 18 independent project pages, selective long-form case studies, project discovery metadata, a résumé and desktop/mobile browser regression tests.
+The publication-style portfolio currently contains 18 project records, of which 16 are public, along with responsive layouts, selective long-form case studies, project discovery metadata, a résumé and desktop/mobile browser regression tests.
 
 ## Contact
 

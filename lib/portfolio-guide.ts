@@ -30,6 +30,7 @@ const projectSearchText = (project: (typeof publicProjects)[number]) => normaliz
   project.role,
   project.excerpt,
   project.statement,
+  ...(project.highlights ?? []),
   ...project.facts.flatMap((fact) => [fact.label, fact.value]),
   ...project.sections.flatMap((section) => [section.title, ...section.body, ...(section.points ?? [])]),
 ].join(" "));
@@ -166,6 +167,7 @@ export function getPortfolioGuideContext(): string {
     `Role: ${project.role}`,
     `Summary: ${project.excerpt}`,
     `Intent: ${project.statement}`,
+    `Highlights: ${(project.highlights ?? []).join("; ")}`,
     `Facts: ${project.facts.map((fact) => `${fact.label}: ${fact.value}`).join("; ")}`,
   ].join("\n")).join("\n\n");
 

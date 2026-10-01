@@ -1,0 +1,6 @@
+# Native toolchain packages already pinned in pnpm-lock.yaml.
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true

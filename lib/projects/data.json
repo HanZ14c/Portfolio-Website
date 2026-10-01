@@ -1,0 +1,1420 @@
+[
+  {
+    "slug": "vertical-city-housing",
+    "title": "Vertical City Housing",
+    "subtitle": "Housing research · massing · circulation · unit planning",
+    "category": "Academic Architecture",
+    "time": "2018",
+    "period": "2018",
+    "location": "Xi'an, China",
+    "role": "Individual graduation design",
+    "status": "Academic / Unbuilt",
+    "excerpt": "A high-density housing proposal that turns circulation, landscape and shared programs into a three-dimensional neighbourhood.",
+    "statement": "The project asks how a residential complex can behave less like a stack of isolated apartments and more like a small city.",
+    "accent": "#a8c98f",
+    "cover": "/media/vertical-city/hero.webp",
+    "coverAlt": "Aerial rendering of the Vertical City residential proposal",
+    "featured": true,
+    "cardSize": "wide",
+    "facts": [
+      {
+        "label": "Site",
+        "value": "49,550 m²"
+      },
+      {
+        "label": "Floor area",
+        "value": "112,010 m²"
+      },
+      {
+        "label": "FAR",
+        "value": "2.26"
+      },
+      {
+        "label": "Height",
+        "value": "58.45 m / 20 storeys"
+      },
+      {
+        "label": "Green ratio",
+        "value": "55%"
+      },
+      {
+        "label": "Parking",
+        "value": "897 spaces"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Premise",
+        "title": "Housing as a small city",
+        "body": [
+          "Rapid urbanization made high-rise housing an efficient answer to density, but it also produced standardized living, weaker neighbourhood relationships and limited contact with nature. The project uses the idea of the vertical city as a framework for reconnecting private dwellings with collective life.",
+          "The research draws from Aldo van Eyck's relationship between the house and the city, Le Corbusier's Unité d'Habitation and high-density housing precedents in Singapore."
+        ],
+        "points": [
+          "Functional complexity",
+          "Spatial diversity",
+          "Environmental integration",
+          "Individualized form"
+        ]
+      },
+      {
+        "label": "02 / Planning",
+        "title": "Three courtyards, many elevations",
+        "body": [
+          "The site is divided into three connected courtyard groups. Buildings are cut to form entrances, broken into smaller volumes and varied in height to open views toward Qujiangchi Heritage Park.",
+          "Vehicles remain on a semi-peripheral route while pedestrian paths occupy the inner landscape. Commercial programs line the outer edge, and bridges extend the public circulation above ground level."
+        ]
+      },
+      {
+        "label": "03 / Living system",
+        "title": "The corridor becomes an elevated street",
+        "body": [
+          "Single-loaded duplex units reinterpret the interlocking logic of the Marseille apartment. Flexible partitions, cross ventilation, generous balconies and several unit sizes support different households.",
+          "Exterior corridors connect to sky bridges, corner commons, roof platforms and double-height voids. These spaces create a continuous network for meeting, playing and moving through the community."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/vertical-city/board-2.webp",
+        "alt": "Massing development, aerial view and housing units",
+        "caption": "Massing generation and duplex unit studies."
+      },
+      {
+        "src": "/media/vertical-city/board-3.webp",
+        "alt": "Vertical city precedent analysis and masterplan",
+        "caption": "Precedent research, masterplan and elevated public-space system."
+      },
+      {
+        "src": "/media/vertical-city/board-5.webp",
+        "alt": "Circulation, entrance renderings and elevations",
+        "caption": "Pedestrian and vehicle networks, entrances and community elevations."
+      },
+      {
+        "src": "/media/vertical-city/board-6.webp",
+        "alt": "Courtyard renderings, parking and daylight analysis",
+        "caption": "Shared spaces, technical coordination and courtyard experience."
+      }
+    ]
+  },
+  {
+    "slug": "team-workflow-scheduler",
+    "title": "Team Workflow Scheduler",
+    "subtitle": "Java · TCP sockets · concurrency · JavaFX",
+    "category": "Computer Science",
+    "time": "2026",
+    "period": "2026 / Software project",
+    "role": "System architecture, protocol, UI and implementation",
+    "status": "Repository available",
+    "showSections": false,
+    "excerpt": "A Java client-server application for managing shared team tasks through a JavaFX desktop client or a command-line interface, with TCP networking and JSON persistence.",
+    "statement": "A compact exercise in keeping several clients, a shared task lifecycle and persistent state consistent through a deliberately small, legible protocol.",
+    "accent": "#ff5636",
+    "codeAccent": "#c7d7e6",
+    "featured": true,
+    "cardSize": "standard",
+    "facts": [
+      {
+        "label": "Language",
+        "value": "Java"
+      },
+      {
+        "label": "Client interfaces",
+        "value": "JavaFX + CLI"
+      },
+      {
+        "label": "Architecture",
+        "value": "Client–server"
+      },
+      {
+        "label": "Networking",
+        "value": "TCP sockets / Port 5050"
+      },
+      {
+        "label": "Persistence",
+        "value": "JSON / data/tasks.json"
+      },
+      {
+        "label": "Testing",
+        "value": "JUnit 5"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Overview",
+        "title": "One workflow, several clients",
+        "body": [
+          "The application manages shared team tasks across a JavaFX desktop client and a command-line client for testing raw protocol commands. Both communicate with the same TCP server, so task state must remain predictable even when several users connect at the same time.",
+          "Clients send one-line text commands; the server parses each request, updates the shared task list and saves the result to a JSON file. The desktop table refreshes after every operation so the interface stays synchronized with server state."
+        ]
+      },
+      {
+        "label": "02 / Capabilities",
+        "title": "The complete task lifecycle",
+        "body": [
+          "Tasks carry a title, assignee, status, priority and ISO-formatted due time. The application supports the full create, read, update and delete workflow while automatically moving unfinished tasks into an overdue state when their deadline passes."
+        ],
+        "points": [
+          "Add tasks with title, assignee, status, priority and due time",
+          "Update every task field",
+          "Delete tasks by task ID",
+          "List all persisted tasks",
+          "READY · IN_PROGRESS · DONE · OVERDUE · CANCELED",
+          "Automatic overdue-state updates"
+        ]
+      },
+      {
+        "label": "03 / Architecture",
+        "title": "A small distributed application",
+        "body": [
+          "The server listens on port 5050 and creates a dedicated ClientHandler thread for each accepted socket connection. Every handler parses one command and delegates it to a shared SchedulerService, which owns the task lifecycle independently of either interface.",
+          "A ConcurrentHashMap provides the shared task collection, with synchronized task mutations and serialized saves protecting critical updates. JSON persistence restores the workspace between sessions, while the service recalculates overdue states whenever tasks are listed or changed."
+        ],
+        "points": [
+          "Thread-per-connection socket handling",
+          "Shared SchedulerService domain layer",
+          "ConcurrentHashMap task storage",
+          "Synchronized task updates and JSON writes"
+        ]
+      },
+      {
+        "label": "04 / Protocol",
+        "title": "A readable one-line command format",
+        "body": [
+          "The custom protocol uses a command followed by key-value fields. Its parser accepts quoted values and escaped characters, allowing task titles and assignee names to contain spaces without making the wire format difficult to inspect or test."
+        ],
+        "points": [
+          "ADD title=\"Test 1\" assignee=\"Lee\" status=READY priority=1 dueAt=2026-01-01T17:00:00Z",
+          "LIST",
+          "UPDATE taskId=1 title=\"Review\" status=IN_PROGRESS priority=2",
+          "DELETE taskId=1"
+        ]
+      },
+      {
+        "label": "05 / Interfaces",
+        "title": "A desktop workflow and a direct protocol client",
+        "body": [
+          "The JavaFX client separates add, update and delete actions into dedicated tabs and presents server data in a task table. Network requests run away from the UI thread, then use Platform.runLater to update the interface safely after the server responds.",
+          "A command-line client provides a second path into the same server. It keeps the protocol visible during development and makes client-server behaviour easier to inspect without the graphical interface."
+        ]
+      },
+      {
+        "label": "06 / Quality",
+        "title": "Behaviour made testable",
+        "body": [
+          "The project separates domain behaviour from presentation and transport concerns. JUnit 5 tests exercise protocol parsing and formatting as well as adding, listing, updating, deleting, persisting and automatically marking tasks overdue.",
+          "Tests use temporary JSON files, keeping service behaviour isolated from the application’s saved task data and making changes safer as the feature set grows."
+        ]
+      },
+      {
+        "label": "07 / Run locally",
+        "title": "Two clients, one server",
+        "body": [
+          "Start SchedulerServer.java first, then run either SchedulerFxClient.java for the desktop interface or SchedulerClient.java for command-line access. Both clients connect to the server on localhost:5050."
+        ]
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/Team-Workflow-Scheduler"
+      }
+    ]
+  },
+  {
+    "slug": "feeling-in-form",
+    "title": "Feeling in Form",
+    "subtitle": "Spatial research · form-language generation · architectural representation",
+    "category": "Academic Architecture",
+    "time": "2021",
+    "period": "2021",
+    "location": "Xi'an, China",
+    "role": "Individual design and independent revision",
+    "status": "Academic / Unbuilt",
+    "showSections": true,
+    "excerpt": "A library and cultural space that translates emotion, perception, events and movement into a field of spatial encounters.",
+    "statement": "Instead of beginning with rooms, the project begins with feelings and asks what kinds of events a space can invite.",
+    "accent": "#ed1f24",
+    "cover": "/media/emotion-time/revised-4.webp",
+    "coverAlt": "Exploded axonometric drawing of Feeling in Form",
+    "featured": true,
+    "cardSize": "wide",
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Library / Cultural space"
+      },
+      {
+        "label": "Context",
+        "value": "Beilin historic district"
+      },
+      {
+        "label": "Versions",
+        "value": "School proposal + independent revision"
+      },
+      {
+        "label": "Final display",
+        "value": "Revised proposal"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Research",
+        "title": "From emotion to spatial language",
+        "body": [
+          "The original project developed an entity-sense-field framework. Emotional impressions were abstracted into elements, then combined into spatial situations involving enclosure, exposure, encounter, hesitation and movement.",
+          "This research became a catalogue of possible relationships rather than a fixed formal vocabulary."
+        ]
+      },
+      {
+        "label": "02 / Revision",
+        "title": "Space, event and movement",
+        "body": [
+          "The later independent revision shifts attention from isolated emotional rooms to the uncertain relationship between architecture and use. Parallel drawing sequences test the building as an object, as an empty spatial condition and as a field occupied by events."
+        ]
+      },
+      {
+        "label": "03 / Proposal",
+        "title": "A fragmented cultural field",
+        "body": [
+          "Courtyards, reading rooms, water, screens, stairs and changing light form a porous composition within the historic district. Routes overlap and spaces remain open to more than one interpretation, allowing visitors to construct their own sequence."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/emotion-time/revised-2.webp",
+        "alt": "Context research and massing generation for Feeling in Form",
+        "caption": "Context, site and massing development in the revised proposal."
+      },
+      {
+        "src": "/media/emotion-time/revised-3.webp",
+        "alt": "Event and spatial sequence research diagrams",
+        "caption": "Parallel sequences testing space, event and movement."
+      },
+      {
+        "src": "/media/emotion-time/revised-5.webp",
+        "alt": "Plan and interior views of Feeling in Form",
+        "caption": "Plan, material atmosphere and spatial fragments."
+      },
+      {
+        "src": "/media/emotion-time/original-2.webp",
+        "alt": "Original emotion-space generation board",
+        "caption": "The original school project: emotional language and spatial generation."
+      },
+      {
+        "src": "/media/emotion-time/original-3.webp",
+        "alt": "Original axonometric and activity board",
+        "caption": "The original proposal retained as process material."
+      }
+    ]
+  },
+  {
+    "slug": "mirriedge-opera-house",
+    "title": "MIRRIEDGE",
+    "subtitle": "Auditorium planning · sightlines · circulation · façade studies",
+    "category": "Academic Architecture",
+    "time": "2017",
+    "period": "Academic project",
+    "location": "Xi'an Chanba, China",
+    "role": "Individual design",
+    "status": "Academic / Unbuilt",
+    "excerpt": "A performing arts centre shaped by light, reflection, iridescent ceramic surfaces and the movement of different audiences.",
+    "statement": "The building is conceived as a restrained solid whose inner life appears through changing light and reflective edges.",
+    "accent": "#c92637",
+    "cover": "/media/mirriedge/hero.webp",
+    "coverAlt": "Night rendering of the MIRRIEDGE opera house",
+    "featured": true,
+    "cardSize": "wide",
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Opera house / Performing arts"
+      },
+      {
+        "label": "Concept",
+        "value": "Light, shadow and iridescence"
+      },
+      {
+        "label": "Circulation",
+        "value": "Audience / Performer / Service"
+      },
+      {
+        "label": "Scope",
+        "value": "Concept through technical study"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Atmosphere",
+        "title": "The gleam within",
+        "body": [
+          "Layered cantilevered volumes form a quiet exterior silhouette. A glazed foyer, deep reveals, louvers and a pearlescent ceramic facade register changes in daylight and reveal the energy of performance after dark."
+        ]
+      },
+      {
+        "label": "02 / Movement",
+        "title": "Three paths through one building",
+        "body": [
+          "Audience, performer and service circulation are separated where necessary and reconnected through the stage and public foyer. Outdoor projection and performance areas extend the programme into the surrounding landscape."
+        ]
+      },
+      {
+        "label": "03 / Resolution",
+        "title": "Beyond the exterior image",
+        "body": [
+          "The proposal includes auditorium sightline and acoustic studies, stage organization, structural coordination, facade details, plans, sections, elevations and interior visualizations."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/mirriedge/concept.webp",
+        "alt": "Opera house site, facade concept and main plans",
+        "caption": "Site strategy, facade atmosphere and public organization."
+      },
+      {
+        "src": "/media/mirriedge/technical.webp",
+        "alt": "Sections, elevations and technical studies",
+        "caption": "Sightlines, sections, elevations and technical coordination."
+      },
+      {
+        "src": "/media/mirriedge/experience.webp",
+        "alt": "Interior and exterior opera house visualizations",
+        "caption": "Interior sequence and the building at night."
+      }
+    ]
+  },
+  {
+    "slug": "bc-travel-guide",
+    "title": "BC Travel Guide",
+    "subtitle": "HTML / CSS / JavaScript · PHP / PDO · MySQL",
+    "category": "Computer Science",
+    "time": "2023",
+    "period": "2023 / Web project",
+    "role": "Content structure, responsive interface and full-stack implementation",
+    "status": "Live demo available",
+    "showSections": false,
+    "showGallery": false,
+    "excerpt": "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
+    "statement": "A content-led web project focused on organizing destinations into a clear, responsive browsing experience.",
+    "accent": "#427d65",
+    "codeAccent": "#d3dde5",
+    "cover": "/media/bc-travel-guide/photo-wall.jpg",
+    "coverAlt": "British Columbia travel photography wall used by the website",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Front end",
+        "value": "HTML5 / CSS3 / JavaScript"
+      },
+      {
+        "label": "Back end",
+        "value": "PHP / PDO / MySQL"
+      },
+      {
+        "label": "Content",
+        "value": "Six destination stories"
+      },
+      {
+        "label": "Integrations",
+        "value": "YouTube + Google Maps"
+      },
+      {
+        "label": "Local stack",
+        "value": "XAMPP"
+      },
+      {
+        "label": "Deployment",
+        "value": "GitHub Pages frontend"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Content architecture",
+        "title": "Destinations as stories",
+        "body": [
+          "The site organizes British Columbia destinations through images, written introductions and video. Navigation and page hierarchy keep a growing set of places understandable on both desktop and mobile screens.",
+          "Six story cards introduce Vancouver, Vancouver Island, Whistler, the Sea-to-Sky Highway, Stanley Park and Capilano Suspension Bridge. Featured videos, a travel photo wall, contact information and an embedded map broaden the site beyond a simple destination list."
+        ]
+      },
+      {
+        "label": "02 / Responsive interface",
+        "title": "A responsive reading flow",
+        "body": [
+          "HTML and CSS establish the editorial structure, while JavaScript supports interactive behaviour. The layout adapts from large image-led pages to compact mobile reading without hiding essential content.",
+          "Anchor navigation moves between Stories, Explore More, Videos and Contact Us. A prominent sign-up action scrolls smoothly to the subscription form, and media cards preserve a consistent hierarchy as the viewport narrows."
+        ]
+      },
+      {
+        "label": "03 / Story system",
+        "title": "One template, six data-driven pages",
+        "body": [
+          "Destination links open one shared story template with a story key in the URL. Vanilla JavaScript reads the query parameter, selects the matching record and renders its title, image, introduction, travel tip, quick facts and related-story links.",
+          "Keeping the destination content in a structured JavaScript object avoids duplicating six nearly identical HTML pages and makes the story collection easier to extend."
+        ]
+      },
+      {
+        "label": "04 / Subscription backend",
+        "title": "Optional subscription workflow",
+        "body": [
+          "A PHP and MySQL path extends the static experience with a local subscription workflow, connecting interface design with basic server-side data handling.",
+          "The XAMPP setup script creates a subscriptions table containing visitor name, email, favourite article and submission time. A PHP form handler inserts records through a prepared PDO statement, while a separate page retrieves subscribers in reverse chronological order and escapes displayed values."
+        ]
+      },
+      {
+        "label": "05 / Hosting boundary",
+        "title": "A static demo with a local server extension",
+        "body": [
+          "GitHub Pages publishes the responsive frontend, including destination stories and media. Because static hosting cannot execute PHP or connect to MySQL, JavaScript detects unsupported form contexts and directs the user to run the project through XAMPP before submitting."
+        ]
+      },
+      {
+        "label": "06 / Run locally",
+        "title": "Frontend anywhere, subscriptions through XAMPP",
+        "body": [
+          "The published link demonstrates the full frontend. To use subscriptions, place the project in the XAMPP web root, configure the database connection, run php/setup.php once, then open the site at localhost so PHP and MySQL can process and display subscriber records."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/bc-travel-guide/coastal-background.jpg",
+        "alt": "Rocky British Columbia coastline used as the BC Travel Guide background",
+        "caption": "Image-led visual language used across the travel guide."
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/BC-Travel-Guide"
+      },
+      {
+        "label": "Open live demo",
+        "href": "https://hanz14c.github.io/BC-Travel-Guide/"
+      }
+    ]
+  },
+  {
+    "slug": "qianhai-shimao-centre",
+    "title": "CM Qianhai Shimao Centre",
+    "subtitle": "Civic pavilions within a mixed-use development",
+    "category": "Architecture Practice",
+    "time": "2019",
+    "period": "2019",
+    "location": "Shenzhen, China",
+    "role": "Architectural assistant — basement technical drawings and consultant coordination",
+    "status": "Completed / Professional team project",
+    "showSections": true,
+    "excerpt": "Three public pavilions respond to distinct functions and positions within a larger urban development.",
+    "statement": "My contribution focused on translating a complex public project into coordinated basement documentation.",
+    "accent": "#e8b3ac",
+    "cover": "/media/architecture-practice/qianhai-shimao.webp",
+    "coverAlt": "Public pavilion at CM Qianhai Shimao Centre",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Employer",
+        "value": "Hong Kong Huayi Design Consultant"
+      },
+      {
+        "label": "Collaborator",
+        "value": "HASSELL (Hong Kong)"
+      },
+      {
+        "label": "Contribution",
+        "value": "Technical drawings"
+      },
+      {
+        "label": "Coordination",
+        "value": "Civil defence / Fire / MEP"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Project",
+        "title": "Three distinct civic pavilions",
+        "body": [
+          "The Shenzhen development contains three pavilions, each shaped by a different programme and position in the public realm. The architectural language connects cultural activity with a larger commercial and urban context."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "Coordination below the public ground",
+        "body": [
+          "Working under the project architect, I completed basement detail drawings and communicated with engineering disciplines to resolve civil air-defence, fire-resistance and MEP requirements."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "This page records my contribution within a larger professional team. Design authorship and project credit remain with the respective firms and collaborators."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "car-dealership-manager",
+    "title": "Car Dealership Manager",
+    "subtitle": "Java Swing · OOP domain modelling · JSON · JUnit 5",
+    "category": "Computer Science",
+    "time": "2025",
+    "period": "2025 / Software project",
+    "role": "Domain modelling, persistence, desktop UI and testing",
+    "status": "Repository available",
+    "showSections": false,
+    "excerpt": "A Java desktop application for managing dealership inventory, customers, brokers and sales through Swing or a console interface, supported by JSON persistence and automated tests.",
+    "statement": "A desktop application organized around clear domain boundaries rather than a collection of disconnected forms.",
+    "accent": "#f3b64b",
+    "codeAccent": "#c9d8d1",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Language",
+        "value": "Java 11+"
+      },
+      {
+        "label": "Interfaces",
+        "value": "Java Swing + Console"
+      },
+      {
+        "label": "Structure",
+        "value": "Model / UI / Persistence"
+      },
+      {
+        "label": "Persistence",
+        "value": "org.json / dealership.json"
+      },
+      {
+        "label": "Testing",
+        "value": "JUnit 5 / 39 tests"
+      },
+      {
+        "label": "Quality",
+        "value": "Checkstyle + UML"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Overview",
+        "title": "A dealership as connected records",
+        "body": [
+          "Vehicles, customers, brokers and sales each have their own behaviour, but the application must connect them without duplicating business rules across screens.",
+          "The application gives dealership staff one workspace for adding cars, maintaining inventory status, viewing customer and broker directories, and recording sales that connect all four record types."
+        ]
+      },
+      {
+        "label": "02 / Workflow",
+        "title": "From incoming inventory to completed sale",
+        "body": [
+          "A sale is more than an isolated record: it links a car, buyer, broker and final price, marks the selected vehicle as sold, assigns the customer to the broker and records each change in the event log."
+        ],
+        "points": [
+          "Add vehicles with model, year, colour, packages and price",
+          "Track six inventory states from creation to sold",
+          "Browse inventory, sales, brokers and customers",
+          "Record a sale across car, customer and broker IDs",
+          "Save or restore the complete dealership workspace"
+        ]
+      },
+      {
+        "label": "03 / Architecture",
+        "title": "Domain boundaries before screens",
+        "body": [
+          "The codebase separates model, UI and persistence packages. Dealership acts as the aggregate for cars, brokers, customers and sales; each record type owns its own state while cross-record business rules remain centralized in the dealership model.",
+          "The Swing and console entry points operate on the same domain objects, while the Writable contract, JsonReader and JsonWriter keep file serialization outside the interface layer. This organization keeps the model usable independently of either presentation path."
+        ]
+      },
+      {
+        "label": "04 / Interface",
+        "title": "A modular tab-based workspace",
+        "body": [
+          "The Swing interface groups daily operations into focused tabs. Event logging and JSON persistence provide continuity, while the domain model remains usable independently of the interface.",
+          "Home handles load and save actions; Inventory presents cars and status editing; Sale links the records needed for a transaction; Directory exposes brokers and customers. A separate console application provides the same core workflow without the graphical layer."
+        ]
+      },
+      {
+        "label": "05 / Persistence + events",
+        "title": "State that survives the session",
+        "body": [
+          "The full dealership aggregate is serialized with org.json to data/dealership.json. The reader reconstructs cars, brokers, customers and sales, while restored car IDs advance the next identifier to reduce collisions after loading.",
+          "A singleton EventLog records meaningful model changes such as adding cars, updating status, assigning customers and completing sales. The GUI prints the accumulated log when its window closes, providing a chronological account of the session."
+        ]
+      },
+      {
+        "label": "06 / Documentation + quality",
+        "title": "Design that can be inspected",
+        "body": [
+          "JUnit tests, Checkstyle and a documented UML model make the architecture visible and support disciplined iteration.",
+          "Thirty-nine JUnit 5 tests cover the domain model, singleton event log and JSON reader/writer against both general and empty fixtures. The UML diagram records class responsibilities across the tabs, aggregate model, persistence layer and event system."
+        ],
+        "points": [
+          "Replace integer car states with a CarStatus enum",
+          "Introduce a shared ID generator",
+          "Extract common broker and customer fields into Person",
+          "Move broker-customer links from IDs to managed object associations"
+        ]
+      },
+      {
+        "label": "07 / Run locally",
+        "title": "A Java 11 desktop application",
+        "body": [
+          "Compile the project with JDK 11 or newer and the libraries in lib. Run ui.DealershipUI for the Swing application or ui.Main for the console version; Windows users replace the colon in the classpath with a semicolon."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/car-dealership-manager/uml-design-diagram.png",
+        "alt": "UML class diagram for Car Dealership Manager",
+        "caption": "UML design diagram showing the tabbed Swing interface, dealership aggregate, domain records, persistence layer and event log."
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/Car-Dealership-Manager"
+      }
+    ]
+  },
+  {
+    "slug": "shenzhen-junior-high-school",
+    "title": "Shenzhen Junior High School",
+    "subtitle": "A compact vertical campus",
+    "category": "Architecture Practice",
+    "time": "2020",
+    "period": "2020",
+    "location": "Shenzhen, China",
+    "role": "Architectural assistant — programming and early form exploration",
+    "status": "Completed / Professional team project",
+    "excerpt": "A constrained school site organized as a dense, connected campus with layered courtyards and shared space.",
+    "statement": "The design challenge was to fit many educational functions into a small site without losing collective outdoor space.",
+    "accent": "#ba7a62",
+    "cover": "/media/architecture-practice/shenzhen-junior-school.webp",
+    "coverAlt": "Completed Shenzhen Junior High School campus",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Education"
+      },
+      {
+        "label": "Contribution",
+        "value": "Programming"
+      },
+      {
+        "label": "Study",
+        "value": "Building form exploration"
+      },
+      {
+        "label": "Context",
+        "value": "Constrained urban site"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Constraint",
+        "title": "Many programmes, limited land",
+        "body": [
+          "The school combines classrooms, sports, circulation and collective space on a compact site with demanding functional requirements."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "Programming before form",
+        "body": [
+          "I contributed to architectural programming and explored building forms that could connect multiple functions. The resulting scheme uses a vertical-campus approach to preserve shared outdoor spaces."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "The project was completed by a professional design team. This case study focuses on the programming and early design work in which I participated."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "grid-pursuit-cheese",
+    "title": "Grid Pursuit: Cheese",
+    "subtitle": "JavaScript · Canvas API · game state · collision logic",
+    "category": "Computer Science",
+    "time": "2023",
+    "period": "2023 / Browser game",
+    "role": "Game state, Canvas rendering and interface implementation",
+    "status": "Playable demo available",
+    "showSections": false,
+    "excerpt": "A 10×10 Canvas game with queued player actions, randomized enemies, traps, walls, scoring and collision detection.",
+    "statement": "A small game used to make state, timing and collision rules visible through immediate browser interaction.",
+    "accent": "#cf5a35",
+    "codeAccent": "#d8d4e1",
+    "cover": "/media/grid-pursuit-cheese/gameplay-interface.png",
+    "coverAlt": "Complete Grid Pursuit Cheese game interface with board, controls, scoring and status panels",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Stack",
+        "value": "HTML / CSS / JavaScript"
+      },
+      {
+        "label": "Rendering",
+        "value": "HTML5 Canvas API"
+      },
+      {
+        "label": "Board",
+        "value": "10 × 10 grid"
+      },
+      {
+        "label": "Turn model",
+        "value": "Five-action queue / 250ms steps"
+      },
+      {
+        "label": "Testing tools",
+        "value": "Wall mode + God Mode"
+      },
+      {
+        "label": "Deployment",
+        "value": "GitHub Pages"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Gameplay",
+        "title": "A readable grid, unpredictable pressure",
+        "body": [
+          "The player navigates a compact board while enemies move with randomized behaviour. Walls, traps and scoring create tactical choices without obscuring the basic rules.",
+          "Mikey begins in the upper-left cell and tries to collect cheese without meeting a kitty. Each cheese increases the score and introduces another kitty; if an enemy reaches the cheese first, the score falls and the target moves."
+        ]
+      },
+      {
+        "label": "02 / Turn sequence",
+        "title": "State changes in a controlled order",
+        "body": [
+          "Queued player actions, enemy movement and collision detection are resolved as explicit stages. Separating these stages prevents one input from producing inconsistent board states.",
+          "The player must queue exactly five arrow or trap actions before execution begins. A timer resolves one command every 250 milliseconds; after each action every kitty chooses a random direction, checks the destination and moves only when the cell is valid."
+        ],
+        "points": [
+          "Queue five keyboard commands",
+          "Resolve one player action",
+          "Move every kitty",
+          "Evaluate cheese, trap, wall and kitty collisions",
+          "Redraw the complete board state"
+        ]
+      },
+      {
+        "label": "03 / State + collision",
+        "title": "Coordinates as the shared game model",
+        "body": [
+          "Mikey, cheese, traps, walls and kitties are all represented by grid-aligned coordinates. Kitty and wall collections use coordinate arrays, allowing the same position checks to support random placement, movement blocking and collision outcomes.",
+          "Placement routines reject occupied cells and regenerate invalid random positions. Collision rules distinguish direct player-enemy contact, enemies reaching cheese, traps catching one kitty and walls returning an attempted move to its previous cell."
+        ]
+      },
+      {
+        "label": "04 / Mechanics",
+        "title": "Difficulty grows with the score",
+        "body": [
+          "Collecting cheese adds 100 points and introduces a new kitty. A trapped kitty is replaced and awards 250 points, while a kitty reaching the cheese removes 50 points. Optional walls add ten blocked cells and force both player and enemy movement to respect the same spatial constraints."
+        ]
+      },
+      {
+        "label": "05 / Rendering",
+        "title": "Canvas as a compact renderer",
+        "body": [
+          "The Canvas API draws the board and its changing entities efficiently, while surrounding HTML and CSS provide instructions and responsive framing.",
+          "Drawing responsibilities are separated into dedicated helpers for the grid, walls, trap, mouse, cheese, kitties and game-over state. Each frame clears the surface and rebuilds the current state from coordinates rather than manipulating many positioned DOM elements."
+        ]
+      },
+      {
+        "label": "06 / Controls + testing",
+        "title": "Game controls that also expose edge cases",
+        "body": [
+          "Arrow keys queue movement and M places a trap. Move Mikey executes a full sequence, Reset regenerates the board, Wall mode adds obstacles, and God Mode prevents capture so movement, scoring and collision behaviour can be inspected for longer sessions."
+        ]
+      },
+      {
+        "label": "07 / Run + deployment",
+        "title": "A dependency-free browser project",
+        "body": [
+          "The game runs directly from index.html with its stylesheet and two JavaScript files: game.js for state and rules, and draw.js for Canvas rendering. The same static structure is published as a playable GitHub Pages demo."
+        ]
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/Grid-Pursuit-Cheese"
+      },
+      {
+        "label": "Play demo",
+        "href": "https://hanz14c.github.io/Grid-Pursuit-Cheese/"
+      }
+    ]
+  },
+  {
+    "slug": "heshan-ocean-world",
+    "title": "Jiangmen Heshan Ocean World",
+    "subtitle": "Hotel, water park, retail and leisure district",
+    "category": "Architecture Practice",
+    "time": "2017",
+    "period": "2017",
+    "location": "Jiangmen, China",
+    "role": "Architectural assistant — form and facade studies",
+    "status": "Professional team project",
+    "excerpt": "A mixed leisure destination shaped as a pedestrian-friendly commercial cluster with a contemporary regional identity.",
+    "statement": "My work explored how varied programmes could read as one walkable district rather than isolated attractions.",
+    "accent": "#74a6b0",
+    "cover": "/media/architecture-practice/heshan-ocean-world.webp",
+    "coverAlt": "Commercial street rendering at Jiangmen Heshan Ocean World",
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Leisure / Hospitality / Retail"
+      },
+      {
+        "label": "Contribution",
+        "value": "Hotel and retail form studies"
+      },
+      {
+        "label": "Tools",
+        "value": "SketchUp"
+      },
+      {
+        "label": "Output",
+        "value": "Facade options and client presentations"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Programme",
+        "title": "A destination made from several worlds",
+        "body": [
+          "The project combines a hotel, water park, retail and leisure uses. The design organizes them around pedestrian movement and a sequence of public spaces."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "Form and facade options",
+        "body": [
+          "I participated in hotel and retail form design in SketchUp, developed facade options and presented alternatives to the client. The studies explored a contemporary Chinese character without turning the district into a literal historical reproduction."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "This case study presents my design studies within the larger project produced by Hong Kong Huayi Design Consultant and its project team."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "guangzhou-najin-business-area",
+    "title": "Guangzhou Najin Business Area",
+    "subtitle": "A connected office and commercial campus",
+    "category": "Architecture Practice",
+    "time": "2020",
+    "period": "2020",
+    "location": "Guangzhou, China",
+    "role": "Architectural assistant — programming and form development",
+    "status": "Professional team project",
+    "excerpt": "A business district on an irregular site, composed as a family of blocks and connecting pavilions.",
+    "statement": "The project turns a difficult site boundary into a sequence of related buildings and public gaps.",
+    "accent": "#79a38d",
+    "cover": "/media/architecture-practice/guangzhou-najin.webp",
+    "coverAlt": "Street rendering of Guangzhou Najin Business Area",
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Office / Commercial"
+      },
+      {
+        "label": "Contribution",
+        "value": "Architectural programming"
+      },
+      {
+        "label": "Tools",
+        "value": "AutoCAD / Rhino"
+      },
+      {
+        "label": "Study",
+        "value": "Final massing support"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Site",
+        "title": "Working with an irregular boundary",
+        "body": [
+          "The elongated and irregular site required a building family that could address several edges while maintaining a coherent identity."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "From programme to massing",
+        "body": [
+          "I undertook architectural programming in AutoCAD and assisted the project architect in defining the final building forms through Rhino studies. Connecting pavilions help the separate blocks operate as one campus."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "The project was developed by a larger professional team. The work shown here is contextualized around my specific programming and form-development contribution."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "foshan-jinzhu-residential-area",
+    "title": "COLI Foshan Jinzhu Residential Area",
+    "subtitle": "High-rise residential development",
+    "category": "Architecture Practice",
+    "time": "2017",
+    "period": "2017 internship / Later completed",
+    "location": "Foshan, China",
+    "role": "Architectural intern — facade research and planning support",
+    "status": "Completed / Professional team project",
+    "excerpt": "A commercial high-rise residential project developed through coordinated planning, facade studies and client presentations.",
+    "statement": "My early professional contribution centred on turning client preferences into facade directions and planning material.",
+    "accent": "#c9a69e",
+    "cover": "/media/architecture-practice/foshan-jinzhu.webp",
+    "coverAlt": "Entrance rendering at COLI Foshan Jinzhu Residential Area",
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Residential"
+      },
+      {
+        "label": "Contribution",
+        "value": "Mood boards and facade studies"
+      },
+      {
+        "label": "Support",
+        "value": "Planning application"
+      },
+      {
+        "label": "Status",
+        "value": "Completed"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Project",
+        "title": "A commercial residential development",
+        "body": [
+          "The Foshan project combines high-rise housing, landscape and a clearly defined arrival sequence. Unit planning and facade identity support its position in the residential market."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "Communicating a facade direction",
+        "body": [
+          "During my internship, I prepared mood boards to explore client preferences and assisted the project architect with planning-application material. The work connected precedent research, visual communication and technical requirements."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "This was a completed team project. The case study identifies my internship contribution rather than claiming authorship of the overall design."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "chongqing-tianan-cyber-park-t3",
+    "title": "Chongqing Tianan Cyber Park T3",
+    "hidden": true,
+    "subtitle": "Feasibility and early design communication",
+    "category": "Architecture Practice",
+    "time": "2019",
+    "period": "2019",
+    "location": "Chongqing, China",
+    "role": "Architectural assistant — site study, feasibility and diagrams",
+    "status": "Professional team project",
+    "excerpt": "An early-stage workplace project supported by site investigation, feasibility research and concise design communication.",
+    "statement": "The work focused on making an early project brief legible enough for the team to make confident design decisions.",
+    "accent": "#9eb0a0",
+    "cover": "/media/architecture-practice/chongqing-tianan.webp",
+    "coverAlt": "Aerial concept image for Chongqing Tianan Cyber Park T3",
+    "containCover": true,
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Workplace / Technology park"
+      },
+      {
+        "label": "Contribution",
+        "value": "Site visit and feasibility study"
+      },
+      {
+        "label": "Output",
+        "value": "Brief and diagrams"
+      },
+      {
+        "label": "Tools",
+        "value": "InDesign / Illustrator"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Beginning",
+        "title": "Understanding the site before fixing the form",
+        "body": [
+          "The project began with a site visit and feasibility study undertaken with senior architects. The aim was to identify spatial opportunities, constraints and a credible path for development."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "A brief the team could work with",
+        "body": [
+          "I helped produce the design brief and explanatory diagrams in InDesign and Illustrator. The material condensed site findings into an accessible visual document for further design work."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "The portfolio currently contains limited public imagery for this project. The page therefore emphasizes the verified scope of my contribution rather than inventing a fuller visual record."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "dongguan-songshanhu-office-tower",
+    "title": "Dongguan Songshanhu Office Tower",
+    "hidden": true,
+    "subtitle": "Technical documentation and precedent research",
+    "category": "Architecture Practice",
+    "time": "2017",
+    "period": "2017",
+    "location": "Dongguan, China",
+    "role": "Architectural assistant — basement drawings and precedent studies",
+    "status": "Professional team project",
+    "excerpt": "An office tower contribution combining basement documentation with focused precedent research for the project team.",
+    "statement": "Technical drawing and design research were treated as two parts of the same architectural decision process.",
+    "accent": "#8b9aa5",
+    "cover": "/media/architecture-practice/dongguan-songshanhu.webp",
+    "coverAlt": "Concept rendering of Dongguan Songshanhu Office Tower",
+    "containCover": true,
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Office"
+      },
+      {
+        "label": "Contribution",
+        "value": "Basement technical drawings"
+      },
+      {
+        "label": "Research",
+        "value": "Precedent studies"
+      },
+      {
+        "label": "Tools",
+        "value": "AutoCAD"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Scope",
+        "title": "Documentation and research",
+        "body": [
+          "The office-tower project required coordinated basement documentation alongside design research that could inform decisions above ground."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "Two scales of architectural work",
+        "body": [
+          "Under the project architect, I completed basement technical drawings in AutoCAD. I also researched relevant precedents and presented selected findings to colleagues."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "The case study records a supporting professional role. Additional team and project credits will be added when archival material is consolidated."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "family-tree-database",
+    "title": "Family Tree Database",
+    "subtitle": "EER modelling · normalization · MySQL · SQL Server",
+    "category": "Computer Science",
+    "time": "2024",
+    "period": "2024 / Database project",
+    "role": "Requirements, EER modelling, normalization and SQL implementation",
+    "status": "Repository available",
+    "showSections": false,
+    "excerpt": "A normalized relational model for family relationships, education, employment, addresses, marriages and life events.",
+    "statement": "The project turns an intuitive but complicated human network into explicit, queryable relationships.",
+    "accent": "#665b8e",
+    "codeAccent": "#c5d0dc",
+    "facts": [
+      {
+        "label": "Model",
+        "value": "EER + Relational schema"
+      },
+      {
+        "label": "Platforms",
+        "value": "MySQL + Microsoft SQL Server"
+      },
+      {
+        "label": "Schema",
+        "value": "13 tables"
+      },
+      {
+        "label": "Query set",
+        "value": "20 example operations"
+      },
+      {
+        "label": "Focus",
+        "value": "Cardinality + Normalization"
+      },
+      {
+        "label": "Deliverables",
+        "value": "Create / Insert / Query / Drop"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Requirements",
+        "title": "More than a parent-child tree",
+        "body": [
+          "A useful family-history model must represent people, marriages, addresses, education, employment, achievements and events without flattening them into one oversized table.",
+          "The requirements also account for biological and non-biological parenthood, divorce and remarriage, children across different marriages, multiple names, incomplete work histories and attendance at other family members’ life events."
+        ]
+      },
+      {
+        "label": "02 / EER model",
+        "title": "Relationships made explicit",
+        "body": [
+          "An enhanced entity-relationship model identifies stable entities and resolves many-to-many relationships through associative structures. Normalization reduces duplication and protects data integrity.",
+          "Person sits at the centre of the model, connected recursively through father, mother and spouse relationships and historically through homes, organizations and achievements. Cardinality and participation rules distinguish required biographical data from optional education, work, marriage and event histories."
+        ]
+      },
+      {
+        "label": "03 / Relational mapping",
+        "title": "Thirteen tables with distinct responsibilities",
+        "body": [
+          "Regular entities become Person, Home, Organization and Achievement tables. Associative history tables resolve many-to-many residence, education, employment and achievement relationships, while recursive parent and spouse tables preserve relationships between people.",
+          "Middle names and used names are mapped into separate tables as multivalued attributes. Composite primary keys, unique constraints and foreign-key cascades make duplication and orphaned history records less likely."
+        ],
+        "points": [
+          "Person · Home · Organization · Achievement",
+          "HomeHistory · EducationHistory · WorkHistory · AchievementHistory",
+          "FatherOf · MotherOf · SpouseHistory",
+          "Person_MiddleName · Person_UsedName"
+        ]
+      },
+      {
+        "label": "04 / Normalization",
+        "title": "A schema designed against repeated facts",
+        "body": [
+          "The companion normalization study documents how the initial family records are decomposed into stable entities and relationship tables. Separating people, places, organizations and time-bounded histories reduces update anomalies while keeping biographical facts queryable."
+        ]
+      },
+      {
+        "label": "05 / SQL implementation",
+        "title": "One model, two SQL environments",
+        "body": [
+          "The schema is implemented for MySQL and Microsoft SQL Server, demonstrating how a conceptual model is translated across related database systems.",
+          "Parallel scripts account for dialect differences such as AUTO_INCREMENT versus IDENTITY(1,1), and TIMESTAMPDIFF versus DATEDIFF. Each platform includes database creation, sample insertion, query and teardown scripts."
+        ]
+      },
+      {
+        "label": "06 / Query set",
+        "title": "Family history as answerable questions",
+        "body": [
+          "Twenty SQL examples test the usefulness of the model through joins, views, updates, deletes, aggregation and unions. They retrieve names and aliases, adults, siblings, parents, adopted children, marriage history, residences, education and work relationships.",
+          "The query set moves beyond simple record lookup to questions such as who currently works or studies, who has lived in British Columbia, how many work histories each person has and whether someone later worked for an organization where they studied."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/family-tree-database/eer-modeling-diagram.png",
+        "alt": "Enhanced entity relationship diagram for the Family Tree Database",
+        "caption": "EER model connecting people with recursive family relationships, residence, education, employment and achievement histories."
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/Family-Tree-Database"
+      }
+    ]
+  },
+  {
+    "slug": "bungalow",
+    "title": "Bungalow",
+    "subtitle": "Lumion 9 · weather systems · real-time rendering",
+    "category": "Visual Studies",
+    "time": "2020",
+    "period": "2020 / Personal study",
+    "role": "Visualization and environment study",
+    "status": "Completed",
+    "excerpt": "A Lumion 9 direct-render study testing how weather, light and seasonal atmosphere alter the same architectural scene.",
+    "statement": "The same hillside residence is used to compare Lumion 9 weather settings through changes in sky, precipitation, light, vegetation and ground conditions.",
+    "accent": "#8fa8bb",
+    "cover": "/media/bungalow/clear-weather.jpg",
+    "coverAlt": "Lumion 9 visualization of a modern hillside residence in clear weather",
+    "facts": [
+      {
+        "label": "Tool",
+        "value": "Lumion 9"
+      },
+      {
+        "label": "Study",
+        "value": "Weather + seasonal atmosphere"
+      },
+      {
+        "label": "Output",
+        "value": "Direct renders"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Baseline",
+        "title": "Keeping the architecture constant",
+        "body": [
+          "A consistent model and camera position isolate the effect of the environmental settings, allowing weather and atmosphere to become the primary variables."
+        ]
+      },
+      {
+        "label": "02 / Weather",
+        "title": "Comparing atmosphere directly in Lumion 9",
+        "body": [
+          "Rain, snow, haze, sky conditions and seasonal landscape changes are tested as direct Lumion outputs without a separate compositing stage."
+        ]
+      }
+    ],
+    "galleryLabel": "Weather studies",
+    "galleryTitle": "One scene across changing atmospheric conditions.",
+    "gallery": [
+      {
+        "src": "/media/bungalow/rain-weather.jpg",
+        "alt": "Lumion 9 direct render of the hillside residence in rain",
+        "caption": "Lumion 9 / Rain"
+      },
+      {
+        "src": "/media/bungalow/cold-snow-weather.jpg",
+        "alt": "Lumion 9 direct render of the hillside residence in cold blue snowfall",
+        "caption": "Lumion 9 / Cold snowfall"
+      },
+      {
+        "src": "/media/bungalow/winter-weather.jpg",
+        "alt": "Lumion 9 direct render of the hillside residence in a snow-covered winter landscape",
+        "caption": "Lumion 9 / Winter snow"
+      }
+    ]
+  },
+  {
+    "slug": "rumah",
+    "title": "Rumah",
+    "subtitle": "Lumion 8 · render passes · Photoshop post-production",
+    "category": "Visual Studies",
+    "time": "2019",
+    "period": "2019 / Personal study",
+    "role": "Visualization and post-production",
+    "status": "Completed",
+    "excerpt": "A residential exterior visualization rendered in Lumion 8 and refined through Photoshop post-production.",
+    "statement": "The study separates the Lumion output passes from the final composited image to show a concise architectural visualization workflow.",
+    "accent": "#7f9ab1",
+    "cover": "/media/rumah/rumah-final.jpg",
+    "coverAlt": "Final visualization of a contemporary house on a residential street",
+    "facts": [
+      {
+        "label": "Tools",
+        "value": "Lumion 8 + Adobe Photoshop"
+      },
+      {
+        "label": "Subject",
+        "value": "Residential exterior"
+      },
+      {
+        "label": "Workflow",
+        "value": "Render passes → Post-production"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Render",
+        "title": "Separating the visualization into useful passes",
+        "body": [
+          "Lumion 8 produced the base render together with a sky alpha mask and material ID pass for controlled post-production."
+        ]
+      },
+      {
+        "label": "02 / Finish",
+        "title": "Refining atmosphere and image balance",
+        "body": [
+          "Photoshop was used to adjust the sky, tonal balance, texture and overall atmosphere while retaining the original architectural composition."
+        ]
+      }
+    ],
+    "galleryLayout": "process-triptych",
+    "galleryLabel": "Visualization workflow",
+    "galleryTitle": "Lumion output to Photoshop finish.",
+    "gallery": [
+      {
+        "src": "/media/rumah/lumion-base.jpg",
+        "alt": "Base residential exterior render exported from Lumion 8",
+        "caption": "Lumion 8 / Base render"
+      },
+      {
+        "src": "/media/rumah/lumion-sky-alpha.jpg",
+        "alt": "Black and white sky alpha pass exported from Lumion 8",
+        "caption": "Lumion 8 / Sky Alpha"
+      },
+      {
+        "src": "/media/rumah/lumion-material-id.jpg",
+        "alt": "Colour-coded material ID pass exported from Lumion 8",
+        "caption": "Lumion 8 / Material ID"
+      },
+      {
+        "src": "/media/rumah/rumah-final.jpg",
+        "alt": "Photoshop-processed final visualization of the contemporary house",
+        "caption": "Photoshop / Final image"
+      }
+    ]
+  },
+  {
+    "slug": "architectural-hand-sketches",
+    "title": "Architectural Hand Sketches",
+    "subtitle": "Freehand perspective · architectural linework",
+    "category": "Visual Studies",
+    "time": "2019",
+    "period": "2019 / Personal work",
+    "role": "Hand drawing",
+    "status": "Selected works",
+    "excerpt": "A selection of architectural hand drawings.",
+    "statement": "Selected architectural hand drawings.",
+    "accent": "#898780",
+    "cover": "/media/architectural-hand-sketches/sketch-1.jpg",
+    "coverAlt": "Ink sketch of a house set within a rocky landscape",
+    "visualOnly": true,
+    "cardSize": "wide",
+    "facts": [],
+    "sections": [],
+    "gallery": [
+      {
+        "src": "/media/architectural-hand-sketches/sketch-1.jpg",
+        "alt": "Ink sketch of a house set within a rocky landscape"
+      },
+      {
+        "src": "/media/architectural-hand-sketches/sketch-2.jpg",
+        "alt": "Ink sketch of an angular contemporary building complex"
+      },
+      {
+        "src": "/media/architectural-hand-sketches/sketch-3.jpg",
+        "alt": "Ink sketch of a curving twin-tower building beside water"
+      }
+    ]
+  }
+]

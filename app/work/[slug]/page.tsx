@@ -129,6 +129,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               )}
             </section>
 
+            {project.highlights && project.highlights.length > 0 && (
+              <section className="project-sections page-shell" aria-label="Project highlights">
+                <div className="project-section" data-reveal>
+                  <p className="section-label">Highlights</p>
+                  <div>
+                    <h2>Project highlights</h2>
+                    <ul>{project.highlights.map((highlight, index) => <li key={index}>{highlight}</li>)}</ul>
+                  </div>
+                </div>
+              </section>
+            )}
+
             <section className="project-facts page-shell" aria-label="Project facts">
               {project.facts.map((fact) => (
                 <div key={fact.label} data-reveal>

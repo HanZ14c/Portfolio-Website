@@ -39,6 +39,7 @@ export type Project = {
   status: string;
   excerpt: string;
   statement: string;
+  highlights?: string[];
   accent: string;
   codeAccent?: string;
   cover?: string;

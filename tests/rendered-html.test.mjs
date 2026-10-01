@@ -25,6 +25,13 @@ async function requestWorker(path, init = {}) {
   );
 }
 
+test("keeps the local editor and write endpoints out of the production worker", async () => {
+  for (const path of ["/editor", "/api/projects", "/api/media", "/scripts/editor/server.mjs"]) {
+    const response = await render(path);
+    assert.equal(response.status, 404, path);
+  }
+});
+
 test("server-renders the finished portfolio home page", async () => {
   const response = await render();
   assert.equal(response.status, 200);

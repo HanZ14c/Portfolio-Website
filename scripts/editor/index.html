@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="editor-token" content="__EDITOR_TOKEN__">
+  <title>Portfolio · 本地项目编辑器</title>
+  <link rel="stylesheet" href="/editor.css">
+  <script type="module" src="/editor.js"></script>
+</head>
+<body>
+  <a class="skip" href="#content">跳到编辑内容</a>
+  <aside>
+    <div class="brand"><span class="eyebrow">HAN ZHANG / LOCAL</span><h1>项目编辑器</h1><p>编辑作品，保存后在网站中预览。</p></div>
+    <label class="search">查找项目<input id="search" type="search" placeholder="标题或分类"></label>
+    <nav id="projects" aria-label="选择项目"></nav>
+    <p class="aside-note">保存到当前本地仓库。<br>线上内容将在发布后更新。</p>
+  </aside>
+  <main id="content">
+    <header class="toolbar">
+      <div><span class="eyebrow" id="project-category">PORTFOLIO</span><h2 id="project-title">正在读取项目…</h2><p id="status" role="status" aria-live="polite">连接本地编辑器</p></div>
+      <div class="actions"><a id="preview" target="_blank" rel="noopener" aria-disabled="true">预览已保存页面 ↗</a><button id="reload" type="button">重新载入</button><button id="save" class="primary" type="submit" form="editor" disabled>保存项目</button></div>
+    </header>
+    <p id="message" role="alert" hidden></p>
+    <form id="editor"><fieldset id="fields" disabled></fieldset></form>
+  </main>
+</body>
+</html>
