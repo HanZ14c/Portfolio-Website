@@ -105,6 +105,8 @@ Start with `pnpm editor` as described in the quick start above, then open [http:
 
 The Chinese-language editor lists all projects, including hidden ones. Edit titles, summaries, sections, paragraph text, bullet points, standalone highlights, facts, links, cover images, galleries and display settings. Sections, facts, links and gallery images can be added, removed and reordered. Project slugs stay fixed to preserve existing URLs; homepage featured order remains in `lib/featured-projects.ts`.
 
+Click **＋ 新增项目** to enter a title, category and unique project slug (up to 80 lowercase letters, digits and hyphens, e.g. `my-new-project`). **创建项目** saves a hidden draft and opens it in the editor, ready for text and media uploads. When ready, uncheck **隐藏项目** and save to include it in `/work` and enable its detail page. New projects are not automatically added to the homepage featured selection.
+
 Choose **保存项目** to write changes to `lib/projects/data.json`, then **预览已保存页面** to inspect the existing website template. Unsaved changes trigger a reminder when leaving or switching projects. Conflicting changes from another editor or program are rejected rather than overwritten; copy any draft text you need before choosing **重新载入**.
 
 Uploads accept JPEG, PNG, WebP and GIF files up to 10 MB each and receive unique filenames under `public/media/editor/<slug>/`. Removing or replacing an image removes its reference, retaining the original file. An uploaded image is written immediately; save the project to use it. Unused uploads can be cleaned up separately after checking references. SVG, video and PDF uploads are not part of this editor.

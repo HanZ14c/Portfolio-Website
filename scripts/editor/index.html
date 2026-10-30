@@ -12,6 +12,7 @@
   <a class="skip" href="#content">跳到编辑内容</a>
   <aside>
     <div class="brand"><span class="eyebrow">HAN ZHANG / LOCAL</span><h1>项目编辑器</h1><p>编辑作品，保存后在网站中预览。</p></div>
+    <button id="new-project" type="button" class="primary" disabled>＋ 新增项目</button>
     <label class="search">查找项目<input id="search" type="search" placeholder="标题或分类"></label>
     <nav id="projects" aria-label="选择项目"></nav>
     <p class="aside-note">保存到当前本地仓库。<br>线上内容将在发布后更新。</p>
@@ -24,5 +25,19 @@
     <p id="message" role="alert" hidden></p>
     <form id="editor"><fieldset id="fields" disabled></fieldset></form>
   </main>
+  <dialog id="create-dialog" aria-labelledby="create-title">
+    <form id="create-project">
+      <h2 id="create-title">新增项目</h2>
+      <p>先创建隐藏草稿，再完善正文和图片。准备好后取消隐藏即可展示。</p>
+      <fieldset id="create-fields">
+        <label class="field">项目标题<input name="title" required maxlength="200" autofocus></label>
+        <label class="field">项目地址<input name="slug" required maxlength="80" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="my-new-project" aria-describedby="slug-help"></label>
+        <p class="hint" id="slug-help">使用小写英文字母、数字和连字符，例如 my-new-project。创建后地址固定为 /work/my-new-project。</p>
+        <label class="field">分类<select name="category" id="new-category"></select></label>
+        <div class="actions"><button type="button" id="cancel-create">取消</button><button class="primary" type="submit">创建项目</button></div>
+      </fieldset>
+      <p id="create-error" role="alert" hidden></p>
+    </form>
+  </dialog>
 </body>
 </html>

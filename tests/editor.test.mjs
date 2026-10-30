@@ -77,4 +77,38 @@ test('local editor validates requests, saves atomically, detects conflicts and i
   assert.equal((await fetch(`${origin}/media/escape.png`)).status, 403);
   assert.equal((await save({ ...changed, cover: '/media/escape.png' }, (await read()).revision)).status, 403);
   assert.deepEqual(readFileSync(join(root, 'public', first.src)), png);
+
+  const create = (project, revision, customHeaders = headers) => fetch(`${origin}/api/projects`, {
+    method: 'POST', headers: customHeaders, body: JSON.stringify({ project, revision }),
+  });
+  const newProject = {
+    slug: 'new-personal-project', title: '我的新项目', category: 'Computer Science',
+    subtitle: '', time: '', period: '', role: '', status: '', excerpt: '', statement: '',
+    accent: '#315f94', hidden: true, showSections: true, facts: [], sections: [],
+  };
+  const beforeCreate = await read();
+  assert.equal((await create(newProject, beforeCreate.revision, {})).status, 403);
+  assert.equal((await create(newProject, beforeCreate.revision, { ...headers, Origin: 'https://example.com' })).status, 403);
+  assert.equal((await create(newProject, oldRevision)).status, 409);
+  for (const invalid of [
+    { ...newProject, title: ' ' }, { ...newProject, slug: '../escape' },
+    { ...newProject, slug: 'a'.repeat(81) }, { ...newProject, category: 'Invalid' },
+  ]) assert.equal((await create(invalid, beforeCreate.revision)).status, 400);
+  assert.deepEqual(await read(), beforeCreate);
+  assert.equal((await save(newProject, beforeCreate.revision)).status, 404);
+  const createdResponse = await create(newProject, beforeCreate.revision);
+  assert.equal(createdResponse.status, 201);
+  const created = await createdResponse.json();
+  const afterCreate = await read();
+  assert.deepEqual(afterCreate.projects, [...beforeCreate.projects, newProject]);
+  assert.equal(afterCreate.revision, created.revision);
+  assert.equal((await create({ ...newProject, title: 'Duplicate' }, created.revision)).status, 409);
+  assert.deepEqual(await read(), afterCreate);
+  const newImageResponse = await upload(png, newProject.slug);
+  assert.equal(newImageResponse.status, 201);
+  const newImage = await newImageResponse.json();
+  const completed = { ...newProject, hidden: false, highlights: ['My outcome'], cover: newImage.src };
+  assert.equal((await save(completed, created.revision)).status, 200);
+  assert.deepEqual((await read()).projects.at(-1), completed);
+  assert.deepEqual((await read()).projects.slice(0, -1), beforeCreate.projects);
 });

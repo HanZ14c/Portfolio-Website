@@ -30,7 +30,7 @@ function validateProject(project) {
   for (const key of required) if (!text(project[key])) fail(`${key} 必须是文本。`);
   for (const key of optionalText) if (key in project && !text(project[key])) fail(`${key} 必须是文本。`);
   for (const key of booleans) if (key in project && typeof project[key] !== 'boolean') fail(`${key} 必须是开关值。`);
-  if (!project.title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)) fail('标题不能为空，项目地址必须有效。');
+  if (!project.title.trim() || project.slug.length > 80 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)) fail('标题不能为空；项目地址限 80 字符，只能使用小写英文字母、数字和连字符。');
   if (!categories.includes(project.category)) fail('请选择有效分类。');
   for (const key of ['accent', 'codeAccent']) {
     if (project[key] !== undefined && !/^#[0-9a-f]{6}$/i.test(project[key])) fail(`${key} 必须是六位十六进制颜色。`);
@@ -93,7 +93,7 @@ export function createEditorServer(root = resolve(directory, '../..')) {
       if (url.pathname.startsWith('/api/')) {
         if (request.headers['x-editor-token'] !== token) fail('编辑会话无效，请刷新页面。', 403);
         if (url.pathname === '/api/projects' && request.method === 'GET') return send(200, snapshot());
-        if (url.pathname === '/api/projects' && request.method === 'PUT') {
+        if (url.pathname === '/api/projects' && ['PUT', 'POST'].includes(request.method)) {
           let payload;
           try { payload = JSON.parse(await readBody(request, 1024 * 1024)); }
           catch (error) { if (error.status) throw error; fail('请求不是有效 JSON。'); }
@@ -103,9 +103,12 @@ export function createEditorServer(root = resolve(directory, '../..')) {
           const current = snapshot();
           if (payload.revision !== current.revision) fail('文件已被其他窗口或程序修改。请保留当前内容，重新载入后再编辑。', 409);
           const index = current.projects.findIndex((project) => project.slug === payload.project.slug);
-          if (index < 0) fail('找不到项目；项目地址不能修改。', 404);
+          const creating = request.method === 'POST';
+          if (creating && index >= 0) fail('项目地址已存在，请换一个地址。', 409);
+          if (!creating && index < 0) fail('找不到项目；项目地址不能修改。', 404);
           for (const path of [payload.project.cover, ...(payload.project.gallery ?? []).map((item) => item.src)].filter(Boolean)) mediaFile(root, path);
-          current.projects[index] = payload.project;
+          if (creating) current.projects.push(payload.project);
+          else current.projects[index] = payload.project;
           const content = JSON.stringify(current.projects, null, 2) + '\n';
           const temporary = `${dataFile}.${randomUUID()}.tmp`;
           try {
@@ -114,7 +117,7 @@ export function createEditorServer(root = resolve(directory, '../..')) {
           } finally {
             try { unlinkSync(temporary); } catch (error) { if (error.code !== 'ENOENT') throw error; }
           }
-          return send(200, { project: payload.project, revision: revision(content) });
+          return send(creating ? 201 : 200, { project: payload.project, revision: revision(content) });
         }
         if (url.pathname === '/api/media' && request.method === 'POST') {
           const slug = url.searchParams.get('slug');

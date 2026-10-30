@@ -22,10 +22,12 @@ async function api(path, options = {}) {
   return result;
 }
 function updateStatus() {
+  $('#new-project').disabled = busy || !revision;
+  $('#create-fields').disabled = busy;
   $('#save').disabled = busy || !dirty();
   $('#reload').disabled = busy;
   $('#fields').disabled = busy || !draft;
-  $('#status').textContent = busy ? '正在处理，请稍候…' : !draft ? '未能载入项目，请重试' : dirty() ? '有未保存的更改' : '已与本地文件同步';
+  $('#status').textContent = busy ? '正在处理，请稍候…' : !draft ? (revision ? '点击新增项目开始' : '未能载入项目，请重试') : dirty() ? '有未保存的更改' : '已与本地文件同步';
   const saved = projects.find((project) => project.slug === draft?.slug);
   $('#preview').setAttribute('aria-disabled', String(!saved || Boolean(saved.hidden)));
   if (saved && !saved.hidden) $('#preview').href = `http://localhost:3000/work/${saved.slug}`;
@@ -192,7 +194,12 @@ async function load() {
   busy = true; updateStatus();
   try {
     const data = await api('/api/projects'); projects = data.projects; revision = data.revision;
-    selectProject(projects.find((project) => project.slug === draft?.slug) ?? projects[0]);
+    const selected = projects.find((project) => project.slug === draft?.slug) ?? projects[0];
+    if (selected) selectProject(selected);
+    else {
+      draft = undefined; baseline = ''; renderNavigation(); $('#fields').replaceChildren();
+      $('#project-title').textContent = '暂无项目'; $('#project-category').textContent = 'PORTFOLIO';
+    }
   } catch (error) { notice(error.message); }
   finally { busy = false; updateStatus(); }
 }
@@ -219,5 +226,37 @@ $('#preview').addEventListener('click', (event) => {
   if ($('#preview').getAttribute('aria-disabled') === 'true') { event.preventDefault(); notice('此项目目前隐藏。取消隐藏并保存后即可预览。'); }
 });
 $('#search').addEventListener('input', renderNavigation);
+for (const category of categories) {
+  const option = element('option', category); option.value = category; $('#new-category').append(option);
+}
+$('#new-project').addEventListener('click', () => {
+  if (busy || !revision) return;
+  if (dirty() && !confirm('当前项目有未保存更改。创建成功后将放弃这些更改，继续？')) return;
+  $('#create-project').reset();
+  $('#create-error').hidden = true;
+  $('#create-dialog').showModal();
+});
+$('#cancel-create').addEventListener('click', () => $('#create-dialog').close());
+$('#create-dialog').addEventListener('cancel', (event) => { if (busy) event.preventDefault(); });
+$('#create-project').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (busy) return;
+  const form = new FormData(event.currentTarget);
+  const project = {
+    title: form.get('title').trim(), slug: form.get('slug').trim(), category: form.get('category'),
+    subtitle: '', time: '', period: '', role: '', status: '', excerpt: '', statement: '',
+    accent: '#315f94', hidden: true, showSections: true, facts: [], sections: [],
+  };
+  busy = true; updateStatus(); $('#create-error').hidden = true;
+  try {
+    const result = await api('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ project, revision }) });
+    revision = result.revision; projects.push(result.project); $('#search').value = '';
+    selectProject(result.project); $('#create-dialog').close();
+    notice('项目已创建为隐藏草稿。可以继续编辑内容和上传图片；准备好后取消隐藏并保存。');
+    window.scrollTo(0, 0);
+  } catch (error) {
+    $('#create-error').textContent = error.message; $('#create-error').hidden = false;
+  } finally { busy = false; updateStatus(); }
+});
 window.addEventListener('beforeunload', (event) => { if (dirty() || busy) { event.preventDefault(); event.returnValue = ''; } });
 await load();
