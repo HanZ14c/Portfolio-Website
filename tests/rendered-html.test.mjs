@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
+const publishedProjects = JSON.parse(readFileSync(new URL("../lib/projects/data.json", import.meta.url), "utf8")).filter((project) => !project.hidden);
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
@@ -121,7 +123,7 @@ test("server-renders the project index", async () => {
   assert.match(html, /Projects grouped by category/);
   assert.match(html, /href="\/work" aria-current="page"/);
   assert.match(html, /2026/);
-  assert.match(html, /Showing (?:<!-- -->)?16(?:<!-- -->)? (?:<!-- -->)?projects/);
+  assert.ok(html.replaceAll("<!-- -->", "").includes(`Showing ${publishedProjects.length} projects`));
   assert.doesNotMatch(html, /Chongqing Tianan Cyber Park T3/);
   assert.doesNotMatch(html, /Dongguan Songshanhu Office Tower/);
   assert.doesNotMatch(html, /XXXX/);
@@ -170,22 +172,19 @@ test("selectively renders complete project narratives", async () => {
 });
 
 test("renders previous and next project navigation in the default index order", async () => {
-  const middleResponse = await render("/work/feeling-in-form");
-  const middleHtml = await middleResponse.text();
-  assert.match(middleHtml, /aria-label="Browse adjacent projects"/);
-  assert.match(middleHtml, /href="\/work\/vertical-city-housing"[^>]*>[^]*Previous project/);
-  assert.match(middleHtml, /href="\/work\/mirriedge-opera-house"[^>]*>[^]*Next project/);
-  assert.match(middleHtml, /07(?:<!-- -->)? \/ (?:<!-- -->)?16/);
-
-  const firstResponse = await render("/work/team-workflow-scheduler");
-  const firstHtml = await firstResponse.text();
-  assert.doesNotMatch(firstHtml, /Previous project/);
-  assert.match(firstHtml, /href="\/work\/bc-travel-guide"[^>]*>[^]*Next project/);
-
-  const lastResponse = await render("/work/architectural-hand-sketches");
-  const lastHtml = await lastResponse.text();
-  assert.match(lastHtml, /href="\/work\/rumah"[^>]*>[^]*Previous project/);
-  assert.doesNotMatch(lastHtml, /Next project/);
+  const ordered = ["Computer Science", "Academic Architecture", "Architecture Practice", "Visual Studies"]
+    .flatMap((category) => publishedProjects.filter((project) => project.category === category));
+  for (const index of [0, Math.floor(ordered.length / 2), ordered.length - 1]) {
+    const response = await render(`/work/${ordered[index].slug}`);
+    assert.equal(response.status, 200);
+    const html = (await response.text()).replaceAll("<!-- -->", "");
+    assert.match(html, /aria-label="Browse adjacent projects"/);
+    assert.ok(html.includes(`${String(index + 1).padStart(2, "0")} / ${String(ordered.length).padStart(2, "0")}`));
+    if (index > 0) assert.ok(html.includes(`href="/work/${ordered[index - 1].slug}"`));
+    else assert.doesNotMatch(html, /Previous project/);
+    if (index < ordered.length - 1) assert.ok(html.includes(`href="/work/${ordered[index + 1].slug}"`));
+    else assert.doesNotMatch(html, /Next project/);
+  }
 });
 
 test("publishes crawl and discovery metadata", async () => {
