@@ -1,99 +1,130 @@
 [
   {
-    "slug": "vertical-city-housing",
-    "title": "Vertical City Housing",
-    "subtitle": "Housing research · massing · circulation · unit planning",
+    "title": "Airbnb Machine Learning",
+    "slug": "airbnb-ml",
+    "category": "Computer Science",
+    "subtitle": "Supervised machine learning study",
+    "time": "2026",
+    "period": "2026",
+    "role": "",
+    "status": "Repository available",
+    "excerpt": "",
+    "statement": "",
+    "accent": "#315f94",
+    "hidden": false,
+    "showSections": true,
+    "facts": [],
+    "sections": [],
+    "cover": "/media/editor/airbnb-ml/dc70f085-bd27-4b2a-8da5-22cace8b4276.jpg",
+    "gallery": [
+      {
+        "src": "/media/editor/airbnb-ml/5961bedf-ae66-496a-80b5-f8ec045a5cb8.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/airbnb-ml/0629b527-0532-4b00-b08c-ed90af88bb04.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/airbnb-ml/853634ce-837a-469e-9212-d54c30712780.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/airbnb-ml/ab9942e7-8f59-4b2d-92c4-4f1f6b3e66ed.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/airbnb-ml/5db888c7-ec8a-4597-847c-eff8d033224b.png",
+        "alt": "",
+        "caption": ""
+      }
+    ],
+    "links": [
+      {
+        "label": "Github Repository",
+        "href": "https://github.com/HanZ14c/airbnb-ml"
+      }
+    ]
+  },
+  {
+    "slug": "feeling-in-form",
+    "title": "Feeling in Form",
+    "subtitle": "Spatial research · form-language generation · architectural representation",
     "category": "Academic Architecture",
-    "time": "2018",
-    "period": "2018",
+    "time": "2021",
+    "period": "2021",
     "location": "Xi'an, China",
-    "role": "Individual graduation design",
+    "role": "Individual design and independent revision",
     "status": "Academic / Unbuilt",
-    "excerpt": "A high-density housing proposal that turns circulation, landscape and shared programs into a three-dimensional neighbourhood.",
-    "statement": "The project asks how a residential complex can behave less like a stack of isolated apartments and more like a small city.",
-    "accent": "#a8c98f",
-    "cover": "/media/vertical-city/hero.webp",
-    "coverAlt": "Aerial rendering of the Vertical City residential proposal",
+    "showSections": true,
+    "excerpt": "A library and cultural space that translates emotion, perception, events and movement into a field of spatial encounters.",
+    "statement": "Instead of beginning with rooms, the project begins with feelings and asks what kinds of events a space can invite.",
+    "accent": "#ed1f24",
+    "cover": "/media/emotion-time/revised-4.webp",
+    "coverAlt": "Exploded axonometric drawing of Feeling in Form",
     "featured": true,
     "cardSize": "wide",
     "facts": [
       {
-        "label": "Site",
-        "value": "49,550 m²"
+        "label": "Type",
+        "value": "Library / Cultural space"
       },
       {
-        "label": "Floor area",
-        "value": "112,010 m²"
+        "label": "Context",
+        "value": "Beilin historic district"
       },
       {
-        "label": "FAR",
-        "value": "2.26"
+        "label": "Versions",
+        "value": "School proposal + independent revision"
       },
       {
-        "label": "Height",
-        "value": "58.45 m / 20 storeys"
-      },
-      {
-        "label": "Green ratio",
-        "value": "55%"
-      },
-      {
-        "label": "Parking",
-        "value": "897 spaces"
+        "label": "Final display",
+        "value": "Revised proposal"
       }
     ],
     "sections": [
       {
-        "label": "01 / Premise",
-        "title": "Housing as a small city",
+        "label": "01 / Research",
+        "title": "From emotion to spatial language",
         "body": [
-          "Rapid urbanization made high-rise housing an efficient answer to density, but it also produced standardized living, weaker neighbourhood relationships and limited contact with nature. The project uses the idea of the vertical city as a framework for reconnecting private dwellings with collective life.",
-          "The research draws from Aldo van Eyck's relationship between the house and the city, Le Corbusier's Unité d'Habitation and high-density housing precedents in Singapore."
-        ],
-        "points": [
-          "Functional complexity",
-          "Spatial diversity",
-          "Environmental integration",
-          "Individualized form"
+          "The original project developed an entity-sense-field framework. Emotional impressions were abstracted into elements, then combined into spatial situations involving enclosure, exposure, encounter, hesitation and movement.",
+          "This research became a catalogue of possible relationships rather than a fixed formal vocabulary."
         ]
       },
       {
-        "label": "02 / Planning",
-        "title": "Three courtyards, many elevations",
+        "label": "02 / Revision",
+        "title": "Space, event and movement",
         "body": [
-          "The site is divided into three connected courtyard groups. Buildings are cut to form entrances, broken into smaller volumes and varied in height to open views toward Qujiangchi Heritage Park.",
-          "Vehicles remain on a semi-peripheral route while pedestrian paths occupy the inner landscape. Commercial programs line the outer edge, and bridges extend the public circulation above ground level."
+          "The later independent revision shifts attention from isolated emotional rooms to the uncertain relationship between architecture and use. Parallel drawing sequences test the building as an object, as an empty spatial condition and as a field occupied by events."
         ]
       },
       {
-        "label": "03 / Living system",
-        "title": "The corridor becomes an elevated street",
+        "label": "03 / Proposal",
+        "title": "A fragmented cultural field",
         "body": [
-          "Single-loaded duplex units reinterpret the interlocking logic of the Marseille apartment. Flexible partitions, cross ventilation, generous balconies and several unit sizes support different households.",
-          "Exterior corridors connect to sky bridges, corner commons, roof platforms and double-height voids. These spaces create a continuous network for meeting, playing and moving through the community."
+          "Courtyards, reading rooms, water, screens, stairs and changing light form a porous composition within the historic district. Routes overlap and spaces remain open to more than one interpretation, allowing visitors to construct their own sequence."
         ]
       }
     ],
     "gallery": [
       {
-        "src": "/media/vertical-city/board-2.webp",
-        "alt": "Massing development, aerial view and housing units",
-        "caption": "Massing generation and duplex unit studies."
+        "src": "/media/emotion-time/revised-2.webp",
+        "alt": "Context research and massing generation for Feeling in Form",
+        "caption": "Context, site and massing development in the revised proposal."
       },
       {
-        "src": "/media/vertical-city/board-3.webp",
-        "alt": "Vertical city precedent analysis and masterplan",
-        "caption": "Precedent research, masterplan and elevated public-space system."
+        "src": "/media/emotion-time/revised-3.webp",
+        "alt": "Event and spatial sequence research diagrams",
+        "caption": "Parallel sequences testing space, event and movement."
       },
       {
-        "src": "/media/vertical-city/board-5.webp",
-        "alt": "Circulation, entrance renderings and elevations",
-        "caption": "Pedestrian and vehicle networks, entrances and community elevations."
-      },
-      {
-        "src": "/media/vertical-city/board-6.webp",
-        "alt": "Courtyard renderings, parking and daylight analysis",
-        "caption": "Shared spaces, technical coordination and courtyard experience."
+        "src": "/media/emotion-time/revised-5.webp",
+        "alt": "Plan and interior views of Feeling in Form",
+        "caption": "Plan, material atmosphere and spatial fragments."
       }
     ]
   },
@@ -222,90 +253,100 @@
     ]
   },
   {
-    "slug": "feeling-in-form",
-    "title": "Feeling in Form",
-    "subtitle": "Spatial research · form-language generation · architectural representation",
+    "slug": "vertical-city-housing",
+    "title": "Vertical City Housing",
+    "subtitle": "Housing research · massing · circulation · unit planning",
     "category": "Academic Architecture",
-    "time": "2021",
-    "period": "2021",
+    "time": "2018",
+    "period": "2018",
     "location": "Xi'an, China",
-    "role": "Individual design and independent revision",
+    "role": "Individual graduation design",
     "status": "Academic / Unbuilt",
-    "showSections": true,
-    "excerpt": "A library and cultural space that translates emotion, perception, events and movement into a field of spatial encounters.",
-    "statement": "Instead of beginning with rooms, the project begins with feelings and asks what kinds of events a space can invite.",
-    "accent": "#ed1f24",
-    "cover": "/media/emotion-time/revised-4.webp",
-    "coverAlt": "Exploded axonometric drawing of Feeling in Form",
+    "excerpt": "A high-density housing proposal that turns circulation, landscape and shared programs into a three-dimensional neighbourhood.",
+    "statement": "The project asks how a residential complex can behave less like a stack of isolated apartments and more like a small city.",
+    "accent": "#a8c98f",
+    "cover": "/media/vertical-city/hero.webp",
+    "coverAlt": "Aerial rendering of the Vertical City residential proposal",
     "featured": true,
     "cardSize": "wide",
     "facts": [
       {
-        "label": "Type",
-        "value": "Library / Cultural space"
+        "label": "Site",
+        "value": "49,550 m²"
       },
       {
-        "label": "Context",
-        "value": "Beilin historic district"
+        "label": "Floor area",
+        "value": "112,010 m²"
       },
       {
-        "label": "Versions",
-        "value": "School proposal + independent revision"
+        "label": "FAR",
+        "value": "2.26"
       },
       {
-        "label": "Final display",
-        "value": "Revised proposal"
+        "label": "Height",
+        "value": "58.45 m / 20 storeys"
+      },
+      {
+        "label": "Green ratio",
+        "value": "55%"
+      },
+      {
+        "label": "Parking",
+        "value": "897 spaces"
       }
     ],
     "sections": [
       {
-        "label": "01 / Research",
-        "title": "From emotion to spatial language",
+        "label": "01 / Premise",
+        "title": "Housing as a small city",
         "body": [
-          "The original project developed an entity-sense-field framework. Emotional impressions were abstracted into elements, then combined into spatial situations involving enclosure, exposure, encounter, hesitation and movement.",
-          "This research became a catalogue of possible relationships rather than a fixed formal vocabulary."
+          "Rapid urbanization made high-rise housing an efficient answer to density, but it also produced standardized living, weaker neighbourhood relationships and limited contact with nature. The project uses the idea of the vertical city as a framework for reconnecting private dwellings with collective life.",
+          "The research draws from Aldo van Eyck's relationship between the house and the city, Le Corbusier's Unité d'Habitation and high-density housing precedents in Singapore."
+        ],
+        "points": [
+          "Functional complexity",
+          "Spatial diversity",
+          "Environmental integration",
+          "Individualized form"
         ]
       },
       {
-        "label": "02 / Revision",
-        "title": "Space, event and movement",
+        "label": "02 / Planning",
+        "title": "Three courtyards, many elevations",
         "body": [
-          "The later independent revision shifts attention from isolated emotional rooms to the uncertain relationship between architecture and use. Parallel drawing sequences test the building as an object, as an empty spatial condition and as a field occupied by events."
+          "The site is divided into three connected courtyard groups. Buildings are cut to form entrances, broken into smaller volumes and varied in height to open views toward Qujiangchi Heritage Park.",
+          "Vehicles remain on a semi-peripheral route while pedestrian paths occupy the inner landscape. Commercial programs line the outer edge, and bridges extend the public circulation above ground level."
         ]
       },
       {
-        "label": "03 / Proposal",
-        "title": "A fragmented cultural field",
+        "label": "03 / Living system",
+        "title": "The corridor becomes an elevated street",
         "body": [
-          "Courtyards, reading rooms, water, screens, stairs and changing light form a porous composition within the historic district. Routes overlap and spaces remain open to more than one interpretation, allowing visitors to construct their own sequence."
+          "Single-loaded duplex units reinterpret the interlocking logic of the Marseille apartment. Flexible partitions, cross ventilation, generous balconies and several unit sizes support different households.",
+          "Exterior corridors connect to sky bridges, corner commons, roof platforms and double-height voids. These spaces create a continuous network for meeting, playing and moving through the community."
         ]
       }
     ],
     "gallery": [
       {
-        "src": "/media/emotion-time/revised-2.webp",
-        "alt": "Context research and massing generation for Feeling in Form",
-        "caption": "Context, site and massing development in the revised proposal."
+        "src": "/media/vertical-city/board-2.webp",
+        "alt": "Massing development, aerial view and housing units",
+        "caption": "Massing generation and duplex unit studies."
       },
       {
-        "src": "/media/emotion-time/revised-3.webp",
-        "alt": "Event and spatial sequence research diagrams",
-        "caption": "Parallel sequences testing space, event and movement."
+        "src": "/media/vertical-city/board-3.webp",
+        "alt": "Vertical city precedent analysis and masterplan",
+        "caption": "Precedent research, masterplan and elevated public-space system."
       },
       {
-        "src": "/media/emotion-time/revised-5.webp",
-        "alt": "Plan and interior views of Feeling in Form",
-        "caption": "Plan, material atmosphere and spatial fragments."
+        "src": "/media/vertical-city/board-5.webp",
+        "alt": "Circulation, entrance renderings and elevations",
+        "caption": "Pedestrian and vehicle networks, entrances and community elevations."
       },
       {
-        "src": "/media/emotion-time/original-2.webp",
-        "alt": "Original emotion-space generation board",
-        "caption": "The original school project: emotional language and spatial generation."
-      },
-      {
-        "src": "/media/emotion-time/original-3.webp",
-        "alt": "Original axonometric and activity board",
-        "caption": "The original proposal retained as process material."
+        "src": "/media/vertical-city/board-6.webp",
+        "alt": "Courtyard renderings, parking and daylight analysis",
+        "caption": "Shared spaces, technical coordination and courtyard experience."
       }
     ]
   },
@@ -1142,113 +1183,30 @@
     ]
   },
   {
-    "slug": "family-tree-database",
-    "title": "Family Tree Database",
-    "subtitle": "EER modelling · normalization · MySQL · SQL Server",
+    "title": "DisplayTidy",
+    "slug": "displaytidy",
     "category": "Computer Science",
-    "time": "2024",
-    "period": "2024 / Database project",
-    "role": "Requirements, EER modelling, normalization and SQL implementation",
-    "status": "Repository available",
-    "showSections": false,
-    "excerpt": "A normalized relational model for family relationships, education, employment, addresses, marriages and life events.",
-    "statement": "The project turns an intuitive but complicated human network into explicit, queryable relationships.",
-    "accent": "#665b8e",
-    "codeAccent": "#c5d0dc",
-    "facts": [
-      {
-        "label": "Model",
-        "value": "EER + Relational schema"
-      },
-      {
-        "label": "Platforms",
-        "value": "MySQL + Microsoft SQL Server"
-      },
-      {
-        "label": "Schema",
-        "value": "13 tables"
-      },
-      {
-        "label": "Query set",
-        "value": "20 example operations"
-      },
-      {
-        "label": "Focus",
-        "value": "Cardinality + Normalization"
-      },
-      {
-        "label": "Deliverables",
-        "value": "Create / Insert / Query / Drop"
-      }
-    ],
-    "sections": [
-      {
-        "label": "01 / Requirements",
-        "title": "More than a parent-child tree",
-        "body": [
-          "A useful family-history model must represent people, marriages, addresses, education, employment, achievements and events without flattening them into one oversized table.",
-          "The requirements also account for biological and non-biological parenthood, divorce and remarriage, children across different marriages, multiple names, incomplete work histories and attendance at other family members’ life events."
-        ]
-      },
-      {
-        "label": "02 / EER model",
-        "title": "Relationships made explicit",
-        "body": [
-          "An enhanced entity-relationship model identifies stable entities and resolves many-to-many relationships through associative structures. Normalization reduces duplication and protects data integrity.",
-          "Person sits at the centre of the model, connected recursively through father, mother and spouse relationships and historically through homes, organizations and achievements. Cardinality and participation rules distinguish required biographical data from optional education, work, marriage and event histories."
-        ]
-      },
-      {
-        "label": "03 / Relational mapping",
-        "title": "Thirteen tables with distinct responsibilities",
-        "body": [
-          "Regular entities become Person, Home, Organization and Achievement tables. Associative history tables resolve many-to-many residence, education, employment and achievement relationships, while recursive parent and spouse tables preserve relationships between people.",
-          "Middle names and used names are mapped into separate tables as multivalued attributes. Composite primary keys, unique constraints and foreign-key cascades make duplication and orphaned history records less likely."
-        ],
-        "points": [
-          "Person · Home · Organization · Achievement",
-          "HomeHistory · EducationHistory · WorkHistory · AchievementHistory",
-          "FatherOf · MotherOf · SpouseHistory",
-          "Person_MiddleName · Person_UsedName"
-        ]
-      },
-      {
-        "label": "04 / Normalization",
-        "title": "A schema designed against repeated facts",
-        "body": [
-          "The companion normalization study documents how the initial family records are decomposed into stable entities and relationship tables. Separating people, places, organizations and time-bounded histories reduces update anomalies while keeping biographical facts queryable."
-        ]
-      },
-      {
-        "label": "05 / SQL implementation",
-        "title": "One model, two SQL environments",
-        "body": [
-          "The schema is implemented for MySQL and Microsoft SQL Server, demonstrating how a conceptual model is translated across related database systems.",
-          "Parallel scripts account for dialect differences such as AUTO_INCREMENT versus IDENTITY(1,1), and TIMESTAMPDIFF versus DATEDIFF. Each platform includes database creation, sample insertion, query and teardown scripts."
-        ]
-      },
-      {
-        "label": "06 / Query set",
-        "title": "Family history as answerable questions",
-        "body": [
-          "Twenty SQL examples test the usefulness of the model through joins, views, updates, deletes, aggregation and unions. They retrieve names and aliases, adults, siblings, parents, adopted children, marriage history, residences, education and work relationships.",
-          "The query set moves beyond simple record lookup to questions such as who currently works or studies, who has lived in British Columbia, how many work histories each person has and whether someone later worked for an organization where they studied."
-        ]
-      }
-    ],
+    "subtitle": "",
+    "time": "2026",
+    "period": "2026",
+    "role": "",
+    "status": "",
+    "excerpt": "",
+    "statement": "",
+    "accent": "#315f94",
+    "hidden": false,
+    "showSections": true,
+    "facts": [],
+    "sections": [],
+    "cover": "/media/editor/displaytidy/140a2e47-e703-43cf-abe0-b93db4550621.png",
     "gallery": [
       {
-        "src": "/media/family-tree-database/eer-modeling-diagram.png",
-        "alt": "Enhanced entity relationship diagram for the Family Tree Database",
-        "caption": "EER model connecting people with recursive family relationships, residence, education, employment and achievement histories."
+        "src": "/media/editor/displaytidy/61255b21-a113-4b01-a6cf-22aace5267cb.png",
+        "alt": "",
+        "caption": ""
       }
     ],
-    "links": [
-      {
-        "label": "View repository",
-        "href": "https://github.com/HanZ14c/Family-Tree-Database"
-      }
-    ]
+    "containCover": false
   },
   {
     "slug": "bungalow",
@@ -1383,6 +1341,169 @@
         "caption": "Photoshop / Final image"
       }
     ]
+  },
+  {
+    "title": "Beneath the Present",
+    "slug": "beneath-the-present",
+    "category": "Visual Studies",
+    "subtitle": "",
+    "time": "2026",
+    "period": "2026",
+    "role": "",
+    "status": "",
+    "excerpt": "",
+    "statement": "",
+    "accent": "#315f94",
+    "hidden": false,
+    "showSections": true,
+    "facts": [],
+    "sections": [],
+    "location": "Vancouver",
+    "cover": "/media/editor/beneath-the-present/b6f93664-7ff0-4a62-8073-09cc4d569694.jpg",
+    "gallery": [
+      {
+        "src": "/media/editor/beneath-the-present/e182b2ff-a84e-4b63-9704-8edcb77374d4.jpg",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/beneath-the-present/014152eb-3146-4509-b2a5-0c2188d3d37f.jpg",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/beneath-the-present/b02dcf4b-db71-4ac4-bea3-cbe9edb5e86b.jpg",
+        "alt": "",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "title": "TabNext",
+    "slug": "tabnext",
+    "category": "Computer Science",
+    "subtitle": "",
+    "time": "",
+    "period": "",
+    "role": "",
+    "status": "",
+    "excerpt": "",
+    "statement": "",
+    "accent": "#315f94",
+    "hidden": false,
+    "showSections": true,
+    "facts": [],
+    "sections": []
+  },
+  {
+    "slug": "family-tree-database",
+    "title": "Family Tree Database",
+    "subtitle": "EER modelling · normalization · MySQL · SQL Server",
+    "category": "Computer Science",
+    "time": "2024",
+    "period": "2024 / Database project",
+    "role": "Requirements, EER modelling, normalization and SQL implementation",
+    "status": "Repository available",
+    "showSections": false,
+    "excerpt": "A normalized relational model for family relationships, education, employment, addresses, marriages and life events.",
+    "statement": "The project turns an intuitive but complicated human network into explicit, queryable relationships.",
+    "accent": "#665b8e",
+    "codeAccent": "#c5d0dc",
+    "facts": [
+      {
+        "label": "Model",
+        "value": "EER + Relational schema"
+      },
+      {
+        "label": "Platforms",
+        "value": "MySQL + Microsoft SQL Server"
+      },
+      {
+        "label": "Schema",
+        "value": "13 tables"
+      },
+      {
+        "label": "Query set",
+        "value": "20 example operations"
+      },
+      {
+        "label": "Focus",
+        "value": "Cardinality + Normalization"
+      },
+      {
+        "label": "Deliverables",
+        "value": "Create / Insert / Query / Drop"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Requirements",
+        "title": "More than a parent-child tree",
+        "body": [
+          "A useful family-history model must represent people, marriages, addresses, education, employment, achievements and events without flattening them into one oversized table.",
+          "The requirements also account for biological and non-biological parenthood, divorce and remarriage, children across different marriages, multiple names, incomplete work histories and attendance at other family members’ life events."
+        ]
+      },
+      {
+        "label": "02 / EER model",
+        "title": "Relationships made explicit",
+        "body": [
+          "An enhanced entity-relationship model identifies stable entities and resolves many-to-many relationships through associative structures. Normalization reduces duplication and protects data integrity.",
+          "Person sits at the centre of the model, connected recursively through father, mother and spouse relationships and historically through homes, organizations and achievements. Cardinality and participation rules distinguish required biographical data from optional education, work, marriage and event histories."
+        ]
+      },
+      {
+        "label": "03 / Relational mapping",
+        "title": "Thirteen tables with distinct responsibilities",
+        "body": [
+          "Regular entities become Person, Home, Organization and Achievement tables. Associative history tables resolve many-to-many residence, education, employment and achievement relationships, while recursive parent and spouse tables preserve relationships between people.",
+          "Middle names and used names are mapped into separate tables as multivalued attributes. Composite primary keys, unique constraints and foreign-key cascades make duplication and orphaned history records less likely."
+        ],
+        "points": [
+          "Person · Home · Organization · Achievement",
+          "HomeHistory · EducationHistory · WorkHistory · AchievementHistory",
+          "FatherOf · MotherOf · SpouseHistory",
+          "Person_MiddleName · Person_UsedName"
+        ]
+      },
+      {
+        "label": "04 / Normalization",
+        "title": "A schema designed against repeated facts",
+        "body": [
+          "The companion normalization study documents how the initial family records are decomposed into stable entities and relationship tables. Separating people, places, organizations and time-bounded histories reduces update anomalies while keeping biographical facts queryable."
+        ]
+      },
+      {
+        "label": "05 / SQL implementation",
+        "title": "One model, two SQL environments",
+        "body": [
+          "The schema is implemented for MySQL and Microsoft SQL Server, demonstrating how a conceptual model is translated across related database systems.",
+          "Parallel scripts account for dialect differences such as AUTO_INCREMENT versus IDENTITY(1,1), and TIMESTAMPDIFF versus DATEDIFF. Each platform includes database creation, sample insertion, query and teardown scripts."
+        ]
+      },
+      {
+        "label": "06 / Query set",
+        "title": "Family history as answerable questions",
+        "body": [
+          "Twenty SQL examples test the usefulness of the model through joins, views, updates, deletes, aggregation and unions. They retrieve names and aliases, adults, siblings, parents, adopted children, marriage history, residences, education and work relationships.",
+          "The query set moves beyond simple record lookup to questions such as who currently works or studies, who has lived in British Columbia, how many work histories each person has and whether someone later worked for an organization where they studied."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/family-tree-database/eer-modeling-diagram.png",
+        "alt": "Enhanced entity relationship diagram for the Family Tree Database",
+        "caption": "EER model connecting people with recursive family relationships, residence, education, employment and achievement histories."
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/Family-Tree-Database"
+      }
+    ],
+    "cover": "/media/editor/family-tree-database/80bbfdbf-c26b-42d0-853c-985b8974b3f6.png"
   },
   {
     "slug": "architectural-hand-sketches",
