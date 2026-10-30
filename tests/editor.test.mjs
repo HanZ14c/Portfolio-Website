@@ -14,6 +14,8 @@ test('local editor validates requests, saves atomically, detects conflicts and i
   mkdirSync(join(root, 'lib/projects'), { recursive: true });
   const dataFile = join(root, 'lib/projects/data.json');
   writeFileSync(dataFile, JSON.stringify(data));
+  const featuredFile = join(root, 'lib/projects/featured.json');
+  writeFileSync(featuredFile, JSON.stringify([data[0].slug, data[1].slug]));
   for (const project of data) {
     for (const src of [project.cover, ...(project.gallery ?? []).map((item) => item.src)].filter(Boolean)) {
       const file = join(root, 'public', src); mkdirSync(dirname(file), { recursive: true }); writeFileSync(file, png);
@@ -136,5 +138,34 @@ test('local editor validates requests, saves atomically, detects conflicts and i
   assert.equal((await move(completed.slug, 1, moved.revision)).status, 200);
   assert.deepEqual((await read()).projects, beforeMove.projects);
   assert.equal((await move(peers[0].slug, -1, (await read()).revision)).status, 400);
+
+  const readFeatured = async () => (await fetch(`${origin}/api/featured`, { headers })).json();
+  const saveFeatured = (slugs, revision, customHeaders = headers) => fetch(`${origin}/api/featured`, {
+    method: 'PUT', headers: customHeaders, body: JSON.stringify({ slugs, revision }),
+  });
+  const projectBytes = readFileSync(dataFile, 'utf8');
+  const initialFeatured = await readFeatured();
+  assert.deepEqual(initialFeatured.slugs, [data[0].slug, data[1].slug]);
+  assert.equal((await fetch(`${origin}/api/featured`)).status, 403);
+  assert.equal((await saveFeatured([], initialFeatured.revision, {})).status, 403);
+  assert.equal((await saveFeatured([], initialFeatured.revision, { ...headers, Origin: 'https://example.com' })).status, 403);
+  for (const invalid of [null, 'not-a-list', [null], ['unknown-project'], [data[0].slug, data[0].slug]]) {
+    assert.equal((await saveFeatured(invalid, initialFeatured.revision)).status, 400);
+  }
+  assert.deepEqual(await readFeatured(), initialFeatured);
+  const selection = [completed.slug, data[1].slug, data[0].slug];
+  const featuredResponse = await saveFeatured(selection, initialFeatured.revision);
+  assert.equal(featuredResponse.status, 200);
+  const updatedFeatured = await featuredResponse.json();
+  assert.deepEqual(updatedFeatured.slugs, selection);
+  assert.deepEqual(JSON.parse(readFileSync(featuredFile)), selection);
+  assert.equal((await saveFeatured([], initialFeatured.revision)).status, 409);
+  assert.equal((await saveFeatured([], updatedFeatured.revision)).status, 200);
+  assert.deepEqual((await readFeatured()).slugs, []);
+  assert.equal(readFileSync(dataFile, 'utf8'), projectBytes);
+  const beforeProjectChange = await readFeatured();
+  writeFileSync(dataFile, projectBytes + ' ');
+  assert.equal((await saveFeatured(selection, beforeProjectChange.revision)).status, 409);
+  assert.deepEqual((await readFeatured()).slugs, []);
 
 });

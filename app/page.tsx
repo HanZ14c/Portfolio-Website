@@ -39,7 +39,7 @@ export default function Home() {
           <span>04 Visual Studies</span>
         </section>
 
-        <section className="selected-work page-shell">
+        {featured.length > 0 && <section className="selected-work page-shell">
           <div className="section-heading" data-reveal>
             <p className="section-label">Selected work / 01–{String(featured.length).padStart(2, "0")}</p>
             <h2>Projects with a point of view.</h2>
@@ -53,7 +53,7 @@ export default function Home() {
             <p>{publicProjects.length} projects currently published</p>
             <Link className="button-link" href="/work">View the full index <span>↗</span></Link>
           </div>
-        </section>
+        </section>}
 
         <section className="home-about page-shell">
           <p className="section-label" data-reveal>Profile / Two disciplines, one practice</p>

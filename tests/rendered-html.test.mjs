@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -26,7 +27,7 @@ async function requestWorker(path, init = {}) {
 }
 
 test("keeps the local editor and write endpoints out of the production worker", async () => {
-  for (const path of ["/editor", "/api/projects", "/api/media", "/scripts/editor/server.mjs"]) {
+  for (const path of ["/editor", "/api/projects", "/api/media", "/api/featured", "/scripts/editor/server.mjs"]) {
     const response = await render(path);
     assert.equal(response.status, 404, path);
   }
@@ -41,7 +42,7 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(html, /Han Zhang — Computer Science, Architecture and Visual Work/);
   assert.match(html, /A portfolio of/);
   assert.match(html, /code, space, and visual studies/);
-  assert.match(html, /Selected work/);
+
   assert.match(html, /class="profile-links"/);
   assert.match(html, /Han-Zhang-Resume\.pdf/);
   assert.match(html, /aria-current="page"[^>]*>HZ/);
@@ -59,19 +60,12 @@ test("server-renders the finished portfolio home page", async () => {
   assert.match(html, /href="https:\/\/zhang-han\.com\/favicon-hz-16\.png"/);
   assert.match(html, /rel="shortcut icon" href="https:\/\/zhang-han\.com\/favicon-hz\.ico"/);
   assert.match(html, /rel="apple-touch-icon" href="https:\/\/zhang-han\.com\/apple-touch-icon-hz\.png"/);
-  const featuredTitles = [
-    "Feeling in Form",
-    "BC Travel Guide",
-    "Team Workflow Scheduler",
-    "CM Qianhai Shimao Centre",
-    "Car Dealership Manager",
-    "Grid Pursuit: Cheese",
-    "Architectural Hand Sketches",
-  ];
-  const featuredPositions = featuredTitles.map((title) => html.indexOf(title));
-  assert.ok(featuredPositions.every((position) => position >= 0));
-  assert.deepEqual(featuredPositions, [...featuredPositions].sort((first, second) => first - second));
-  assert.match(html, /2021/);
+  const selectedSlugs = JSON.parse(readFileSync(new URL('../lib/projects/featured.json', import.meta.url)));
+  const projectData = JSON.parse(readFileSync(new URL('../lib/projects/data.json', import.meta.url)));
+  const expectedSlugs = selectedSlugs.filter((slug) => projectData.some((project) => project.slug === slug && !project.hidden));
+  const renderedSlugs = [...html.matchAll(/<a\b[^>]*href="\/work\/([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(renderedSlugs, expectedSlugs);
+  assert.equal(html.includes('Selected work'), expectedSlugs.length > 0);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
 });
 

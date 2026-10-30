@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { getFeaturedProjects } from "../../lib/featured-projects";
 
 test("home exposes navigation, featured work and an accessible main landmark", async ({ page }) => {
   await page.goto("/");
@@ -8,7 +9,12 @@ test("home exposes navigation, featured work and an accessible main landmark", a
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "A portfolio of code, space, and visual studies.",
   );
-  await expect(page.getByRole("link", { name: "View Feeling in Form" })).toBeVisible();
+  const featured = getFeaturedProjects();
+  const cards = page.locator('.project-grid--featured .project-card > a');
+  await expect(cards).toHaveCount(featured.length);
+  for (let index = 0; index < featured.length; index++) {
+    await expect(cards.nth(index)).toHaveAttribute('href', `/work/${featured[index].slug}`);
+  }
 
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();

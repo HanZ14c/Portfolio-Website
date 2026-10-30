@@ -2,6 +2,8 @@ const token = document.querySelector('meta[name="editor-token"]').content;
 const $ = (selector) => document.querySelector(selector);
 const categories = ['Computer Science', 'Academic Architecture', 'Architecture Practice', 'Visual Studies'];
 let projects = [], revision = '', draft, baseline = '', busy = false;
+let featuredSlugs = [], featuredProjects = [], featuredRevision = '', featuredBaseline = '[]';
+const featuredDirty = () => JSON.stringify(featuredSlugs) !== featuredBaseline;
 const dirty = () => draft && JSON.stringify(draft) !== baseline;
 const clone = (value) => structuredClone(value);
 
@@ -22,6 +24,8 @@ async function api(path, options = {}) {
   return result;
 }
 function updateStatus() {
+  updateFeaturedStatus();
+  $('#project-tab').disabled = busy; $('#featured-tab').disabled = busy;
   $('#new-project').disabled = busy || !revision;
   for (const control of document.querySelectorAll('[data-project-move]')) control.disabled = busy || dirty() || control.dataset.boundary === 'true';
   $('#create-fields').disabled = busy;
@@ -283,5 +287,104 @@ $('#create-project').addEventListener('submit', async (event) => {
     $('#create-error').textContent = error.message; $('#create-error').hidden = false;
   } finally { busy = false; updateStatus(); }
 });
-window.addEventListener('beforeunload', (event) => { if (dirty() || busy) { event.preventDefault(); event.returnValue = ''; } });
+function featuredNotice(message = '') {
+  $('#featured-message').textContent = message; $('#featured-message').hidden = !message;
+}
+function updateFeaturedStatus() {
+  $('#featured-save').disabled = busy || !featuredRevision || !featuredDirty();
+  $('#featured-reload').disabled = busy;
+  $('#featured-fields').disabled = busy || !featuredRevision;
+  const visible = featuredSlugs.filter((slug) => featuredProjects.some((project) => project.slug === slug && !project.hidden)).length;
+  $('#featured-status').textContent = busy ? '正在处理…' : !featuredRevision ? '尚未载入' : `${visible} 个项目将显示在首页 · ${featuredDirty() ? '有未保存的更改' : '已与本地文件同步'}`;
+}
+function renderFeatured(focusKey) {
+  const selected = element('section'); selected.append(element('h3', '展示顺序'));
+  const primary = featuredSlugs.find((slug) => featuredProjects.some((project) => project.slug === slug && !project.hidden));
+  featuredSlugs.forEach((slug, index) => {
+    const project = featuredProjects.find((project) => project.slug === slug);
+    const card = element('div', undefined, 'item');
+    card.append(element('strong', `${index + 1}. ${project?.title ?? slug}`), element('p', project?.hidden ? '已隐藏 · 当前不会显示' : slug === primary ? '主要项目 · 首页大卡片' : '次要项目'));
+    const actions = element('div', undefined, 'item-actions');
+    for (const [direction, label] of [[-1, '上移'], [1, '下移']]) {
+      const key = `${slug}:${direction}`;
+      const control = button(label, () => {
+        [featuredSlugs[index], featuredSlugs[index + direction]] = [featuredSlugs[index + direction], featuredSlugs[index]];
+        renderFeatured(key);
+      });
+      control.disabled = index + direction < 0 || index + direction >= featuredSlugs.length;
+      control.dataset.featuredFocus = key; control.setAttribute('aria-label', `${project?.title ?? slug} 首页${label}`);
+      actions.append(control);
+    }
+    actions.append(button('移出首页', () => {
+      featuredSlugs.splice(index, 1); renderFeatured(slug);
+    }));
+    card.append(actions); selected.append(card);
+  });
+  if (!featuredSlugs.length) selected.append(element('p', '尚未选择项目。保存空列表将隐藏首页精选区域。', 'empty'));
+  const choices = element('section'); choices.append(element('h3', '选择项目'));
+  for (const category of categories) {
+    const group = element('div', undefined, 'item'); group.append(element('h4', category));
+    for (const project of featuredProjects.filter((project) => project.category === category)) {
+      const label = element('label', undefined, 'check');
+      const input = element('input'); input.type = 'checkbox'; input.checked = featuredSlugs.includes(project.slug);
+      input.dataset.featuredFocus = project.slug;
+      input.addEventListener('change', () => {
+        if (input.checked) featuredSlugs.push(project.slug);
+        else featuredSlugs = featuredSlugs.filter((slug) => slug !== project.slug);
+        renderFeatured(project.slug);
+      });
+      label.append(input, element('span', project.title + (project.hidden ? '（已隐藏，不会展示）' : ''))); group.append(label);
+    }
+    choices.append(group);
+  }
+  const columns = element('div', undefined, 'featured-grid'); columns.append(selected, choices);
+  $('#featured-fields').replaceChildren(columns); updateFeaturedStatus();
+  if (focusKey) {
+    const target = document.querySelector(`[data-featured-focus="${CSS.escape(focusKey)}"]`);
+    if (target && !target.disabled) target.focus();
+  }
+}
+async function loadFeatured() {
+  busy = true; updateStatus(); featuredNotice();
+  try {
+    const data = await api('/api/featured');
+    featuredSlugs = data.slugs; featuredProjects = data.projects; featuredRevision = data.revision;
+    featuredBaseline = JSON.stringify(featuredSlugs); renderFeatured();
+  } catch (error) { featuredNotice(error.message); }
+  finally { busy = false; updateStatus(); }
+}
+async function switchPanel(featured) {
+  if (busy) return;
+  $('#project-panel').hidden = featured; $('#project-sidebar').hidden = featured;
+  $('#featured-panel').hidden = !featured;
+  for (const [id, active] of [['project-tab', !featured], ['featured-tab', featured]]) {
+    $(`#${id}`).setAttribute('aria-selected', String(active)); $(`#${id}`).tabIndex = active ? 0 : -1;
+  }
+  if (featured && !featuredDirty()) await loadFeatured();
+  window.scrollTo(0, 0);
+}
+$('#project-tab').addEventListener('click', () => switchPanel(false));
+$('#featured-tab').addEventListener('click', () => switchPanel(true));
+$('.editor-tabs').addEventListener('keydown', (event) => {
+  if (busy || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const featured = event.key === 'Home' ? false : event.key === 'End' ? true : $('#featured-panel').hidden;
+  $(featured ? '#featured-tab' : '#project-tab').focus(); switchPanel(featured);
+});
+$('#featured-reload').addEventListener('click', () => {
+  if (featuredDirty() && !confirm('重新载入会放弃尚未保存的首页选择和顺序，继续？')) return;
+  loadFeatured();
+});
+$('#featured-save').addEventListener('click', async () => {
+  if (busy || !featuredRevision || !featuredDirty()) return;
+  busy = true; updateStatus(); featuredNotice();
+  try {
+    const data = await api('/api/featured', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ slugs: featuredSlugs, revision: featuredRevision }) });
+    featuredSlugs = data.slugs; featuredProjects = data.projects; featuredRevision = data.revision;
+    featuredBaseline = JSON.stringify(featuredSlugs); renderFeatured();
+    featuredNotice('首页精选已保存到本地。可以预览首页，线上网站需发布后才更新。');
+  } catch (error) { featuredNotice(error.message); }
+  finally { busy = false; updateStatus(); }
+});
+window.addEventListener('beforeunload', (event) => { if (dirty() || featuredDirty() || busy) { event.preventDefault(); event.returnValue = ''; } });
 await load();

@@ -1,14 +1,8 @@
 import { projects } from "@/lib/projects";
 
-export const featuredProjectSlugs = [
-  "feeling-in-form",
-  "bc-travel-guide",
-  "team-workflow-scheduler",
-  "qianhai-shimao-centre",
-  "car-dealership-manager",
-  "grid-pursuit-cheese",
-  "architectural-hand-sketches",
-] as const;
+import featuredSlugs from "./projects/featured.json";
+
+export const featuredProjectSlugs: readonly string[] = featuredSlugs;
 
 export function getFeaturedProjects() {
   return featuredProjectSlugs.map((slug) => {

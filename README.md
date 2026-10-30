@@ -103,7 +103,9 @@ Project records live in `lib/projects/data.json`. `lib/projects.ts` provides typ
 
 Start with `pnpm editor` as described in the quick start above, then open [http://127.0.0.1:4310](http://127.0.0.1:4310).
 
-The Chinese-language editor lists all projects, including hidden ones. Edit titles, summaries, sections, paragraph text, bullet points, standalone highlights, facts, links, cover images, galleries and display settings. Sections, facts, links and gallery images can be added, removed and reordered. Project slugs stay fixed to preserve existing URLs; homepage featured order remains in `lib/featured-projects.ts`.
+The Chinese-language editor lists all projects, including hidden ones. Edit titles, summaries, sections, paragraph text, bullet points, standalone highlights, facts, links, cover images, galleries and display settings. Sections, facts, links and gallery images can be added, removed and reordered. Project slugs stay fixed to preserve existing URLs; homepage featured selection and order are stored in `lib/projects/featured.json`.
+
+Switch to **首页精选** to choose which projects appear on the homepage and reorder them with **上移 / 下移**. The first non-hidden selection is the large primary card. Click **保存首页精选**, then **预览已保存首页**. Hidden selections remain saved but are skipped on the homepage; saving an empty selection hides the selected-work section. Removing a selection does not delete the project or change the Work index. Unsaved edits in either tab are retained when switching tabs. Conflicting homepage or project changes require reloading the selection before saving again.
 
 Use **分类内排序 → 项目上移 / 项目下移** to reorder the selected project within its category (including hidden projects). Each click immediately saves the order; save any content edits first. The sidebar follows category order, and the saved order controls `/work` in Category mode and previous/next project navigation. Homepage featured order remains independent. Sorting by title or time still uses those values.
 

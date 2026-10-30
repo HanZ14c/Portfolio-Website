@@ -12,18 +12,35 @@
   <a class="skip" href="#content">跳到编辑内容</a>
   <aside>
     <div class="brand"><span class="eyebrow">HAN ZHANG / LOCAL</span><h1>项目编辑器</h1><p>编辑作品，保存后在网站中预览。</p></div>
+    <div class="editor-tabs" role="tablist" aria-label="编辑器分页">
+      <button id="project-tab" role="tab" aria-selected="true" aria-controls="project-panel" type="button">项目编辑</button>
+      <button id="featured-tab" role="tab" aria-selected="false" aria-controls="featured-panel" tabindex="-1" type="button">首页精选</button>
+    </div>
+    <div id="project-sidebar">
     <button id="new-project" type="button" class="primary" disabled>＋ 新增项目</button>
     <label class="search">查找项目<input id="search" type="search" placeholder="标题或分类"></label>
     <nav id="projects" aria-label="选择项目"></nav>
+    </div>
     <p class="aside-note">保存到当前本地仓库。<br>线上内容将在发布后更新。</p>
   </aside>
   <main id="content">
+    <div id="project-panel" role="tabpanel" aria-labelledby="project-tab">
     <header class="toolbar">
       <div><span class="eyebrow" id="project-category">PORTFOLIO</span><h2 id="project-title">正在读取项目…</h2><p id="status" role="status" aria-live="polite">连接本地编辑器</p></div>
       <div class="actions"><a id="preview" target="_blank" rel="noopener" aria-disabled="true">预览已保存页面 ↗</a><button id="reload" type="button">重新载入</button><button id="save" class="primary" type="submit" form="editor" disabled>保存项目</button></div>
     </header>
     <p id="message" role="alert" hidden></p>
     <form id="editor"><fieldset id="fields" disabled></fieldset></form>
+    </div>
+    <div id="featured-panel" role="tabpanel" aria-labelledby="featured-tab" hidden>
+      <header class="toolbar">
+        <div><span class="eyebrow">HOME / SELECTED WORK</span><h2>首页精选</h2><p id="featured-status" role="status" aria-live="polite">尚未载入</p></div>
+        <div class="actions"><a href="http://localhost:3000/" target="_blank" rel="noopener">预览已保存首页 ↗</a><button id="featured-reload" type="button">重新载入精选</button><button id="featured-save" class="primary" type="button" disabled>保存首页精选</button></div>
+      </header>
+      <p class="hint featured-help">勾选要展示的项目，再用上移／下移调整顺序。第一个未隐藏的项目使用主要大卡片；取消勾选只移出首页，不删除项目。切换分页会保留未保存的修改。</p>
+      <p id="featured-message" role="alert" hidden></p>
+      <fieldset id="featured-fields" disabled></fieldset>
+    </div>
   </main>
   <dialog id="create-dialog" aria-labelledby="create-title">
     <form id="create-project">

@@ -21,6 +21,18 @@ const link = (value) => {
   catch { return false; }
 };
 
+function writeJson(file, value) {
+  const content = JSON.stringify(value, null, 2) + '\n';
+  const temporary = `${file}.${randomUUID()}.tmp`;
+  try {
+    writeFileSync(temporary, content, { flag: 'wx' });
+    renameSync(temporary, file);
+  } finally {
+    try { unlinkSync(temporary); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
+  return revision(content);
+}
+
 function validateProject(project) {
   const required = ['slug', 'title', 'subtitle', 'category', 'time', 'period', 'role', 'status', 'excerpt', 'statement', 'accent'];
   const optionalText = ['location', 'codeAccent', 'cover', 'coverAlt', 'galleryLabel', 'galleryTitle'];
@@ -74,10 +86,16 @@ function imageExtension(bytes) {
 
 export function createEditorServer(root = resolve(directory, '../..')) {
   const dataFile = join(root, 'lib/projects/data.json');
+  const featuredFile = join(root, 'lib/projects/featured.json');
   const token = randomUUID();
   const snapshot = () => {
     const content = readFileSync(dataFile, 'utf8');
     return { projects: JSON.parse(content), revision: revision(content) };
+  };
+  const featuredSnapshot = () => {
+    const current = snapshot();
+    const content = readFileSync(featuredFile, 'utf8');
+    return { slugs: JSON.parse(content), projects: current.projects, revision: revision(current.revision + content) };
   };
   const server = createServer(async (request, response) => {
     const send = (status, value, type = 'application/json') => {
@@ -92,6 +110,18 @@ export function createEditorServer(root = resolve(directory, '../..')) {
       const url = new URL(request.url, origin);
       if (url.pathname.startsWith('/api/')) {
         if (request.headers['x-editor-token'] !== token) fail('编辑会话无效，请刷新页面。', 403);
+        if (url.pathname === '/api/featured' && request.method === 'GET') return send(200, featuredSnapshot());
+        if (url.pathname === '/api/featured' && request.method === 'PUT') {
+          let payload;
+          try { payload = JSON.parse(await readBody(request, 1024 * 1024)); }
+          catch (error) { if (error.status) throw error; fail('请求不是有效 JSON。'); }
+          if (!object(payload) || !Array.isArray(payload.slugs) || !payload.slugs.every((slug) => typeof slug === 'string')) fail('首页项目列表格式无效。');
+          const current = featuredSnapshot();
+          if (payload.revision !== current.revision) fail('首页配置或项目资料已变化，请重新载入首页精选后再保存。', 409);
+          if (new Set(payload.slugs).size !== payload.slugs.length || payload.slugs.some((slug) => !current.projects.some((project) => project.slug === slug))) fail('首页项目不能重复，且必须是已有项目。');
+          writeJson(featuredFile, payload.slugs);
+          return send(200, featuredSnapshot());
+        }
         if (url.pathname === '/api/projects' && request.method === 'GET') return send(200, snapshot());
         if (url.pathname === '/api/projects' && ['PUT', 'POST', 'PATCH'].includes(request.method)) {
           let payload;
@@ -120,15 +150,8 @@ export function createEditorServer(root = resolve(directory, '../..')) {
             if (creating) current.projects.push(payload.project);
             else current.projects[index] = payload.project;
           }
-          const content = JSON.stringify(current.projects, null, 2) + '\n';
-          const temporary = `${dataFile}.${randomUUID()}.tmp`;
-          try {
-            writeFileSync(temporary, content, { flag: 'wx' });
-            renameSync(temporary, dataFile);
-          } finally {
-            try { unlinkSync(temporary); } catch (error) { if (error.code !== 'ENOENT') throw error; }
-          }
-          return send(creating ? 201 : 200, { ...(reordering ? { projects: current.projects } : { project: payload.project }), revision: revision(content) });
+          const savedRevision = writeJson(dataFile, current.projects);
+          return send(creating ? 201 : 200, { ...(reordering ? { projects: current.projects } : { project: payload.project }), revision: savedRevision });
         }
         if (url.pathname === '/api/media' && request.method === 'POST') {
           const slug = url.searchParams.get('slug');
