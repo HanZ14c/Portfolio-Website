@@ -111,4 +111,30 @@ test('local editor validates requests, saves atomically, detects conflicts and i
   assert.equal((await save(completed, created.revision)).status, 200);
   assert.deepEqual((await read()).projects.at(-1), completed);
   assert.deepEqual((await read()).projects.slice(0, -1), beforeCreate.projects);
+  const move = (slug, direction, revision, customHeaders = headers) => fetch(`${origin}/api/projects`, {
+    method: 'PATCH', headers: customHeaders, body: JSON.stringify({ slug, direction, revision }),
+  });
+  const beforeMove = await read();
+  assert.equal((await move(completed.slug, -1, beforeMove.revision, {})).status, 403);
+  assert.equal((await move(completed.slug, -1, beforeMove.revision, { ...headers, Origin: 'https://example.com' })).status, 403);
+  assert.equal((await move(completed.slug, -1, oldRevision)).status, 409);
+  assert.equal((await move(completed.slug, 0, beforeMove.revision)).status, 400);
+  assert.equal((await move('missing', -1, beforeMove.revision)).status, 404);
+  assert.equal((await move(completed.slug, 1, beforeMove.revision)).status, 400);
+  assert.deepEqual(await read(), beforeMove);
+  const peers = beforeMove.projects.filter((project) => project.category === completed.category);
+  const expected = [...beforeMove.projects];
+  const firstIndex = expected.findIndex((project) => project.slug === peers.at(-2).slug);
+  const lastIndex = expected.findIndex((project) => project.slug === completed.slug);
+  [expected[firstIndex], expected[lastIndex]] = [expected[lastIndex], expected[firstIndex]];
+  const movedResponse = await move(completed.slug, -1, beforeMove.revision);
+  assert.equal(movedResponse.status, 200);
+  const moved = await movedResponse.json();
+  assert.deepEqual(moved.projects, expected);
+  assert.deepEqual(await read(), moved);
+  assert.equal((await move(completed.slug, 1, beforeMove.revision)).status, 409);
+  assert.equal((await move(completed.slug, 1, moved.revision)).status, 200);
+  assert.deepEqual((await read()).projects, beforeMove.projects);
+  assert.equal((await move(peers[0].slug, -1, (await read()).revision)).status, 400);
+
 });

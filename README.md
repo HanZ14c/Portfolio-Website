@@ -105,6 +105,8 @@ Start with `pnpm editor` as described in the quick start above, then open [http:
 
 The Chinese-language editor lists all projects, including hidden ones. Edit titles, summaries, sections, paragraph text, bullet points, standalone highlights, facts, links, cover images, galleries and display settings. Sections, facts, links and gallery images can be added, removed and reordered. Project slugs stay fixed to preserve existing URLs; homepage featured order remains in `lib/featured-projects.ts`.
 
+Use **分类内排序 → 项目上移 / 项目下移** to reorder the selected project within its category (including hidden projects). Each click immediately saves the order; save any content edits first. The sidebar follows category order, and the saved order controls `/work` in Category mode and previous/next project navigation. Homepage featured order remains independent. Sorting by title or time still uses those values.
+
 Click **＋ 新增项目** to enter a title, category and unique project slug (up to 80 lowercase letters, digits and hyphens, e.g. `my-new-project`). **创建项目** saves a hidden draft and opens it in the editor, ready for text and media uploads. When ready, uncheck **隐藏项目** and save to include it in `/work` and enable its detail page. New projects are not automatically added to the homepage featured selection.
 
 Choose **保存项目** to write changes to `lib/projects/data.json`, then **预览已保存页面** to inspect the existing website template. Unsaved changes trigger a reminder when leaving or switching projects. Conflicting changes from another editor or program are rejected rather than overwritten; copy any draft text you need before choosing **重新载入**.

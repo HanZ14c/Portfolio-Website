@@ -23,6 +23,7 @@ async function api(path, options = {}) {
 }
 function updateStatus() {
   $('#new-project').disabled = busy || !revision;
+  for (const control of document.querySelectorAll('[data-project-move]')) control.disabled = busy || dirty() || control.dataset.boundary === 'true';
   $('#create-fields').disabled = busy;
   $('#save').disabled = busy || !dirty();
   $('#reload').disabled = busy;
@@ -127,7 +128,7 @@ function uploader(label, multiple, onUpload) {
 function renderNavigation() {
   const nav = $('#projects'); nav.replaceChildren();
   const query = $('#search').value.toLowerCase();
-  for (const project of projects.filter((project) => `${project.title} ${project.category} ${project.slug}`.toLowerCase().includes(query))) {
+  for (const project of categories.flatMap((category) => projects.filter((project) => project.category === category)).filter((project) => `${project.title} ${project.category} ${project.slug}`.toLowerCase().includes(query))) {
     const node = button(project.title, () => {
       if (busy || project.slug === draft?.slug) return;
       if (dirty() && !confirm('当前项目有未保存更改。放弃这些更改并切换项目？')) return;
@@ -143,6 +144,19 @@ function render() {
   $('#project-title').textContent = draft.title;
   $('#project-category').textContent = draft.category;
   renderNavigation();
+  const savedProject = projects.find((project) => project.slug === draft.slug);
+  const siblings = projects.filter((project) => project.category === savedProject.category);
+  const position = siblings.findIndex((project) => project.slug === draft.slug);
+  const orderControls = element('div', undefined, 'actions');
+  for (const [direction, label] of [[-1, '项目上移'], [1, '项目下移']]) {
+    const control = button(label, () => moveProject(direction));
+    control.dataset.projectMove = String(direction);
+    control.dataset.boundary = String(position + direction < 0 || position + direction >= siblings.length);
+    orderControls.append(control);
+  }
+  const order = block('分类内排序',
+    element('p', `${savedProject.category} · 第 ${position + 1} / ${siblings.length} 项（含隐藏项目）`),
+    element('p', '点击后立即保存顺序。请先保存内容修改再排序；影响 Work 默认排序和前后项目导航，首页精选不变。', 'hint'), orderControls);
   const basics = block('01 / 基本信息',
     field('项目标题', draft, 'title', { required: true }),
     field('副标题', draft, 'subtitle'),
@@ -187,8 +201,19 @@ function render() {
     element('p', '隐藏项目的详情页返回 404；需要公开并保存后才能在网站中预览。', 'hint'),
     grid(field('主题颜色', draft, 'accent', { type: 'color' }), field('代码卡片颜色（可选，例 #c7d7e6）', draft, 'codeAccent')),
     field('卡片尺寸', draft, 'cardSize', { choices: [['', '默认'], ['standard', '标准'], ['wide', '宽卡片']] }));
-  $('#fields').replaceChildren(basics, content, facts, gallery, display);
+  $('#fields').replaceChildren(order, basics, content, facts, gallery, display);
   updateStatus();
+}
+async function moveProject(direction) {
+  if (busy || dirty()) return;
+  busy = true; updateStatus(); notice();
+  try {
+    const result = await api('/api/projects', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ slug: draft.slug, direction, revision }) });
+    projects = result.projects; revision = result.revision;
+    selectProject(projects.find((project) => project.slug === draft.slug));
+    notice('分类内顺序已保存。刷新 Work 页面即可查看。');
+  } catch (error) { notice(error.message); }
+  finally { busy = false; updateStatus(); }
 }
 async function load() {
   busy = true; updateStatus();

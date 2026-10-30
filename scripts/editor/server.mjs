@@ -93,22 +93,33 @@ export function createEditorServer(root = resolve(directory, '../..')) {
       if (url.pathname.startsWith('/api/')) {
         if (request.headers['x-editor-token'] !== token) fail('编辑会话无效，请刷新页面。', 403);
         if (url.pathname === '/api/projects' && request.method === 'GET') return send(200, snapshot());
-        if (url.pathname === '/api/projects' && ['PUT', 'POST'].includes(request.method)) {
+        if (url.pathname === '/api/projects' && ['PUT', 'POST', 'PATCH'].includes(request.method)) {
           let payload;
           try { payload = JSON.parse(await readBody(request, 1024 * 1024)); }
           catch (error) { if (error.status) throw error; fail('请求不是有效 JSON。'); }
           if (!object(payload)) fail('请求格式无效。');
-          validateProject(payload.project);
+          const reordering = request.method === 'PATCH';
+          if (!reordering) validateProject(payload.project);
           // Synchronous compare + atomic rename keeps concurrent saves serialized in this local process.
           const current = snapshot();
           if (payload.revision !== current.revision) fail('文件已被其他窗口或程序修改。请保留当前内容，重新载入后再编辑。', 409);
-          const index = current.projects.findIndex((project) => project.slug === payload.project.slug);
           const creating = request.method === 'POST';
-          if (creating && index >= 0) fail('项目地址已存在，请换一个地址。', 409);
-          if (!creating && index < 0) fail('找不到项目；项目地址不能修改。', 404);
-          for (const path of [payload.project.cover, ...(payload.project.gallery ?? []).map((item) => item.src)].filter(Boolean)) mediaFile(root, path);
-          if (creating) current.projects.push(payload.project);
-          else current.projects[index] = payload.project;
+          if (reordering) {
+            if (typeof payload.slug !== 'string' || ![-1, 1].includes(payload.direction)) fail('排序请求无效。');
+            const index = current.projects.findIndex((project) => project.slug === payload.slug);
+            if (index < 0) fail('找不到项目。', 404);
+            const siblings = current.projects.map((project, position) => project.category === current.projects[index].category ? position : -1).filter((position) => position >= 0);
+            const target = siblings[siblings.indexOf(index) + payload.direction];
+            if (target === undefined) fail('项目已经位于该分类的最前或最后。');
+            [current.projects[index], current.projects[target]] = [current.projects[target], current.projects[index]];
+          } else {
+            const index = current.projects.findIndex((project) => project.slug === payload.project.slug);
+            if (creating && index >= 0) fail('项目地址已存在，请换一个地址。', 409);
+            if (!creating && index < 0) fail('找不到项目；项目地址不能修改。', 404);
+            for (const path of [payload.project.cover, ...(payload.project.gallery ?? []).map((item) => item.src)].filter(Boolean)) mediaFile(root, path);
+            if (creating) current.projects.push(payload.project);
+            else current.projects[index] = payload.project;
+          }
           const content = JSON.stringify(current.projects, null, 2) + '\n';
           const temporary = `${dataFile}.${randomUUID()}.tmp`;
           try {
@@ -117,7 +128,7 @@ export function createEditorServer(root = resolve(directory, '../..')) {
           } finally {
             try { unlinkSync(temporary); } catch (error) { if (error.code !== 'ENOENT') throw error; }
           }
-          return send(creating ? 201 : 200, { project: payload.project, revision: revision(content) });
+          return send(creating ? 201 : 200, { ...(reordering ? { projects: current.projects } : { project: payload.project }), revision: revision(content) });
         }
         if (url.pathname === '/api/media' && request.method === 'POST') {
           const slug = url.searchParams.get('slug');
