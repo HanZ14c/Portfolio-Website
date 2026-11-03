@@ -60,11 +60,11 @@
     "location": "Xi'an, China",
     "role": "Individual design and independent revision",
     "status": "Academic / Unbuilt",
-    "showSections": true,
+    "showSections": false,
     "excerpt": "A library and cultural space that translates emotion, perception, events and movement into a field of spatial encounters.",
     "statement": "Instead of beginning with rooms, the project begins with feelings and asks what kinds of events a space can invite.",
     "accent": "#ed1f24",
-    "cover": "/media/emotion-time/revised-4.webp",
+    "cover": "/media/editor/feeling-in-form/ade8668f-abc1-44af-9249-02d702b92634.jpg",
     "coverAlt": "Exploded axonometric drawing of Feeling in Form",
     "featured": true,
     "cardSize": "wide",
@@ -112,17 +112,17 @@
     ],
     "gallery": [
       {
-        "src": "/media/emotion-time/revised-2.webp",
-        "alt": "Context research and massing generation for Feeling in Form",
-        "caption": "Context, site and massing development in the revised proposal."
+        "src": "/media/editor/feeling-in-form/2a417775-c12e-49e3-b2b2-1f271a5a19c1.jpg",
+        "alt": "",
+        "caption": ""
       },
       {
-        "src": "/media/emotion-time/revised-3.webp",
+        "src": "/media/editor/feeling-in-form/c1e0f3f9-1af9-43ca-adb4-d0db04173d87.jpg",
         "alt": "Event and spatial sequence research diagrams",
         "caption": "Parallel sequences testing space, event and movement."
       },
       {
-        "src": "/media/emotion-time/revised-5.webp",
+        "src": "/media/editor/feeling-in-form/b8ede019-7699-4bf2-afcc-b7bd7e643a2c.jpg",
         "alt": "Plan and interior views of Feeling in Form",
         "caption": "Plan, material atmosphere and spatial fragments."
       }
