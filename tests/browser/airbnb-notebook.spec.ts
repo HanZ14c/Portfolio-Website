@@ -14,7 +14,9 @@ test("Airbnb embeds the complete notebook and fits its content", async ({ page }
     viewport: window.innerHeight,
     images: [...body.querySelectorAll("img")].every((image) => image.complete && image.naturalWidth > 0),
   }));
-  expect(Math.abs(metrics.content - metrics.viewport)).toBeLessThan(2);
+  await expect.poll(() => notebook.locator("body").evaluate((body) =>
+    Math.abs(body.getBoundingClientRect().height - window.innerHeight),
+  )).toBeLessThan(2);
   expect(metrics.images).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
