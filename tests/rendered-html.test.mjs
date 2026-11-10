@@ -150,11 +150,13 @@ test("server-renders the Team Workflow Scheduler summary without its narrative",
   assert.match(html, /"@type":"CreativeWork"/);
 });
 
-test("selectively renders complete project narratives", async () => {
+test("renders the Qianhai drawings without the hidden narrative", async () => {
   const completeResponse = await render("/work/qianhai-shimao-centre");
   const completeHtml = await completeResponse.text();
-  assert.match(completeHtml, /class="project-sections page-shell"/);
-  assert.match(completeHtml, /Coordination below the public ground/);
+  assert.doesNotMatch(completeHtml, /Coordination below the public ground/);
+  for (const name of ["basement-plan", "pavilion-1-plan", "pavilion-2-plan", "pavilion-2-elevation"]) {
+    assert.ok(completeHtml.includes(`qianhai-${name}.png`));
+  }
 
   const computerSciencePaths = [
     "/work/team-workflow-scheduler",

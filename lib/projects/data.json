@@ -546,7 +546,7 @@
     "location": "Shenzhen, China",
     "role": "Architectural assistant — basement technical drawings and consultant coordination",
     "status": "Completed / Professional team project",
-    "showSections": true,
+    "showSections": false,
     "excerpt": "Three public pavilions respond to distinct functions and positions within a larger urban development.",
     "statement": "My contribution focused on translating a complex public project into coordinated basement documentation.",
     "accent": "#e8b3ac",
@@ -592,6 +592,30 @@
         "body": [
           "This page records my contribution within a larger professional team. Design authorship and project credit remain with the respective firms and collaborators."
         ]
+      }
+    ],
+    "galleryLabel": "Technical drawings",
+    "galleryTitle": "Plans, elevation and coordination.",
+    "gallery": [
+      {
+        "src": "/media/architecture-practice/qianhai-basement-plan.png",
+        "alt": "Basement architectural plan showing the swimming pool, changing rooms, commercial areas, circulation and fire compartment annotations.",
+        "caption": "Basement plan detail — circulation, programme and fire compartment coordination."
+      },
+      {
+        "src": "/media/architecture-practice/qianhai-pavilion-1-plan.png",
+        "alt": "Pavilion 1 architectural plan showing commercial space, stairs, lifts and the surrounding public passage.",
+        "caption": "Pavilion 1 — plan and public circulation."
+      },
+      {
+        "src": "/media/architecture-practice/qianhai-pavilion-2-plan.png",
+        "alt": "Pavilion 2 architectural plan showing the fire control room, electrical room, toilets, property management room and commercial space.",
+        "caption": "Pavilion 2 — plan and service spaces."
+      },
+      {
+        "src": "/media/architecture-practice/qianhai-pavilion-2-elevation.png",
+        "alt": "Pavilion 2 elevation showing glazing, stone cladding, perforated aluminium panels and level annotations.",
+        "caption": "Pavilion 2 — elevation and facade materials."
       }
     ]
   },

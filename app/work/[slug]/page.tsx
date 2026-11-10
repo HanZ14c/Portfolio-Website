@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
+import { AirbnbNotebook } from "@/app/components/AirbnbNotebook";
 import { ProjectCard } from "@/app/components/ProjectCard";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
@@ -115,7 +116,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {!project.visualOnly && (
           <>
             <section className="project-intro page-shell" data-reveal>
-              <p className="section-label">Project premise</p>
+              {project.slug !== "airbnb-ml" && <p className="section-label">Project premise</p>}
               <h2>{project.statement}</h2>
               <p>{project.excerpt}</p>
               {project.links && (
@@ -128,6 +129,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               )}
             </section>
+
+            {project.slug === "airbnb-ml" && <AirbnbNotebook />}
 
             {project.highlights && project.highlights.length > 0 && (
               <section className="project-sections page-shell" aria-label="Project highlights">
@@ -171,7 +174,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </>
         )}
 
-        {project.gallery && project.showGallery !== false && (
+        {project.slug !== "airbnb-ml" && project.gallery && project.showGallery !== false && (
           <section className={`project-gallery page-shell${project.visualOnly ? " project-gallery--visual-only" : ""}`}>
             {!project.visualOnly && <div className="section-heading" data-reveal>
               <p className="section-label">{project.galleryLabel ?? "Selected project material"}</p>
