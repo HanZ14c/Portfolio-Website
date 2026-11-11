@@ -232,12 +232,13 @@ test("keeps analytics disabled when no production site token is configured", asy
   assert.doesNotMatch(html, /static\.cloudflareinsights\.com\/beacon\.min\.js/);
 });
 
-test("server-renders the Car Dealership Manager summary and gallery", async () => {
+test("server-renders the DealerDesk summary and gallery", async () => {
   const response = await render("/work/car-dealership-manager");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Java 11\+/);
-  assert.match(html, /JUnit 5 \/ 39 tests/);
+  assert.match(html, /DealerDesk/);
+  assert.match(html, /JUnit 5/);
+  assert.match(html, /1ae84706-606c-454e-8f9c-f806512fe8c9\.png/);
   assert.match(html, /uml-design-diagram\.png/);
   assert.match(html, /Car-Dealership-Manager/);
   assert.doesNotMatch(html, /singleton EventLog/);

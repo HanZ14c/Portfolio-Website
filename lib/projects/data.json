@@ -621,7 +621,7 @@
   },
   {
     "slug": "car-dealership-manager",
-    "title": "Car Dealership Manager",
+    "title": "DealerDesk",
     "subtitle": "Java Swing · OOP domain modelling · JSON · JUnit 5",
     "category": "Computer Science",
     "time": "2025",
@@ -637,7 +637,7 @@
     "facts": [
       {
         "label": "Language",
-        "value": "Java 11+"
+        "value": "Java"
       },
       {
         "label": "Interfaces",
@@ -653,11 +653,7 @@
       },
       {
         "label": "Testing",
-        "value": "JUnit 5 / 39 tests"
-      },
-      {
-        "label": "Quality",
-        "value": "Checkstyle + UML"
+        "value": "JUnit 5"
       }
     ],
     "sections": [
@@ -741,7 +737,8 @@
         "label": "View repository",
         "href": "https://github.com/HanZ14c/Car-Dealership-Manager"
       }
-    ]
+    ],
+    "cover": "/media/editor/car-dealership-manager/1ae84706-606c-454e-8f9c-f806512fe8c9.png"
   },
   {
     "slug": "shenzhen-junior-high-school",
@@ -1417,7 +1414,8 @@
     "hidden": false,
     "showSections": true,
     "facts": [],
-    "sections": []
+    "sections": [],
+    "cover": "/media/editor/tabnext/1b7efc2c-6f04-4061-8d09-4cdeda97e038.png"
   },
   {
     "slug": "family-tree-database",
