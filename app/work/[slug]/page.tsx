@@ -178,7 +178,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <section className={`project-gallery page-shell${project.visualOnly ? " project-gallery--visual-only" : ""}`}>
             {!project.visualOnly && <div className="section-heading" data-reveal>
               <p className="section-label">{project.galleryLabel ?? "Selected project material"}</p>
-              <h2>{project.galleryTitle ?? "Drawings, systems and outcomes."}</h2>
+              {project.galleryTitle && <h2>{project.galleryTitle}</h2>}
             </div>}
             {project.galleryLayout === "process-triptych" ? (
               <>

@@ -1,52 +1,82 @@
 [
   {
-    "title": "Airbnb Machine Learning",
-    "slug": "airbnb-ml",
+    "title": "InsightUBC",
+    "slug": "insight-ubc",
     "category": "Computer Science",
-    "subtitle": "Supervised machine learning study",
+    "subtitle": "TypeScript · Express · REST API",
     "time": "2026",
     "period": "2026",
-    "role": "",
-    "status": "Repository available",
-    "excerpt": "",
-    "statement": "",
+    "role": "Software developer on a course team",
+    "status": "In Progress",
+    "excerpt": "A web application for importing, querying and visualizing UBC Vancouver course and classroom data.",
+    "statement": "Explore course section outcomes over time and compare classroom capacity across campus.",
     "accent": "#315f94",
     "hidden": false,
     "showSections": true,
-    "facts": [],
-    "sections": [],
-    "cover": "/media/editor/airbnb-ml/dc70f085-bd27-4b2a-8da5-22cace8b4276.jpg",
-    "gallery": [
+    "facts": [
       {
-        "src": "/media/editor/airbnb-ml/5961bedf-ae66-496a-80b5-f8ec045a5cb8.png",
-        "alt": "",
-        "caption": ""
+        "label": "Context",
+        "value": "UBC CPSC 310 team project"
       },
       {
-        "src": "/media/editor/airbnb-ml/0629b527-0532-4b00-b08c-ed90af88bb04.png",
-        "alt": "",
-        "caption": ""
+        "label": "Stack",
+        "value": "TypeScript / Node.js / Express"
       },
       {
-        "src": "/media/editor/airbnb-ml/853634ce-837a-469e-9212-d54c30712780.png",
-        "alt": "",
-        "caption": ""
+        "label": "Data",
+        "value": "Course sections and campus rooms"
       },
       {
-        "src": "/media/editor/airbnb-ml/ab9942e7-8f59-4b2d-92c4-4f1f6b3e66ed.png",
-        "alt": "",
-        "caption": ""
+        "label": "Workflow",
+        "value": "ZIP uploads, filtering and pagination"
       },
       {
-        "src": "/media/editor/airbnb-ml/5db888c7-ec8a-4597-847c-eff8d033224b.png",
-        "alt": "",
-        "caption": ""
+        "label": "Visualizations",
+        "value": "Course averages, room capacity and section assignments"
       }
     ],
-    "links": [
+    "sections": [],
+    "cover": "/media/editor/insight-ubc/3ef9646a-f659-4070-b3ae-e4ca15e039f9.png",
+    "gallery": [
       {
-        "label": "Github Repository",
-        "href": "https://github.com/HanZ14c/airbnb-ml"
+        "src": "/media/editor/insight-ubc/fa72ce16-2d9a-4574-b3be-91aebd202a39.jpg",
+        "alt": "Business Logic",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/439381b7-1d99-4032-b7c7-9f1281010374.jpg",
+        "alt": "Data Import",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/76a8963e-4a60-453f-b1c7-6f9fc9c147a8.jpg",
+        "alt": "Data Persisitence",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/baa27f96-bd27-4ddd-bb4b-af2fd695fb3a.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/cb431f98-dd66-44b5-a085-9be8e021f3c0.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/e06b2d81-3225-48a3-bf59-ac8ed1157350.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/d8580ee9-d03f-415f-84db-24e3e292add5.png",
+        "alt": "",
+        "caption": ""
+      },
+      {
+        "src": "/media/editor/insight-ubc/e3107658-0eb6-4296-8127-5710ba53e431.png",
+        "alt": "",
+        "caption": ""
       }
     ]
   },
@@ -129,126 +159,74 @@
     ]
   },
   {
-    "slug": "team-workflow-scheduler",
-    "title": "Team Workflow Scheduler",
-    "subtitle": "Java · TCP sockets · concurrency · JavaFX",
+    "title": "Airbnb Machine Learning",
+    "slug": "airbnb-ml",
     "category": "Computer Science",
+    "subtitle": "Python · scikit-learn",
     "time": "2026",
-    "period": "2026 / Software project",
-    "role": "System architecture, protocol, UI and implementation",
+    "period": "2026",
+    "role": "Data analysis and model development",
     "status": "Repository available",
-    "showSections": false,
-    "excerpt": "A Java client-server application for managing shared team tasks through a JavaFX desktop client or a command-line interface, with TCP networking and JSON persistence.",
-    "statement": "A compact exercise in keeping several clients, a shared task lifecycle and persistent state consistent through a deliberately small, legible protocol.",
-    "accent": "#ff5636",
-    "codeAccent": "#c7d7e6",
-    "featured": true,
-    "cardSize": "standard",
+    "excerpt": "A regression study predicting monthly review activity for previously reviewed Airbnb listings using the 2019 NYC dataset.",
+    "statement": "Compare regression models and explain which listing attributes influence predicted review activity.",
+    "accent": "#315f94",
+    "hidden": false,
+    "showSections": true,
     "facts": [
       {
-        "label": "Language",
-        "value": "Java"
+        "label": "Stack",
+        "value": "Python / pandas / scikit-learn / SHAP"
       },
       {
-        "label": "Client interfaces",
-        "value": "JavaFX + CLI"
+        "label": "Dataset",
+        "value": "NYC Airbnb Open Data (2019)"
       },
       {
-        "label": "Architecture",
-        "value": "Client–server"
+        "label": "Target",
+        "value": "Reviews per month"
       },
       {
-        "label": "Networking",
-        "value": "TCP sockets / Port 5050"
+        "label": "Selected model",
+        "value": "Tuned Random Forest"
       },
       {
-        "label": "Persistence",
-        "value": "JSON / data/tasks.json"
-      },
-      {
-        "label": "Testing",
-        "value": "JUnit 5"
+        "label": "Recorded test MAE",
+        "value": "0.8656 reviews per month"
       }
     ],
-    "sections": [
+    "sections": [],
+    "cover": "/media/editor/airbnb-ml/dc70f085-bd27-4b2a-8da5-22cace8b4276.jpg",
+    "gallery": [
       {
-        "label": "01 / Overview",
-        "title": "One workflow, several clients",
-        "body": [
-          "The application manages shared team tasks across a JavaFX desktop client and a command-line client for testing raw protocol commands. Both communicate with the same TCP server, so task state must remain predictable even when several users connect at the same time.",
-          "Clients send one-line text commands; the server parses each request, updates the shared task list and saves the result to a JSON file. The desktop table refreshes after every operation so the interface stays synchronized with server state."
-        ]
+        "src": "/media/editor/airbnb-ml/5961bedf-ae66-496a-80b5-f8ec045a5cb8.png",
+        "alt": "",
+        "caption": ""
       },
       {
-        "label": "02 / Capabilities",
-        "title": "The complete task lifecycle",
-        "body": [
-          "Tasks carry a title, assignee, status, priority and ISO-formatted due time. The application supports the full create, read, update and delete workflow while automatically moving unfinished tasks into an overdue state when their deadline passes."
-        ],
-        "points": [
-          "Add tasks with title, assignee, status, priority and due time",
-          "Update every task field",
-          "Delete tasks by task ID",
-          "List all persisted tasks",
-          "READY · IN_PROGRESS · DONE · OVERDUE · CANCELED",
-          "Automatic overdue-state updates"
-        ]
+        "src": "/media/editor/airbnb-ml/0629b527-0532-4b00-b08c-ed90af88bb04.png",
+        "alt": "",
+        "caption": ""
       },
       {
-        "label": "03 / Architecture",
-        "title": "A small distributed application",
-        "body": [
-          "The server listens on port 5050 and creates a dedicated ClientHandler thread for each accepted socket connection. Every handler parses one command and delegates it to a shared SchedulerService, which owns the task lifecycle independently of either interface.",
-          "A ConcurrentHashMap provides the shared task collection, with synchronized task mutations and serialized saves protecting critical updates. JSON persistence restores the workspace between sessions, while the service recalculates overdue states whenever tasks are listed or changed."
-        ],
-        "points": [
-          "Thread-per-connection socket handling",
-          "Shared SchedulerService domain layer",
-          "ConcurrentHashMap task storage",
-          "Synchronized task updates and JSON writes"
-        ]
+        "src": "/media/editor/airbnb-ml/853634ce-837a-469e-9212-d54c30712780.png",
+        "alt": "",
+        "caption": ""
       },
       {
-        "label": "04 / Protocol",
-        "title": "A readable one-line command format",
-        "body": [
-          "The custom protocol uses a command followed by key-value fields. Its parser accepts quoted values and escaped characters, allowing task titles and assignee names to contain spaces without making the wire format difficult to inspect or test."
-        ],
-        "points": [
-          "ADD title=\"Test 1\" assignee=\"Lee\" status=READY priority=1 dueAt=2026-01-01T17:00:00Z",
-          "LIST",
-          "UPDATE taskId=1 title=\"Review\" status=IN_PROGRESS priority=2",
-          "DELETE taskId=1"
-        ]
+        "src": "/media/editor/airbnb-ml/ab9942e7-8f59-4b2d-92c4-4f1f6b3e66ed.png",
+        "alt": "",
+        "caption": ""
       },
       {
-        "label": "05 / Interfaces",
-        "title": "A desktop workflow and a direct protocol client",
-        "body": [
-          "The JavaFX client separates add, update and delete actions into dedicated tabs and presents server data in a task table. Network requests run away from the UI thread, then use Platform.runLater to update the interface safely after the server responds.",
-          "A command-line client provides a second path into the same server. It keeps the protocol visible during development and makes client-server behaviour easier to inspect without the graphical interface."
-        ]
-      },
-      {
-        "label": "06 / Quality",
-        "title": "Behaviour made testable",
-        "body": [
-          "The project separates domain behaviour from presentation and transport concerns. JUnit 5 tests exercise protocol parsing and formatting as well as adding, listing, updating, deleting, persisting and automatically marking tasks overdue.",
-          "Tests use temporary JSON files, keeping service behaviour isolated from the application’s saved task data and making changes safer as the feature set grows."
-        ]
-      },
-      {
-        "label": "07 / Run locally",
-        "title": "Two clients, one server",
-        "body": [
-          "Start SchedulerServer.java first, then run either SchedulerFxClient.java for the desktop interface or SchedulerClient.java for command-line access. Both clients connect to the server on localhost:5050."
-        ]
+        "src": "/media/editor/airbnb-ml/5db888c7-ec8a-4597-847c-eff8d033224b.png",
+        "alt": "",
+        "caption": ""
       }
     ],
     "links": [
       {
-        "label": "View repository",
-        "href": "https://github.com/HanZ14c/Team-Workflow-Scheduler"
+        "label": "Github Repository",
+        "href": "https://github.com/HanZ14c/airbnb-ml"
       }
     ]
   },
@@ -427,114 +405,136 @@
     ]
   },
   {
-    "slug": "bc-travel-guide",
-    "title": "BC Travel Guide",
-    "subtitle": "HTML / CSS / JavaScript · PHP / PDO · MySQL",
+    "slug": "team-workflow-scheduler",
+    "title": "Team Workflow Scheduler",
+    "subtitle": "Java · TCP sockets · concurrency · JavaFX",
     "category": "Computer Science",
-    "time": "2023",
-    "period": "2023 / Web project",
-    "role": "Content structure, responsive interface and full-stack implementation",
-    "status": "Live demo available",
+    "time": "2026",
+    "period": "2026 / Software project",
+    "role": "System architecture, protocol, UI and implementation",
+    "status": "Repository available",
     "showSections": false,
-    "showGallery": false,
-    "excerpt": "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
-    "statement": "A content-led web project focused on organizing destinations into a clear, responsive browsing experience.",
-    "accent": "#427d65",
-    "codeAccent": "#d3dde5",
-    "cover": "/media/bc-travel-guide/photo-wall.jpg",
-    "coverAlt": "British Columbia travel photography wall used by the website",
+    "excerpt": "A Java client-server application for managing shared team tasks through a JavaFX desktop client or a command-line interface, with TCP networking and JSON persistence.",
+    "statement": "A compact exercise in keeping several clients, a shared task lifecycle and persistent state consistent through a deliberately small, legible protocol.",
+    "accent": "#ff5636",
+    "codeAccent": "#c7d7e6",
     "featured": true,
+    "cardSize": "standard",
     "facts": [
       {
-        "label": "Front end",
-        "value": "HTML5 / CSS3 / JavaScript"
+        "label": "Language",
+        "value": "Java"
       },
       {
-        "label": "Back end",
-        "value": "PHP / PDO / MySQL"
+        "label": "Client interfaces",
+        "value": "JavaFX + CLI"
       },
       {
-        "label": "Content",
-        "value": "Six destination stories"
+        "label": "Architecture",
+        "value": "Client–server"
       },
       {
-        "label": "Integrations",
-        "value": "YouTube + Google Maps"
+        "label": "Networking",
+        "value": "TCP sockets / Port 5050"
       },
       {
-        "label": "Local stack",
-        "value": "XAMPP"
+        "label": "Persistence",
+        "value": "JSON / data/tasks.json"
       },
       {
-        "label": "Deployment",
-        "value": "GitHub Pages frontend"
+        "label": "Testing",
+        "value": "JUnit 5"
       }
     ],
     "sections": [
       {
-        "label": "01 / Content architecture",
-        "title": "Destinations as stories",
+        "label": "01 / Overview",
+        "title": "One workflow, several clients",
         "body": [
-          "The site organizes British Columbia destinations through images, written introductions and video. Navigation and page hierarchy keep a growing set of places understandable on both desktop and mobile screens.",
-          "Six story cards introduce Vancouver, Vancouver Island, Whistler, the Sea-to-Sky Highway, Stanley Park and Capilano Suspension Bridge. Featured videos, a travel photo wall, contact information and an embedded map broaden the site beyond a simple destination list."
+          "The application manages shared team tasks across a JavaFX desktop client and a command-line client for testing raw protocol commands. Both communicate with the same TCP server, so task state must remain predictable even when several users connect at the same time.",
+          "Clients send one-line text commands; the server parses each request, updates the shared task list and saves the result to a JSON file. The desktop table refreshes after every operation so the interface stays synchronized with server state."
         ]
       },
       {
-        "label": "02 / Responsive interface",
-        "title": "A responsive reading flow",
+        "label": "02 / Capabilities",
+        "title": "The complete task lifecycle",
         "body": [
-          "HTML and CSS establish the editorial structure, while JavaScript supports interactive behaviour. The layout adapts from large image-led pages to compact mobile reading without hiding essential content.",
-          "Anchor navigation moves between Stories, Explore More, Videos and Contact Us. A prominent sign-up action scrolls smoothly to the subscription form, and media cards preserve a consistent hierarchy as the viewport narrows."
+          "Tasks carry a title, assignee, status, priority and ISO-formatted due time. The application supports the full create, read, update and delete workflow while automatically moving unfinished tasks into an overdue state when their deadline passes."
+        ],
+        "points": [
+          "Add tasks with title, assignee, status, priority and due time",
+          "Update every task field",
+          "Delete tasks by task ID",
+          "List all persisted tasks",
+          "READY · IN_PROGRESS · DONE · OVERDUE · CANCELED",
+          "Automatic overdue-state updates"
         ]
       },
       {
-        "label": "03 / Story system",
-        "title": "One template, six data-driven pages",
+        "label": "03 / Architecture",
+        "title": "A small distributed application",
         "body": [
-          "Destination links open one shared story template with a story key in the URL. Vanilla JavaScript reads the query parameter, selects the matching record and renders its title, image, introduction, travel tip, quick facts and related-story links.",
-          "Keeping the destination content in a structured JavaScript object avoids duplicating six nearly identical HTML pages and makes the story collection easier to extend."
+          "The server listens on port 5050 and creates a dedicated ClientHandler thread for each accepted socket connection. Every handler parses one command and delegates it to a shared SchedulerService, which owns the task lifecycle independently of either interface.",
+          "A ConcurrentHashMap provides the shared task collection, with synchronized task mutations and serialized saves protecting critical updates. JSON persistence restores the workspace between sessions, while the service recalculates overdue states whenever tasks are listed or changed."
+        ],
+        "points": [
+          "Thread-per-connection socket handling",
+          "Shared SchedulerService domain layer",
+          "ConcurrentHashMap task storage",
+          "Synchronized task updates and JSON writes"
         ]
       },
       {
-        "label": "04 / Subscription backend",
-        "title": "Optional subscription workflow",
+        "label": "04 / Protocol",
+        "title": "A readable one-line command format",
         "body": [
-          "A PHP and MySQL path extends the static experience with a local subscription workflow, connecting interface design with basic server-side data handling.",
-          "The XAMPP setup script creates a subscriptions table containing visitor name, email, favourite article and submission time. A PHP form handler inserts records through a prepared PDO statement, while a separate page retrieves subscribers in reverse chronological order and escapes displayed values."
+          "The custom protocol uses a command followed by key-value fields. Its parser accepts quoted values and escaped characters, allowing task titles and assignee names to contain spaces without making the wire format difficult to inspect or test."
+        ],
+        "points": [
+          "ADD title=\"Test 1\" assignee=\"Lee\" status=READY priority=1 dueAt=2026-01-01T17:00:00Z",
+          "LIST",
+          "UPDATE taskId=1 title=\"Review\" status=IN_PROGRESS priority=2",
+          "DELETE taskId=1"
         ]
       },
       {
-        "label": "05 / Hosting boundary",
-        "title": "A static demo with a local server extension",
+        "label": "05 / Interfaces",
+        "title": "A desktop workflow and a direct protocol client",
         "body": [
-          "GitHub Pages publishes the responsive frontend, including destination stories and media. Because static hosting cannot execute PHP or connect to MySQL, JavaScript detects unsupported form contexts and directs the user to run the project through XAMPP before submitting."
+          "The JavaFX client separates add, update and delete actions into dedicated tabs and presents server data in a task table. Network requests run away from the UI thread, then use Platform.runLater to update the interface safely after the server responds.",
+          "A command-line client provides a second path into the same server. It keeps the protocol visible during development and makes client-server behaviour easier to inspect without the graphical interface."
         ]
       },
       {
-        "label": "06 / Run locally",
-        "title": "Frontend anywhere, subscriptions through XAMPP",
+        "label": "06 / Quality",
+        "title": "Behaviour made testable",
         "body": [
-          "The published link demonstrates the full frontend. To use subscriptions, place the project in the XAMPP web root, configure the database connection, run php/setup.php once, then open the site at localhost so PHP and MySQL can process and display subscriber records."
+          "The project separates domain behaviour from presentation and transport concerns. JUnit 5 tests exercise protocol parsing and formatting as well as adding, listing, updating, deleting, persisting and automatically marking tasks overdue.",
+          "Tests use temporary JSON files, keeping service behaviour isolated from the application’s saved task data and making changes safer as the feature set grows."
         ]
-      }
-    ],
-    "gallery": [
+      },
       {
-        "src": "/media/bc-travel-guide/coastal-background.jpg",
-        "alt": "Rocky British Columbia coastline used as the BC Travel Guide background",
-        "caption": "Image-led visual language used across the travel guide."
+        "label": "07 / Run locally",
+        "title": "Two clients, one server",
+        "body": [
+          "Start SchedulerServer.java first, then run either SchedulerFxClient.java for the desktop interface or SchedulerClient.java for command-line access. Both clients connect to the server on localhost:5050."
+        ]
       }
     ],
     "links": [
       {
         "label": "View repository",
-        "href": "https://github.com/HanZ14c/BC-Travel-Guide"
-      },
-      {
-        "label": "Open live demo",
-        "href": "https://hanz14c.github.io/BC-Travel-Guide/"
+        "href": "https://github.com/HanZ14c/Team-Workflow-Scheduler"
       }
-    ]
+    ],
+    "gallery": [
+      {
+        "src": "/media/editor/team-workflow-scheduler/52c001fe-1338-4e80-89c0-3a40d2c96489.jpg",
+        "alt": "",
+        "caption": ""
+      }
+    ],
+    "cover": "/media/editor/team-workflow-scheduler/1dfad4ef-97e1-4431-acf3-144fe31d8cf5.png"
   },
   {
     "slug": "qianhai-shimao-centre",
@@ -616,6 +616,170 @@
         "src": "/media/architecture-practice/qianhai-pavilion-2-elevation.png",
         "alt": "Pavilion 2 elevation showing glazing, stone cladding, perforated aluminium panels and level annotations.",
         "caption": "Pavilion 2 — elevation and facade materials."
+      }
+    ]
+  },
+  {
+    "slug": "bc-travel-guide",
+    "title": "BC Travel Guide",
+    "subtitle": "HTML / CSS / JavaScript · PHP / PDO · MySQL",
+    "category": "Computer Science",
+    "time": "2023",
+    "period": "2023 / Web project",
+    "role": "Content structure, responsive interface and full-stack implementation",
+    "status": "Live demo available",
+    "showSections": false,
+    "showGallery": true,
+    "excerpt": "A responsive multi-page travel website combining destination stories, media and an optional subscription backend.",
+    "statement": "A content-led web project focused on organizing destinations into a clear, responsive browsing experience.",
+    "accent": "#427d65",
+    "codeAccent": "#d3dde5",
+    "cover": "/media/bc-travel-guide/photo-wall.jpg",
+    "coverAlt": "British Columbia travel photography wall used by the website",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Front end",
+        "value": "HTML5 / CSS3 / JavaScript"
+      },
+      {
+        "label": "Back end",
+        "value": "PHP / PDO / MySQL"
+      },
+      {
+        "label": "Integrations",
+        "value": "YouTube + Google Maps"
+      },
+      {
+        "label": "Local stack",
+        "value": "XAMPP"
+      },
+      {
+        "label": "Deployment",
+        "value": "GitHub Pages frontend"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Content architecture",
+        "title": "Destinations as stories",
+        "body": [
+          "The site organizes British Columbia destinations through images, written introductions and video. Navigation and page hierarchy keep a growing set of places understandable on both desktop and mobile screens.",
+          "Six story cards introduce Vancouver, Vancouver Island, Whistler, the Sea-to-Sky Highway, Stanley Park and Capilano Suspension Bridge. Featured videos, a travel photo wall, contact information and an embedded map broaden the site beyond a simple destination list."
+        ]
+      },
+      {
+        "label": "02 / Responsive interface",
+        "title": "A responsive reading flow",
+        "body": [
+          "HTML and CSS establish the editorial structure, while JavaScript supports interactive behaviour. The layout adapts from large image-led pages to compact mobile reading without hiding essential content.",
+          "Anchor navigation moves between Stories, Explore More, Videos and Contact Us. A prominent sign-up action scrolls smoothly to the subscription form, and media cards preserve a consistent hierarchy as the viewport narrows."
+        ]
+      },
+      {
+        "label": "03 / Story system",
+        "title": "One template, six data-driven pages",
+        "body": [
+          "Destination links open one shared story template with a story key in the URL. Vanilla JavaScript reads the query parameter, selects the matching record and renders its title, image, introduction, travel tip, quick facts and related-story links.",
+          "Keeping the destination content in a structured JavaScript object avoids duplicating six nearly identical HTML pages and makes the story collection easier to extend."
+        ]
+      },
+      {
+        "label": "04 / Subscription backend",
+        "title": "Optional subscription workflow",
+        "body": [
+          "A PHP and MySQL path extends the static experience with a local subscription workflow, connecting interface design with basic server-side data handling.",
+          "The XAMPP setup script creates a subscriptions table containing visitor name, email, favourite article and submission time. A PHP form handler inserts records through a prepared PDO statement, while a separate page retrieves subscribers in reverse chronological order and escapes displayed values."
+        ]
+      },
+      {
+        "label": "05 / Hosting boundary",
+        "title": "A static demo with a local server extension",
+        "body": [
+          "GitHub Pages publishes the responsive frontend, including destination stories and media. Because static hosting cannot execute PHP or connect to MySQL, JavaScript detects unsupported form contexts and directs the user to run the project through XAMPP before submitting."
+        ]
+      },
+      {
+        "label": "06 / Run locally",
+        "title": "Frontend anywhere, subscriptions through XAMPP",
+        "body": [
+          "The published link demonstrates the full frontend. To use subscriptions, place the project in the XAMPP web root, configure the database connection, run php/setup.php once, then open the site at localhost so PHP and MySQL can process and display subscriber records."
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/media/editor/bc-travel-guide/692a0e78-490b-4c59-b36a-5c3c5bba8314.jpg",
+        "alt": "",
+        "caption": ""
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/BC-Travel-Guide"
+      },
+      {
+        "label": "Open live demo",
+        "href": "https://hanz14c.github.io/BC-Travel-Guide/"
+      }
+    ]
+  },
+  {
+    "slug": "shenzhen-junior-high-school",
+    "title": "Shenzhen Junior High School",
+    "subtitle": "A compact vertical campus",
+    "category": "Architecture Practice",
+    "time": "2020",
+    "period": "2020",
+    "location": "Shenzhen, China",
+    "role": "Architectural assistant — programming and early form exploration",
+    "status": "Completed / Professional team project",
+    "excerpt": "A constrained school site organized as a dense, connected campus with layered courtyards and shared space.",
+    "statement": "The design challenge was to fit many educational functions into a small site without losing collective outdoor space.",
+    "accent": "#ba7a62",
+    "cover": "/media/architecture-practice/shenzhen-junior-school.webp",
+    "coverAlt": "Completed Shenzhen Junior High School campus",
+    "featured": true,
+    "facts": [
+      {
+        "label": "Type",
+        "value": "Education"
+      },
+      {
+        "label": "Contribution",
+        "value": "Programming"
+      },
+      {
+        "label": "Study",
+        "value": "Building form exploration"
+      },
+      {
+        "label": "Context",
+        "value": "Constrained urban site"
+      }
+    ],
+    "sections": [
+      {
+        "label": "01 / Constraint",
+        "title": "Many programmes, limited land",
+        "body": [
+          "The school combines classrooms, sports, circulation and collective space on a compact site with demanding functional requirements."
+        ]
+      },
+      {
+        "label": "02 / Contribution",
+        "title": "Programming before form",
+        "body": [
+          "I contributed to architectural programming and explored building forms that could connect multiple functions. The resulting scheme uses a vertical-campus approach to preserve shared outdoor spaces."
+        ]
+      },
+      {
+        "label": "03 / Credit",
+        "title": "Professional team work",
+        "body": [
+          "The project was completed by a professional design team. This case study focuses on the programming and early design work in which I participated."
+        ]
       }
     ]
   },
@@ -739,180 +903,6 @@
       }
     ],
     "cover": "/media/editor/car-dealership-manager/1ae84706-606c-454e-8f9c-f806512fe8c9.png"
-  },
-  {
-    "slug": "shenzhen-junior-high-school",
-    "title": "Shenzhen Junior High School",
-    "subtitle": "A compact vertical campus",
-    "category": "Architecture Practice",
-    "time": "2020",
-    "period": "2020",
-    "location": "Shenzhen, China",
-    "role": "Architectural assistant — programming and early form exploration",
-    "status": "Completed / Professional team project",
-    "excerpt": "A constrained school site organized as a dense, connected campus with layered courtyards and shared space.",
-    "statement": "The design challenge was to fit many educational functions into a small site without losing collective outdoor space.",
-    "accent": "#ba7a62",
-    "cover": "/media/architecture-practice/shenzhen-junior-school.webp",
-    "coverAlt": "Completed Shenzhen Junior High School campus",
-    "featured": true,
-    "facts": [
-      {
-        "label": "Type",
-        "value": "Education"
-      },
-      {
-        "label": "Contribution",
-        "value": "Programming"
-      },
-      {
-        "label": "Study",
-        "value": "Building form exploration"
-      },
-      {
-        "label": "Context",
-        "value": "Constrained urban site"
-      }
-    ],
-    "sections": [
-      {
-        "label": "01 / Constraint",
-        "title": "Many programmes, limited land",
-        "body": [
-          "The school combines classrooms, sports, circulation and collective space on a compact site with demanding functional requirements."
-        ]
-      },
-      {
-        "label": "02 / Contribution",
-        "title": "Programming before form",
-        "body": [
-          "I contributed to architectural programming and explored building forms that could connect multiple functions. The resulting scheme uses a vertical-campus approach to preserve shared outdoor spaces."
-        ]
-      },
-      {
-        "label": "03 / Credit",
-        "title": "Professional team work",
-        "body": [
-          "The project was completed by a professional design team. This case study focuses on the programming and early design work in which I participated."
-        ]
-      }
-    ]
-  },
-  {
-    "slug": "grid-pursuit-cheese",
-    "title": "Grid Pursuit: Cheese",
-    "subtitle": "JavaScript · Canvas API · game state · collision logic",
-    "category": "Computer Science",
-    "time": "2023",
-    "period": "2023 / Browser game",
-    "role": "Game state, Canvas rendering and interface implementation",
-    "status": "Playable demo available",
-    "showSections": false,
-    "excerpt": "A 10×10 Canvas game with queued player actions, randomized enemies, traps, walls, scoring and collision detection.",
-    "statement": "A small game used to make state, timing and collision rules visible through immediate browser interaction.",
-    "accent": "#cf5a35",
-    "codeAccent": "#d8d4e1",
-    "cover": "/media/grid-pursuit-cheese/gameplay-interface.png",
-    "coverAlt": "Complete Grid Pursuit Cheese game interface with board, controls, scoring and status panels",
-    "featured": true,
-    "facts": [
-      {
-        "label": "Stack",
-        "value": "HTML / CSS / JavaScript"
-      },
-      {
-        "label": "Rendering",
-        "value": "HTML5 Canvas API"
-      },
-      {
-        "label": "Board",
-        "value": "10 × 10 grid"
-      },
-      {
-        "label": "Turn model",
-        "value": "Five-action queue / 250ms steps"
-      },
-      {
-        "label": "Testing tools",
-        "value": "Wall mode + God Mode"
-      },
-      {
-        "label": "Deployment",
-        "value": "GitHub Pages"
-      }
-    ],
-    "sections": [
-      {
-        "label": "01 / Gameplay",
-        "title": "A readable grid, unpredictable pressure",
-        "body": [
-          "The player navigates a compact board while enemies move with randomized behaviour. Walls, traps and scoring create tactical choices without obscuring the basic rules.",
-          "Mikey begins in the upper-left cell and tries to collect cheese without meeting a kitty. Each cheese increases the score and introduces another kitty; if an enemy reaches the cheese first, the score falls and the target moves."
-        ]
-      },
-      {
-        "label": "02 / Turn sequence",
-        "title": "State changes in a controlled order",
-        "body": [
-          "Queued player actions, enemy movement and collision detection are resolved as explicit stages. Separating these stages prevents one input from producing inconsistent board states.",
-          "The player must queue exactly five arrow or trap actions before execution begins. A timer resolves one command every 250 milliseconds; after each action every kitty chooses a random direction, checks the destination and moves only when the cell is valid."
-        ],
-        "points": [
-          "Queue five keyboard commands",
-          "Resolve one player action",
-          "Move every kitty",
-          "Evaluate cheese, trap, wall and kitty collisions",
-          "Redraw the complete board state"
-        ]
-      },
-      {
-        "label": "03 / State + collision",
-        "title": "Coordinates as the shared game model",
-        "body": [
-          "Mikey, cheese, traps, walls and kitties are all represented by grid-aligned coordinates. Kitty and wall collections use coordinate arrays, allowing the same position checks to support random placement, movement blocking and collision outcomes.",
-          "Placement routines reject occupied cells and regenerate invalid random positions. Collision rules distinguish direct player-enemy contact, enemies reaching cheese, traps catching one kitty and walls returning an attempted move to its previous cell."
-        ]
-      },
-      {
-        "label": "04 / Mechanics",
-        "title": "Difficulty grows with the score",
-        "body": [
-          "Collecting cheese adds 100 points and introduces a new kitty. A trapped kitty is replaced and awards 250 points, while a kitty reaching the cheese removes 50 points. Optional walls add ten blocked cells and force both player and enemy movement to respect the same spatial constraints."
-        ]
-      },
-      {
-        "label": "05 / Rendering",
-        "title": "Canvas as a compact renderer",
-        "body": [
-          "The Canvas API draws the board and its changing entities efficiently, while surrounding HTML and CSS provide instructions and responsive framing.",
-          "Drawing responsibilities are separated into dedicated helpers for the grid, walls, trap, mouse, cheese, kitties and game-over state. Each frame clears the surface and rebuilds the current state from coordinates rather than manipulating many positioned DOM elements."
-        ]
-      },
-      {
-        "label": "06 / Controls + testing",
-        "title": "Game controls that also expose edge cases",
-        "body": [
-          "Arrow keys queue movement and M places a trap. Move Mikey executes a full sequence, Reset regenerates the board, Wall mode adds obstacles, and God Mode prevents capture so movement, scoring and collision behaviour can be inspected for longer sessions."
-        ]
-      },
-      {
-        "label": "07 / Run + deployment",
-        "title": "A dependency-free browser project",
-        "body": [
-          "The game runs directly from index.html with its stylesheet and two JavaScript files: game.js for state and rules, and draw.js for Canvas rendering. The same static structure is published as a playable GitHub Pages demo."
-        ]
-      }
-    ],
-    "links": [
-      {
-        "label": "View repository",
-        "href": "https://github.com/HanZ14c/Grid-Pursuit-Cheese"
-      },
-      {
-        "label": "Play demo",
-        "href": "https://hanz14c.github.io/Grid-Pursuit-Cheese/"
-      }
-    ]
   },
   {
     "slug": "heshan-ocean-world",
@@ -1204,30 +1194,120 @@
     ]
   },
   {
-    "title": "DisplayTidy",
-    "slug": "displaytidy",
+    "slug": "grid-pursuit-cheese",
+    "title": "Grid Pursuit: Cheese",
+    "subtitle": "JavaScript · Canvas API · game state · collision logic",
     "category": "Computer Science",
-    "subtitle": "",
-    "time": "2026",
-    "period": "2026",
-    "role": "",
-    "status": "",
-    "excerpt": "",
-    "statement": "",
-    "accent": "#315f94",
-    "hidden": false,
-    "showSections": true,
-    "facts": [],
-    "sections": [],
-    "cover": "/media/editor/displaytidy/140a2e47-e703-43cf-abe0-b93db4550621.png",
-    "gallery": [
+    "time": "2023",
+    "period": "2023 / Browser game",
+    "role": "Game state, Canvas rendering and interface implementation",
+    "status": "Playable demo available",
+    "showSections": false,
+    "excerpt": "A 10×10 Canvas game with queued player actions, randomized enemies, traps, walls, scoring and collision detection.",
+    "statement": "A small game used to make state, timing and collision rules visible through immediate browser interaction.",
+    "accent": "#cf5a35",
+    "codeAccent": "#d8d4e1",
+    "cover": "/media/grid-pursuit-cheese/gameplay-interface.png",
+    "coverAlt": "Complete Grid Pursuit Cheese game interface with board, controls, scoring and status panels",
+    "featured": true,
+    "facts": [
       {
-        "src": "/media/editor/displaytidy/61255b21-a113-4b01-a6cf-22aace5267cb.png",
-        "alt": "",
-        "caption": ""
+        "label": "Stack",
+        "value": "HTML / CSS / JavaScript"
+      },
+      {
+        "label": "Rendering",
+        "value": "HTML5 Canvas API"
+      },
+      {
+        "label": "Board",
+        "value": "10 × 10 grid"
+      },
+      {
+        "label": "Turn model",
+        "value": "Five-action queue / 250ms steps"
+      },
+      {
+        "label": "Testing tools",
+        "value": "Wall mode + God Mode"
+      },
+      {
+        "label": "Deployment",
+        "value": "GitHub Pages"
       }
     ],
-    "containCover": false
+    "sections": [
+      {
+        "label": "01 / Gameplay",
+        "title": "A readable grid, unpredictable pressure",
+        "body": [
+          "The player navigates a compact board while enemies move with randomized behaviour. Walls, traps and scoring create tactical choices without obscuring the basic rules.",
+          "Mikey begins in the upper-left cell and tries to collect cheese without meeting a kitty. Each cheese increases the score and introduces another kitty; if an enemy reaches the cheese first, the score falls and the target moves."
+        ]
+      },
+      {
+        "label": "02 / Turn sequence",
+        "title": "State changes in a controlled order",
+        "body": [
+          "Queued player actions, enemy movement and collision detection are resolved as explicit stages. Separating these stages prevents one input from producing inconsistent board states.",
+          "The player must queue exactly five arrow or trap actions before execution begins. A timer resolves one command every 250 milliseconds; after each action every kitty chooses a random direction, checks the destination and moves only when the cell is valid."
+        ],
+        "points": [
+          "Queue five keyboard commands",
+          "Resolve one player action",
+          "Move every kitty",
+          "Evaluate cheese, trap, wall and kitty collisions",
+          "Redraw the complete board state"
+        ]
+      },
+      {
+        "label": "03 / State + collision",
+        "title": "Coordinates as the shared game model",
+        "body": [
+          "Mikey, cheese, traps, walls and kitties are all represented by grid-aligned coordinates. Kitty and wall collections use coordinate arrays, allowing the same position checks to support random placement, movement blocking and collision outcomes.",
+          "Placement routines reject occupied cells and regenerate invalid random positions. Collision rules distinguish direct player-enemy contact, enemies reaching cheese, traps catching one kitty and walls returning an attempted move to its previous cell."
+        ]
+      },
+      {
+        "label": "04 / Mechanics",
+        "title": "Difficulty grows with the score",
+        "body": [
+          "Collecting cheese adds 100 points and introduces a new kitty. A trapped kitty is replaced and awards 250 points, while a kitty reaching the cheese removes 50 points. Optional walls add ten blocked cells and force both player and enemy movement to respect the same spatial constraints."
+        ]
+      },
+      {
+        "label": "05 / Rendering",
+        "title": "Canvas as a compact renderer",
+        "body": [
+          "The Canvas API draws the board and its changing entities efficiently, while surrounding HTML and CSS provide instructions and responsive framing.",
+          "Drawing responsibilities are separated into dedicated helpers for the grid, walls, trap, mouse, cheese, kitties and game-over state. Each frame clears the surface and rebuilds the current state from coordinates rather than manipulating many positioned DOM elements."
+        ]
+      },
+      {
+        "label": "06 / Controls + testing",
+        "title": "Game controls that also expose edge cases",
+        "body": [
+          "Arrow keys queue movement and M places a trap. Move Mikey executes a full sequence, Reset regenerates the board, Wall mode adds obstacles, and God Mode prevents capture so movement, scoring and collision behaviour can be inspected for longer sessions."
+        ]
+      },
+      {
+        "label": "07 / Run + deployment",
+        "title": "A dependency-free browser project",
+        "body": [
+          "The game runs directly from index.html with its stylesheet and two JavaScript files: game.js for state and rules, and draw.js for Canvas rendering. The same static structure is published as a playable GitHub Pages demo."
+        ]
+      }
+    ],
+    "links": [
+      {
+        "label": "View repository",
+        "href": "https://github.com/HanZ14c/Grid-Pursuit-Cheese"
+      },
+      {
+        "label": "Play demo",
+        "href": "https://hanz14c.github.io/Grid-Pursuit-Cheese/"
+      }
+    ]
   },
   {
     "slug": "bungalow",
@@ -1400,22 +1480,123 @@
     ]
   },
   {
-    "title": "TabNext",
-    "slug": "tabnext",
+    "title": "DisplayTidy",
+    "slug": "displaytidy",
     "category": "Computer Science",
-    "subtitle": "",
-    "time": "",
-    "period": "",
-    "role": "",
-    "status": "",
-    "excerpt": "",
-    "statement": "",
+    "subtitle": "Swift · SwiftUI · Core Graphics",
+    "time": "2026",
+    "period": "2026",
+    "role": "Personal project developer",
+    "status": "Working macOS prototype",
+    "excerpt": "A macOS menu bar utility for aligning an external display or Sidecar screen relative to another active display.",
+    "statement": "Drag a display preview into one of 12 alignment positions, then apply the arrangement from the menu bar.",
     "accent": "#315f94",
     "hidden": false,
     "showSections": true,
-    "facts": [],
+    "facts": [
+      {
+        "label": "Platform",
+        "value": "macOS 13+"
+      },
+      {
+        "label": "Stack",
+        "value": "Swift 6 / SwiftUI / AppKit / Core Graphics"
+      },
+      {
+        "label": "Alignment",
+        "value": "12 positions relative to a reference display"
+      },
+      {
+        "label": "Persistence",
+        "value": "Remembers the last alignment for a display pair"
+      },
+      {
+        "label": "Build",
+        "value": "Apple Silicon"
+      }
+    ],
+    "sections": [],
+    "cover": "/media/editor/displaytidy/140a2e47-e703-43cf-abe0-b93db4550621.png",
+    "gallery": [
+      {
+        "src": "/media/editor/displaytidy/61255b21-a113-4b01-a6cf-22aace5267cb.png",
+        "alt": "",
+        "caption": ""
+      }
+    ],
+    "containCover": false
+  },
+  {
+    "title": "TabNest",
+    "slug": "tabnext",
+    "category": "Computer Science",
+    "subtitle": "Chrome extension · JavaScript · Bookmarks API",
+    "time": "2026",
+    "period": "2026",
+    "role": "Personal project developer",
+    "status": "Development preview",
+    "excerpt": "A Chrome new tab page for browsing and searching bookmarks while keeping the bookmark bar’s original folders and order.",
+    "statement": "Open frequently used links from the new tab page and navigate each bookmark folder independently.",
+    "accent": "#315f94",
+    "hidden": false,
+    "showSections": true,
+    "facts": [
+      {
+        "label": "Platform",
+        "value": "Chrome 134+ / Manifest V3"
+      },
+      {
+        "label": "Stack",
+        "value": "HTML / CSS / JavaScript"
+      },
+      {
+        "label": "Data source",
+        "value": "Chrome Bookmarks API"
+      },
+      {
+        "label": "Sync",
+        "value": "Refreshes on new tabs and on demand"
+      },
+      {
+        "label": "Site icons",
+        "value": "Local Cache Storage with favicon fallback"
+      }
+    ],
     "sections": [],
     "cover": "/media/editor/tabnext/1b7efc2c-6f04-4061-8d09-4cdeda97e038.png"
+  },
+  {
+    "slug": "architectural-hand-sketches",
+    "title": "Architectural Hand Sketches",
+    "subtitle": "Freehand perspective · architectural linework",
+    "category": "Visual Studies",
+    "time": "2019",
+    "period": "2019 / Personal work",
+    "role": "Hand drawing",
+    "status": "Selected works",
+    "excerpt": "A selection of architectural hand drawings.",
+    "statement": "Selected architectural hand drawings.",
+    "accent": "#898780",
+    "cover": "/media/architectural-hand-sketches/sketch-1.jpg",
+    "coverAlt": "Ink sketch of a house set within a rocky landscape",
+    "visualOnly": true,
+    "cardSize": "wide",
+    "facts": [],
+    "sections": [],
+    "gallery": [
+      {
+        "src": "/media/architectural-hand-sketches/sketch-1.jpg",
+        "alt": "Ink sketch of a house set within a rocky landscape"
+      },
+      {
+        "src": "/media/architectural-hand-sketches/sketch-2.jpg",
+        "alt": "Ink sketch of an angular contemporary building complex"
+      },
+      {
+        "src": "/media/architectural-hand-sketches/sketch-3.jpg",
+        "alt": "Ink sketch of a curving twin-tower building beside water"
+      }
+    ]
   },
   {
     "slug": "family-tree-database",
@@ -1526,38 +1707,5 @@
       }
     ],
     "cover": "/media/editor/family-tree-database/80bbfdbf-c26b-42d0-853c-985b8974b3f6.png"
-  },
-  {
-    "slug": "architectural-hand-sketches",
-    "title": "Architectural Hand Sketches",
-    "subtitle": "Freehand perspective · architectural linework",
-    "category": "Visual Studies",
-    "time": "2019",
-    "period": "2019 / Personal work",
-    "role": "Hand drawing",
-    "status": "Selected works",
-    "excerpt": "A selection of architectural hand drawings.",
-    "statement": "Selected architectural hand drawings.",
-    "accent": "#898780",
-    "cover": "/media/architectural-hand-sketches/sketch-1.jpg",
-    "coverAlt": "Ink sketch of a house set within a rocky landscape",
-    "visualOnly": true,
-    "cardSize": "wide",
-    "facts": [],
-    "sections": [],
-    "gallery": [
-      {
-        "src": "/media/architectural-hand-sketches/sketch-1.jpg",
-        "alt": "Ink sketch of a house set within a rocky landscape"
-      },
-      {
-        "src": "/media/architectural-hand-sketches/sketch-2.jpg",
-        "alt": "Ink sketch of an angular contemporary building complex"
-      },
-      {
-        "src": "/media/architectural-hand-sketches/sketch-3.jpg",
-        "alt": "Ink sketch of a curving twin-tower building beside water"
-      }
-    ]
   }
 ]

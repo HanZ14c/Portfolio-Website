@@ -260,12 +260,12 @@ test("server-renders the BC Travel Guide technical case study", async () => {
   const response = await render("/work/bc-travel-guide");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Six destination stories/);
+  assert.match(html, /YouTube \+ Google Maps/);
   assert.match(html, /PHP \/ PDO \/ MySQL/);
   assert.match(html, /photo-wall\.jpg/);
   assert.match(html, /BC-Travel-Guide/);
-  assert.doesNotMatch(html, /class="project-gallery page-shell/);
-  assert.doesNotMatch(html, /coastal-background\.jpg/);
+  assert.match(html, /class="project-gallery page-shell/);
+  assert.match(html, /692a0e78-490b-4c59-b36a-5c3c5bba8314\.jpg/);
 });
 
 test("server-renders the Grid Pursuit Cheese technical case study", async () => {
